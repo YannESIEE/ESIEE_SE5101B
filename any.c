@@ -25,7 +25,7 @@
 #define CAN_COMM_COMMAND 		0x10
 #define CAN_COMM_ACQUISITION 	0x20
 #define CAN_FOCUS_ID 			2
-#define CAN_SEND_ID 			3
+#define CAN_SEND_ID 			2
 /* define pour gestion registres CAN 7841 */
 #define base2					0x180
 #define CAN_CONTROL 			base2
