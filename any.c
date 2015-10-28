@@ -178,7 +178,7 @@ static int prog_init(void)
 	init_matrix();		// initialisation des matrices
 	init_3718();		// init de l'adc
 
-	printk("prog_init : Banc %d : BC_PMn = %d \n BC_PMx = %d \n BC_AMn = %d \n BC_AMx = %d \n", BANC, BC_PMn, BC_PMx, BC_AMn, BC_AMx );
+	printk("prog_init :\n\tBanc : %d\n\tBC_PMn = %d\n\tBC_PMx = %d\n\tBC_AMn = %d\n\tBC_AMx = %d\n", BANC, BC_PMn, BC_PMx, BC_AMn, BC_AMx );
 
 	//Tache d'acquisition
 	ierr_in = rt_task_init(&tache_in,task_in,0,STACK_SIZE, PRIORITE, 1, 0);
@@ -231,10 +231,8 @@ void task_in(long arg)
 
 	while(1)
 	{
-		printk("task_in : loop\n");
 		rt_task_wait_period();
 	}
-#if 0
 	while(1)
 	{
 		/* Acquisition */
@@ -254,6 +252,7 @@ void task_in(long arg)
 		if 		((adc_value & 0x0F) == 1){pos_num_in 	= adc_value >> 4 ;}
 		else if ((adc_value & 0x0F) == 0){angle_num_in 	= adc_value >> 4 ;}
 #endif
+#if 0
 		/* Envoi de donnée */
 		data_send_in[0] = ((angle_num_in >> 8) & 0x0F) + CAN_COMM_ACQUISITION;
 		data_send_in[1] = angle_num_in & 0xFF;
@@ -264,7 +263,12 @@ void task_in(long arg)
 #endif
 		emission(CAN_SEND_ID,data_send_in, 4, 0);
 		/* Swich de routine en attendant la réponse.... */
+#endif
+#if DEBUG_AFF_ROUTINE >= 2
+		printk("task_in : loop\n");
+#endif
 		rt_task_wait_period();
+#if 0
 		/* Attente de reception */
 		while(glb_task_in_wait);
 		glb_task_in_wait = 1;
@@ -273,8 +277,8 @@ void task_in(long arg)
 		printk("task_in : received command_in = %d\n",command_in);
 #endif
         set_DA(0, command_in);	// on ecrit dans le canal 0, la "commande"
-	}
 #endif
+	}
 }
 
 /*
