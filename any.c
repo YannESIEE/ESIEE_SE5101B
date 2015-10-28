@@ -323,7 +323,7 @@ static void routine_reception(void)
 {
 
 #if DEBUG_AFF_INTERUPT >= 1
-		printk("task_out : trame received");
+	printk("routine_reception : trame received\n");
 #endif
 	int value[2];
 	reception(CAN_FOCUS_ID, value);	// Lecture
@@ -342,6 +342,10 @@ static void routine_reception(void)
 
 	inb(CAN_INTERRUPT);		// Lecture du registre d interruptions pour liberer celle traitee
 	rt_ack_irq(5);			// Acquitement de l interruption au niveau du CPU
+#if DEBUG_AFF_INTERUPT >= 1
+	printk("routine_reception : trame traited\n");
+#endif
+	return;
 }
 
 /**************************************************************************\
@@ -371,12 +375,9 @@ void init_can(void)
 void emission(u16 id,u8 *data,u8 lenght,u8 RTR_bit)
 {
 	u8 id_p1, id_p2;
-#if DEBUG_AFF_CAN >= 1
-	printk("***EMISSION*** \n");
-#endif
 	id_p1 = id >> 3;
 	id_p2 = ((id & 0x007) << 5) + (RTR_bit*16) + (lenght&0x0F);	// Securite sur la longueur pour etre sur qu elle ne depasse pas 4 bits
-#if DEBUG_AFF_CAN >= 2
+#if DEBUG_AFF_CAN >= 1
 	printk("emission : id 1ere partie :\t0x%x\n", id_p1);
 	printk("emission : id,RTR,longueur :\t0x%x\n", id_p2);
 	printk("emission : data :\t\t0x%x\n", data[0]);
@@ -396,9 +397,6 @@ void emission(u16 id,u8 *data,u8 lenght,u8 RTR_bit)
 		while(!(inb(CAN_STATUS) && 0x08));	// Verifie que la transmission precedente s est bien terminee avant de lancer la nouvelle
 		outb(0x01,CAN_COMMAND);	// Lance la transmission
 	}
-#if DEBUG_AFF_CAN >= 1
-	printk("***FIN EMISSION*** \n");
-#endif
 }
 
 /*
