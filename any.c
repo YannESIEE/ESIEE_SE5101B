@@ -8,6 +8,8 @@
 #define TEST_COMMANDE_OUT 	1024
 #define DEBUG_AFF_CAN 		2
 #define DEBUG_AFF_DAC 		2
+#define DEBUG_AFF_ROUTINE 	2
+#define DEBUG_AFF_MAT 		2
 /**************************************************************************\
 |********************* - define pour tache periodique - *******************|
 \**************************************************************************/
@@ -138,6 +140,7 @@ static void task_in(long arg);
 static void task_out(long arg);
 static void routine_reception(void);
 /* DRIVER CAN */
+void init_can(void);
 void emission(u16 id,u8 *data,u8 lenght,u8 RTR_bit);
 void reception(int focus, int * data);
 /* DRIVER DAC */
@@ -147,6 +150,7 @@ void init_3718(void);
 void trigger(void);
 int adc_read_eoc(void);
 int adc_read_value(void);
+void ad_range_select(int canal, int range);
 /* MATRICE */
 void init_matrix(void);
 float calc_matrix(void);
@@ -240,14 +244,14 @@ static void task_in(long arg)
 		else if ((adc_value & 0x0F) == 0){angle_num_in 	= adc_value >> 4 ;}
 #endif
 		/* Envoi de donnée */
-		data_send_in[0] = (angle_num_in >> 8) & 0x0F + CAN_COMM_ACQUISITION;
+		data_send_in[0] = ((angle_num_in >> 8) & 0x0F) + CAN_COMM_ACQUISITION;
 		data_send_in[1] = angle_num_in & 0xFF;
 		data_send_in[2] = (pos_num_in >> 8) & 0x0F;
 		data_send_in[3] = pos_num_in & 0xFF;
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_in : send angle_num_in = %d & pos_num_in = %d\n",angle_num_in, pos_num_in);
 #endif
-		emission(CAN_SEND_ID,&data_send_in, 4, 0);
+		emission(CAN_SEND_ID,data_send_in, 4, 0);
 		/* Swich de routine en attendant la réponse.... */
 		rt_task_wait_period();
 		/* Attente de reception */
@@ -290,12 +294,12 @@ static void task_out(long arg)
 		command_out = (unsigned int)(calc_matrix() + 10.0) * 4095.0 / 20.0; // Convertion Volt/numerique
 #endif
 		/* renvoi des donnée */
-		data_send_out[0] = (command_out >> 8) & 0x0F + CAN_COMM_COMMAND;
+		data_send_out[0] = ((command_out >> 8) & 0x0F) + CAN_COMM_COMMAND;
 		data_send_out[1] = command_out & 0xFF;
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_out : send command_out = %d\n",command_out, );
 #endif
-		emission(CAN_SEND_ID,&data_send_out, 2, 0);
+		emission(CAN_SEND_ID,data_send_out, 2, 0);
 		/* SWITCH ROUTINE */
 		rt_task_wait_period();
 	}
@@ -309,12 +313,12 @@ static void routine_reception(void)
 	int value[2];
 	reception(CAN_FOCUS_ID, value);	// Lecture
 	/* repartition selon  */
-	if(value[0]>>8 & 0xF0 == CAN_COMM_COMMAND)
+	if(((value[0]>>8) & 0xF0) == CAN_COMM_COMMAND)
 	{
 		command_in = value[0] & 0x0FFF;
 		glb_task_in_wait = 0;
 	}
-	else if(value>>8 & 0xF0 == CAN_COMM_ACQUISITION)	
+	else if(((value>>8) & 0xF0) == CAN_COMM_ACQUISITION)	
 	{
 		angle_num_out 	= value[0] & 0x0FFF;
 		pos_num_out 	= value[1];
@@ -331,7 +335,7 @@ static void routine_reception(void)
 /*
  * init_can : Fonction d'initialisation du bus CAN
  */
-void init_can(void) 
+void init_can(void)
 {
 	outb(0x01,CAN_CONTROL);
 	outb(0x03,CAN_CONTROL);				// Activation des interruptions en cas de reception
@@ -356,7 +360,7 @@ void emission(u16 id,u8 *data,u8 lenght,u8 RTR_bit)
 #endif
 	u8 id_p1 = id >> 3;
 	u8 id_p2 = ((id & 0x007) << 5) + (RTR_bit*16) + (lenght&0x0F);	// Securite sur la longueur pour etre sur qu elle ne depasse pas 4 bits
-#if DEBUG_AFF_CAN >=2
+#if DEBUG_AFF_CAN >= 2
 	printk("emission : id 1ere partie :\t%x\n", id_p1);
 	printk("emission : id,RTR,longueur :\t%x\n", id_p2);
 	printk("emission : data :\t%x\n", data);
@@ -446,7 +450,7 @@ void set_DA(int canal, unsigned int value_n)
 	lsb = value_n & 0x00FF;			//Recuperation du LSB
 	msb = value_n >> 8;				//Recuperation du MSB
 #if DEBUG_AFF_DAC >= 2
-	printk("Valeur en bits : %d\n",value);
+	printk("Valeur en bits : %d\n",value_n);
 	printk("Valeur MSB : %d\n",msb);
 	printk("Valeur LSB : %d\n",lsb);
 #endif
@@ -464,10 +468,9 @@ void set_DA(int canal, unsigned int value_n)
  */
 void init_3718(void)
 {    //Pour lire canal 0, mettre 0x00. Pour lire canaux 0 et 1 alternativement, mettre 0x10
-	//set_canal(0x00);
 	ad_range_select(0x00,8);	// Canal 0, +/-10V
 	ad_range_select(0x11,8);	// Canal 1, +/-10V
-	set_canal(0x10);			// Scan sur canaux 0 et 1
+    outb(0x10, BASE_ADC_2);		// selectionne le canal   
 }
 
 /* 
@@ -508,6 +511,18 @@ int adc_read_value(void)
     res 	= (((msb << 4) + lsb)<< 4 )+ chan;	// Convertion de la valeur + concatenation du canal dans les 4 bits de poids faible
 
     return res;
+}
+
+
+/*
+ * ad_range_select
+ * Set the input range for each A/D channel. (p26/30))
+ * base+1 D3 to D0 = b1000
+ */
+void ad_range_select(int canal, int range)
+{
+	outb((char)canal, BASE_ADC_2);	// selectionne le canal
+	outb((char)range, BASE_ADC_1);	// met le range
 }
 
 /**************************************************************************\
