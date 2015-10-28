@@ -93,9 +93,9 @@ a18:
 	@echo
 	
 	
-	scp *.ko runarcom arcom@arcom18@esiee.fr:/home/arcom
+	scp *.ko runarcom arcom.arcom18@esiee.fr:/home/arcom
 	@echo
-	ssh arcom@arcom18@esiee.fr
+	ssh arcom@arcom18.esiee.fr
 
 a1:
 	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~
@@ -111,6 +111,6 @@ a1:
 	@echo
 	
 	
-	scp *.ko runarcom arcom@arcom1@esiee.fr:/home/arcom
+	scp *.ko runarcom arcom.arcom1@esiee.fr:/home/arcom
 	@echo
-	ssh arcom@arcom1@esiee.fr
+	ssh arcom@arcom1.esiee.fr
