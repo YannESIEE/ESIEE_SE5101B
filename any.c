@@ -128,6 +128,7 @@ float Bdc[4][2];
 float Cdc[1][4];
 float x[4][1];
 float y[2][1];
+unsigned int didit;
 
 /**************************************************************************\
 |************************ - PROTYPE DES FONCTIONS - ***********************|
@@ -231,6 +232,7 @@ static void task_in(long arg)
 #if TEST == 1
 		angle_num_in 	= TEST_ANGLE_NUM_IN;
 		pos_num_in		= TEST_POS_NUM_IN;
+		adc_value 		= 0; // warning only
 #elif TEST == 0
 		trigger();
 		while(adc_read_eoc() != 1);			// Attente de fin d'acquisition
@@ -275,8 +277,8 @@ static void task_in(long arg)
 static void task_out(long arg)
 {
 	u8 data_send_out[2];
-	glb_task_out_wait = 1;
 	unsigned int command_out;
+	glb_task_out_wait = 1;
 	while(1)
 	{
 		/* Attende de reception */
@@ -291,13 +293,13 @@ static void task_out(long arg)
 #if TEST == 1
 		command_out = TEST_COMMANDE_OUT;
 #elif TEST == 0
-		command_out = (unsigned int)(calc_matrix() + 10.0) * 4095.0 / 20.0; // Convertion Volt/numerique
+		command_out = (unsigned int)((calc_matrix() + 10.0) * 4095.0 / 20.0); // Convertion Volt/numerique
 #endif
 		/* renvoi des donnée */
 		data_send_out[0] = ((command_out >> 8) & 0x0F) + CAN_COMM_COMMAND;
 		data_send_out[1] = command_out & 0xFF;
 #if DEBUG_AFF_ROUTINE >= 2
-		printk("task_out : send command_out = %d\n",command_out, );
+		printk("task_out : send command_out = %d\n",command_out);
 #endif
 		emission(CAN_SEND_ID,data_send_out, 2, 0);
 		/* SWITCH ROUTINE */
@@ -318,7 +320,7 @@ static void routine_reception(void)
 		command_in = value[0] & 0x0FFF;
 		glb_task_in_wait = 0;
 	}
-	else if(((value>>8) & 0xF0) == CAN_COMM_ACQUISITION)	
+	else if(((value[0]>>8) & 0xF0) == CAN_COMM_ACQUISITION)	
 	{
 		angle_num_out 	= value[0] & 0x0FFF;
 		pos_num_out 	= value[1];
@@ -355,11 +357,12 @@ void init_can(void)
  */
 void emission(u16 id,u8 *data,u8 lenght,u8 RTR_bit)
 {
+	u8 id_p1, id_p2;
 #if DEBUG_AFF_CAN >= 1
 	printk("***EMISSION*** \n");
 #endif
-	u8 id_p1 = id >> 3;
-	u8 id_p2 = ((id & 0x007) << 5) + (RTR_bit*16) + (lenght&0x0F);	// Securite sur la longueur pour etre sur qu elle ne depasse pas 4 bits
+	id_p1 = id >> 3;
+	id_p2 = ((id & 0x007) << 5) + (RTR_bit*16) + (lenght&0x0F);	// Securite sur la longueur pour etre sur qu elle ne depasse pas 4 bits
 #if DEBUG_AFF_CAN >= 2
 	printk("emission : id 1ere partie :\t%x\n", id_p1);
 	printk("emission : id,RTR,longueur :\t%x\n", id_p2);
@@ -442,11 +445,12 @@ void reception(int focus, int * data)
  */
 void set_DA(int canal, unsigned int value_n)
 {
+	int lsb, msb;
 #if DEBUG_AFF_DAC >= 1 
 	printk("set_DA\n");
 #endif
-	int lsb = 0;
-	int msb = 0;
+	lsb = 0;
+	msb = 0;
 	lsb = value_n & 0x00FF;			//Recuperation du LSB
 	msb = value_n >> 8;				//Recuperation du MSB
 #if DEBUG_AFF_DAC >= 2
