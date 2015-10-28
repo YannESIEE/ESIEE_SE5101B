@@ -2,17 +2,17 @@
 /**************************************************************************\
 |********************************* - TEST - *******************************|
 \**************************************************************************/
-#define TEST 				1
-#define TEST_ANGLE_NUM_IN 	1024
-#define TEST_POS_NUM_IN 	1024
-#define TEST_COMMANDE_OUT 	1024
+#define TEST 				0
+#define TEST_ANGLE_NUM_IN 	3072
+#define TEST_POS_NUM_IN 	3072
+#define TEST_COMMANDE_OUT 	3072
 /* AFFICHAGE : Attention, il est conseillé de ne pas activé tous les affichage à la fois */
 #define DEBUG_AFF_CAN 		0 // niveau trois est un peu HARD pour arcom
 #define DEBUG_AFF_CAN_REC	0
 #define DEBUG_AFF_DAC 		0
 #define DEBUG_AFF_ROUTINE 	2
-#define DEBUG_AFF_INTERUPT 	2
-#define DEBUG_AFF_MAT 		0
+#define DEBUG_AFF_INTERUPT 	0
+#define DEBUG_AFF_MAT 		2
 /**************************************************************************\
 |********************* - define pour tache periodique - *******************|
 \**************************************************************************/
@@ -626,34 +626,52 @@ void init_matrix(void)
 float calc_matrix(void)
 {
 	float commande;
+float commande2;
 #if DEBUG_AFF_MAT >= 1
-	printk("calc_matrix...\n");
+	printk("calc_matrix:\n");
 #endif
 //?????????????????????????????????????????????????????????? Yann : X n'est jamais mi a jour... : X=0 => Adc x X = 0 .... commande ne dépend que de Bdc et Y ???????
-	commande = 	- Cdc[0][0]*(Adc[0][0]*x[0][0] + Adc[0][1]*x[1][0] + Adc[0][2]*x[2][0] + Adc[0][3]*x[3][0] +Bdc[0][0]*y[0][0] +Bdc[0][1]*y[1][0])
+	/*commande = 	- Cdc[0][0]*(Adc[0][0]*x[0][0] + Adc[0][1]*x[1][0] + Adc[0][2]*x[2][0] + Adc[0][3]*x[3][0] +Bdc[0][0]*y[0][0] +Bdc[0][1]*y[1][0])
 			 	- Cdc[0][1]*(Adc[1][0]*x[0][0] + Adc[1][1]*x[1][0] + Adc[1][2]*x[2][0] + Adc[1][3]*x[3][0] +Bdc[1][0]*y[0][0] +Bdc[1][1]*y[1][0])
 			 	- Cdc[0][2]*(Adc[2][0]*x[0][0] + Adc[2][1]*x[1][0] + Adc[2][2]*x[2][0] + Adc[2][3]*x[3][0] +Bdc[2][0]*y[0][0] +Bdc[2][1]*y[1][0])
 			 	- Cdc[0][3]*(Adc[3][0]*x[0][0] + Adc[3][1]*x[1][0] + Adc[3][2]*x[2][0] + Adc[3][3]*x[3][0] +Bdc[3][0]*y[0][0] +Bdc[3][1]*y[1][0]);
+*/
 
-	printk("");//TRAP HANDLER: à laisser (Antoine, 27/10) // yann : Pour évité trap handler, utilisé la forme x = x>MAX ? MAX : x<MIN ? MIN : x; .... Deuxieme édition
-
+	// commande = 
+commande = 11.0;
 #if DEBUG_AFF_MAT >= 2
-	printk("Commande * 100 = %d | \n", (int)(commande*100));//affichage_float(commande);printk("\n");
+//	printk("\tCommande * 100 = %d\n", (int)(commande*100));
+printk("\tcommande ok;\n");
 #endif
 	
-	//Gestion extrêmes // Yann : WTF?????
-	if(didit < 10 && (((int)(y[1][0]*1000) < (int)(-0.5240*1000)) || ((int)(y[1][0]*1000) > (int)(0.4959*1000))))
+//	printk("nfijerzafiuerzafriri \n");
+//	commande = (int)(commande*100)>(int)(10.0*100) ? 10.0 : (int)(commande*100)<(-10.0*100) ? -10.0 : commande; 
+//printk(" dezaidliezafe\n");
+
+// TRAP HANDLER
+int commande_num = (int)(commande*100/1);
+
+//commande = commande_num>1000 ? 10.0 : commande_num<-1000 ? -10.0 : commande;
+
+	if(commande_num > 1000)
 	{
-		commande = commande * 4;
-		didit++;
+		//printk("\tOVER MAX\n");
+		//commande2 = 10;
+		//return 10.0;
+		return 10.0;
+	}
+	else if(commande_num < -1000)
+	{
+		//printk("\tOVER MIN\n");
+		//commande2 = -10;
+		return -10.0;
 	}
 	else
 	{
-		didit = 0;
+    	return commande;
 	}
-
-    if((int)commande > 10)		{ commande = 10.0;	}
-    else if((int)commande < -10){ commande =-10.0;	}
-    // TRY THIS : commande = commande>10.0 ? 10.0 : commande<-10.0 ? -10.0 : commande; // ça fonctione et evite les trap handler ..... les mails sont inutiles???
-    return commande;
 }
+
+
+
+
