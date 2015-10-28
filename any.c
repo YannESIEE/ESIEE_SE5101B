@@ -6,7 +6,8 @@
 #define TEST_ANGLE_NUM_IN 	1024
 #define TEST_POS_NUM_IN 	1024
 #define TEST_COMMANDE_OUT 	1024
-#define DEBUG_AFF_CAN 		0
+/* AFFICHAGE : Attention, il est conseillé de ne pas activé tous les affichage à la fois */
+#define DEBUG_AFF_CAN 		2
 #define DEBUG_AFF_DAC 		0
 #define DEBUG_AFF_ROUTINE 	2
 #define DEBUG_AFF_MAT 		0
@@ -261,10 +262,8 @@ void task_in(long arg)
 		/* Swich de routine en attendant la réponse.... */
 		rt_task_wait_period();
 		/* Attente de reception */
-#if 0
-		while(glb_task_in_wait);
+		while(glb_task_in_wait)rt_task_wait_period();
 		glb_task_in_wait = 1;
-#endif
 		/* Actionneur */
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_in : received command_in = %d\n",command_in);
