@@ -231,10 +231,6 @@ void task_in(long arg)
 
 	while(1)
 	{
-		rt_task_wait_period();
-	}
-	while(1)
-	{
 		/* Acquisition */
 #if TEST == 1
 		angle_num_in 	= TEST_ANGLE_NUM_IN;
@@ -252,7 +248,6 @@ void task_in(long arg)
 		if 		((adc_value & 0x0F) == 1){pos_num_in 	= adc_value >> 4 ;}
 		else if ((adc_value & 0x0F) == 0){angle_num_in 	= adc_value >> 4 ;}
 #endif
-#if 0
 		/* Envoi de donnée */
 		data_send_in[0] = ((angle_num_in >> 8) & 0x0F) + CAN_COMM_ACQUISITION;
 		data_send_in[1] = angle_num_in & 0xFF;
@@ -261,6 +256,7 @@ void task_in(long arg)
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_in : send angle_num_in = %d & pos_num_in = %d\n",angle_num_in, pos_num_in);
 #endif
+#if 0
 		emission(CAN_SEND_ID,data_send_in, 4, 0);
 		/* Swich de routine en attendant la réponse.... */
 #endif
