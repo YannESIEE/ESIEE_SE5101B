@@ -227,6 +227,7 @@ void task_in(long arg)
 	u8 data_send_in[4];
 	unsigned int adc_value, angle_num_in, pos_num_in;
 	glb_task_in_wait = 1;
+	command_in = 0; 			// Initialisation en cas d'erreur 
 	init_3718();
 
 	while(1)
@@ -372,9 +373,9 @@ void emission(u16 id,u8 *data,u8 lenght,u8 RTR_bit)
 	id_p1 = id >> 3;
 	id_p2 = ((id & 0x007) << 5) + (RTR_bit*16) + (lenght&0x0F);	// Securite sur la longueur pour etre sur qu elle ne depasse pas 4 bits
 #if DEBUG_AFF_CAN >= 2
-	printk("emission : id 1ere partie :\t%x\n", id_p1);
-	printk("emission : id,RTR,longueur :\t%x\n", id_p2);
-	printk("emission : data :\t%x\n", data[0]);
+	printk("emission : id 1ere partie :\t0x%x\n", id_p1);
+	printk("emission : id,RTR,longueur :\t0x%x\n", id_p2);
+	printk("emission : data :\t\t0x%x\n", data[0]);
 #endif
 	outb(id_p1,CAN_TX_IDENTIFIER);
 	outb(id_p2,CAN_TX_RTB_BIT);
@@ -453,6 +454,7 @@ void reception(int focus, int * data)
  */
 void set_DA(int canal, unsigned int value_n)
 {
+#if 0
 	int lsb, msb;
 #if DEBUG_AFF_DAC >= 1 
 	printk("set_DA\n");
@@ -463,12 +465,13 @@ void set_DA(int canal, unsigned int value_n)
 	msb = value_n >> 8;				//Recuperation du MSB
 #if DEBUG_AFF_DAC >= 2
 	printk("Valeur en bits : %d\n",value_n);
-	printk("Valeur MSB : %d\n",msb);
-	printk("Valeur LSB : %d\n",lsb);
+	printk("Valeur MSB : 0x%x\n",msb);
+	printk("Valeur LSB : 0x%x\n",lsb);
 #endif
 	/* WRITE OUTPUT */
 	outb(lsb,BASE_DAC_0+2*canal);
 	outb(msb,BASE_DAC_1+2*canal);
+#endif
 }
 
 /**************************************************************************\
