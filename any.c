@@ -184,8 +184,8 @@ static int prog_init(void)
 	//Tache d'acquisition
 	ierr_in = rt_task_init(&tache_in,task_in,0,STACK_SIZE, PRIORITE, 1, 0);
 	rt_task_make_periodic(&tache_in, now, nano2count(PERIODE_CONTROL));
-	// ierr_out = rt_task_init(&tache_out,task_out,0,STACK_SIZE, PRIORITE, 1, 0);
-	// rt_task_make_periodic(&tache_out, now, nano2count(PERIODE_CONTROL));
+	ierr_out = rt_task_init(&tache_out,task_out,0,STACK_SIZE, PRIORITE, 1, 0);
+	rt_task_make_periodic(&tache_out, now, nano2count(PERIODE_CONTROL));
 
 	//Interuption de lecture de donnée.
 	rt_global_cli();									// Desactivation des IT
@@ -206,7 +206,7 @@ static void prog_exit(void)
 
     stop_rt_timer();
     rt_task_delete(&tache_in);
-    // rt_task_delete(&tache_out);
+    rt_task_delete(&tache_out);
 
     printk("EXIT\n");
 }
