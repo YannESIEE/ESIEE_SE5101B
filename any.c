@@ -7,7 +7,8 @@
 #define TEST_POS_NUM_IN 	1024
 #define TEST_COMMANDE_OUT 	1024
 /* AFFICHAGE : Attention, il est conseillé de ne pas activé tous les affichage à la fois */
-#define DEBUG_AFF_CAN 		2
+#define DEBUG_AFF_CAN 		0 // niveau trois est un peu HARD pour arcom
+#define DEBUG_AFF_CAN_REC	0
 #define DEBUG_AFF_DAC 		0
 #define DEBUG_AFF_ROUTINE 	2
 #define DEBUG_AFF_INTERUPT 	2
@@ -261,7 +262,7 @@ void task_in(long arg)
 		do
 		{
 #if DEBUG_AFF_ROUTINE >= 2
-			printk("task_in : retry to send");
+			printk("task_in : retry to send\n");
 #endif
 			data_send_in[0] = ((angle_num_in >> 8) & 0x0F) + CAN_COMM_ACQUISITION;
 			data_send_in[1] = angle_num_in & 0xFF;
@@ -297,8 +298,8 @@ void task_out(long arg)
 	u8 data_send_out[2];
 	unsigned int command_out;
 	glb_task_out_wait = 1;
-	while(glb_task_out_wait)rt_task_wait_period();
-	glb_task_out_wait = 1;
+	pos_num_out = 2048;
+	angle_num_out = 2048;
 	while(1)
 	{
 #if DEBUG_AFF_ROUTINE >= 1
@@ -309,8 +310,8 @@ void task_out(long arg)
 		printk("task_out : received angle_num_out = %d & pos_num_out = %d\n",angle_num_out, pos_num_out);
 #endif
 		/* Traitement */
-	    y[1][0] = ( ( ( (pos_num_out	- BC_PMn)	*MAX_POS*2.0) 	/ (BC_PMx-BC_PMn) )- MAX_POS); // verif OK (by nico)
-		y[0][0] = ( ( ( (angle_num_out - BC_AMn)	*MAX_ANGL*2.0)	/ (BC_AMx-BC_AMn) )- MAX_ANGL); // verif OK (by nico)
+	    y[1][0] = ( ( ( (pos_num_out	- BC_PMn)	*MAX_POS*2.0) 	/ (BC_PMx-BC_PMn) )- MAX_POS);	// verif OK (by nico)
+		y[0][0] = ( ( ( (angle_num_out	- BC_AMn)	*MAX_ANGL*2.0)	/ (BC_AMx-BC_AMn) )- MAX_ANGL);	// verif OK (by nico)
 #if TEST == 1
 		command_out = TEST_COMMANDE_OUT;
 #elif TEST == 0
@@ -325,7 +326,7 @@ void task_out(long arg)
 		do
 		{
 #if DEBUG_AFF_ROUTINE >= 2
-			printk("task_out : retry to send");
+			printk("task_out : retry to send\n");
 #endif
 			emission(CAN_SEND_ID,data_send_out, 2, 0);
 			/* SWITCH ROUTINE */
@@ -346,19 +347,29 @@ static void routine_reception(void)
 #if DEBUG_AFF_INTERUPT >= 1
 	printk("routine_reception : trame received\n");
 #endif
-	int value[2];
+	unsigned int value[2];
 	reception(CAN_FOCUS_ID, value);	// Lecture
+
+#if DEBUG_AFF_INTERUPT >= 3
+	printk("routine_reception :\n\tvalue[0] = 0x%x\n\tvalue[1] = 0x%x\n\tcomm : 0x%x\n",value[0],value[1], (value[0]>>8));
+#endif
 	/* repartition selon  */
 	if(((value[0]>>8) & 0xF0) == CAN_COMM_COMMAND)
 	{
 		command_in = value[0] & 0x0FFF;
 		glb_task_in_wait = 0;
+#if DEBUG_AFF_INTERUPT >= 2
+		printk("routine_reception : received command\n");
+#endif
 	}
 	else if(((value[0]>>8) & 0xF0) == CAN_COMM_ACQUISITION)	
 	{
 		angle_num_out 	= value[0] & 0x0FFF;
 		pos_num_out 	= value[1];
 		glb_task_out_wait = 0;
+#if DEBUG_AFF_INTERUPT >= 2
+		printk("routine_reception : received data\n");
+#endif
 	}
 
 	inb(CAN_INTERRUPT);		// Lecture du registre d interruptions pour liberer celle traitee
@@ -430,8 +441,8 @@ void reception(int focus, int * data)
 	unsigned int rx_msg_complet;
 	int rx_size;
 	u16 rx_id;
-#if DEBUG_AFF_CAN >= 1
-	printk("\nRECEPTION\n");
+#if DEBUG_AFF_CAN_REC >= 1
+	printk("reception : message received...\n");
 #endif
 	if(inb(CAN_STATUS) && 0x01) //reception!
 	{
@@ -440,16 +451,15 @@ void reception(int focus, int * data)
 		if((rx_id == focus) || (focus == 0))
 		{
 			rx_size = (inb(CAN_RX_RTB_BIT)) & 0x0F ;
-#if DEBUG_AFF_CAN >=2
-			printk("reception : id :\t\t %d\n",rx_id);
-			printk("reception : size :\t\t %x\n",rx_size);
+#if DEBUG_AFF_CAN_REC >=2
+			printk("reception :\n\tid :\t %d\n\tsize :\t%d\n",rx_id,rx_size);
 #endif
 			int j;
 			for(j=0; j < rx_size; j++)	// On recupere d abord les buffer ayant les data de poids fort
 			{
 				rx_msg[j] = inb(CAN_RX_BUFFER+j);
-#if DEBUG_AFF_CAN >=3
-				printk("Buf %d :\t\t %4x\n",j+1,rx_msg[j]);
+#if DEBUG_AFF_CAN_REC >=3
+				printk("Buf %d :\t 0x%x\n",j,rx_msg[j]);
 #endif
 			}
 			
@@ -458,8 +468,8 @@ void reception(int focus, int * data)
 			rx_msg_complet = rx_msg[0];
 			for(j=0; j < rx_size; j++)
 			{
-				if(j%2 == 0){data[j/2] = rx_msg[j]; 				}
-				else 		{data[j/2] = (rx_msg[j]<<8)+rx_msg[j]; 	}
+				if(j%2 == 0){data[j/2] = rx_msg[j]<<8; 		}
+				else 		{data[j/2] += (rx_msg[j]); 	}
 				//rx_msg_complet = (rx_msg_complet << 8) + rx_msg[j];
 			}
 		}
