@@ -260,6 +260,9 @@ void task_in(long arg)
 #endif
 		do
 		{
+#if DEBUG_AFF_ROUTINE >= 2
+			printk("task_in : retry to send");
+#endif
 			data_send_in[0] = ((angle_num_in >> 8) & 0x0F) + CAN_COMM_ACQUISITION;
 			data_send_in[1] = angle_num_in & 0xFF;
 			data_send_in[2] = (pos_num_in >> 8) & 0x0F;
@@ -321,6 +324,9 @@ void task_out(long arg)
 #endif
 		do
 		{
+#if DEBUG_AFF_ROUTINE >= 2
+			printk("task_out : retry to send");
+#endif
 			emission(CAN_SEND_ID,data_send_out, 2, 0);
 			/* SWITCH ROUTINE */
 			rt_task_wait_period();
