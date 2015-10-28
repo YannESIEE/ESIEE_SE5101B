@@ -234,6 +234,9 @@ void task_in(long arg)
 
 	while(1)
 	{
+#if DEBUG_AFF_ROUTINE >= 1
+		printk("task_in : begin loop\n");
+#endif
 		/* Acquisition */
 #if TEST == 1
 		angle_num_in 	= TEST_ANGLE_NUM_IN;
@@ -252,17 +255,20 @@ void task_in(long arg)
 		else if ((adc_value & 0x0F) == 0){angle_num_in 	= adc_value >> 4 ;}
 #endif
 		/* Envoi de donnée */
-		data_send_in[0] = ((angle_num_in >> 8) & 0x0F) + CAN_COMM_ACQUISITION;
-		data_send_in[1] = angle_num_in & 0xFF;
-		data_send_in[2] = (pos_num_in >> 8) & 0x0F;
-		data_send_in[3] = pos_num_in & 0xFF;
 #if DEBUG_AFF_ROUTINE >= 2
-		printk("task_in : send angle_num_in = %d & pos_num_in = %d\n",angle_num_in, pos_num_in);
+			printk("task_in : send angle_num_in = %d & pos_num_in = %d\n",angle_num_in, pos_num_in);
 #endif
-		emission(CAN_SEND_ID,data_send_in, 4, 0);
-		/* Swich de routine en attendant la réponse.... */
-		rt_task_wait_period();
-		/* Attente de reception */
+		do
+		{
+			data_send_in[0] = ((angle_num_in >> 8) & 0x0F) + CAN_COMM_ACQUISITION;
+			data_send_in[1] = angle_num_in & 0xFF;
+			data_send_in[2] = (pos_num_in >> 8) & 0x0F;
+			data_send_in[3] = pos_num_in & 0xFF;
+			emission(CAN_SEND_ID,data_send_in, 4, 0);
+			/* Swich de routine en attendant la réponse.... */
+			rt_task_wait_period();
+			/* Attente de reception */
+		}
 		while(glb_task_in_wait)rt_task_wait_period();
 		glb_task_in_wait = 1;
 		/* Actionneur */
@@ -288,11 +294,14 @@ void task_out(long arg)
 	u8 data_send_out[2];
 	unsigned int command_out;
 	glb_task_out_wait = 1;
+	while(glb_task_out_wait)rt_task_wait_period();
+	glb_task_out_wait = 1;
 	while(1)
 	{
+#if DEBUG_AFF_ROUTINE >= 1
+		printk("task_out : begin loop\n");
+#endif
 		/* Attende de reception */
-		while(glb_task_out_wait)rt_task_wait_period();
-		glb_task_out_wait = 1;
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_out : received angle_num_out = %d & pos_num_out = %d\n",angle_num_out, pos_num_out);
 #endif
@@ -310,9 +319,15 @@ void task_out(long arg)
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_out : send command_out = %d\n",command_out);
 #endif
-		emission(CAN_SEND_ID,data_send_out, 2, 0);
-		/* SWITCH ROUTINE */
-		rt_task_wait_period();
+		do
+		{
+			emission(CAN_SEND_ID,data_send_out, 2, 0);
+			/* SWITCH ROUTINE */
+			rt_task_wait_period();
+		}
+		while(glb_task_out_wait);
+		glb_task_out_wait = 1;
+
 	}
 }
 
