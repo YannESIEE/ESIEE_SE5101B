@@ -1,8 +1,8 @@
 #generate .o
-obj-m	   := squelette_rtai_working.o
+obj-m	   := any.o
 
 PATH := /opt/x86_64/gcc/gcc-3.4.4/bin:$(PATH)
-KIT = arcom7.esiee.fr
+KIT = arcom1.esiee.fr
 
 #KIT = arcom17.esiee.fr =BANC 2 ???
 #ARCOM17 : butée +35° : 2771 // butée -35° 1318
@@ -39,14 +39,14 @@ default:
 	i386 -B --uname-2.6 make -C $(KDIR) M=$(PWD) modules
 
 clean:
-	-rm -f *.o squelette*.ko .*.cmd .*.flags *.mod.c *~
+	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~
 	-rm -r .tmp*
 send:
 	scp *.ko runarcom arcom@$(KIT):/home/arcom
 	ssh arcom@$(KIT)
 
 a:
-	-rm -f *.o squelette*.ko .*.cmd .*.flags *.mod.c *~
+	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~
 	-rm -r .tmp*
 	@echo Cleaned
 	@echo
@@ -64,7 +64,7 @@ a:
 	ssh arcom@$(KIT)
 
 b:
-	-rm -f *.o squelette*.ko .*.cmd .*.flags *.mod.c *~
+	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~
 	-rm -r .tmp*
 	@echo
 	@echo PWD = $(PWD)
