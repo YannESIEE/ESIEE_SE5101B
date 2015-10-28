@@ -7,7 +7,7 @@
 #define TEST_POS_NUM_IN 	1024
 #define TEST_COMMANDE_OUT 	1024
 /* AFFICHAGE : Attention, il est conseillé de ne pas activé tous les affichage à la fois */
-#define DEBUG_AFF_CAN 		2
+#define DEBUG_AFF_CAN 		0
 #define DEBUG_AFF_DAC 		0
 #define DEBUG_AFF_ROUTINE 	2
 #define DEBUG_AFF_MAT 		0
@@ -281,13 +281,16 @@ void task_in(long arg)
  */
 void task_out(long arg)
 {
+#if DEBUG_AFF_ROUTINE >= 1
+	printk("task_out : init\n");
+#endif
 	u8 data_send_out[2];
 	unsigned int command_out;
 	glb_task_out_wait = 1;
 	while(1)
 	{
 		/* Attende de reception */
-		while(glb_task_out_wait);
+		while(glb_task_out_wait)rt_task_wait_period();
 		glb_task_out_wait = 1;
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_out : received angle_num_out = %d & pos_num_out = %d\n",angle_num_out, pos_num_out);

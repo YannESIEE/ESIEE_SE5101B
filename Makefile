@@ -97,6 +97,24 @@ a18:
 	@echo
 	ssh arcom@arcom18.esiee.fr
 
+a16:
+	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~
+	-rm -r .tmp*
+	@echo Cleaned
+	@echo
+
+	@echo PWD = $(PWD)
+	@echo CURRENT = $(CURRENT)
+	@echo KDIR = $(KDIR)
+	i386 -B --uname-2.6 make -C $(KDIR) M=$(PWD) modules
+	@echo Built
+	@echo
+	
+	
+	scp *.ko runarcom arcom@arcom16.esiee.fr:/home/arcom
+	@echo
+	ssh arcom@arcom16.esiee.fr
+
 a1:
 	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~
 	-rm -r .tmp*
