@@ -221,18 +221,20 @@ static void prog_exit(void)
  */
 void task_in(long arg)
 {
-	printk("task_in : init");
-	while(1)
-	{
-		printk("task_in : loop");
-		rt_task_wait_period();
-	}
-#if 0
+#if DEBUG_AFF_ROUTINE >= 1
+	printk("task_in : init\n");
+#endif
 	u8 data_send_in[4];
 	unsigned int adc_value, angle_num_in, pos_num_in;
 	glb_task_in_wait = 1;
 	init_3718();
 
+	while(1)
+	{
+		printk("task_in : loop\n");
+		rt_task_wait_period();
+	}
+#if 0
 	while(1)
 	{
 		/* Acquisition */
