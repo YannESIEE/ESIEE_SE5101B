@@ -137,8 +137,8 @@ unsigned int didit;
 static int prog_init(void);
 static void prog_exit(void);
 /* ROUTINE */
-static void task_in(long arg);
-static void task_out(long arg);
+void task_in(long arg);
+void task_out(long arg);
 static void routine_reception(void);
 /* DRIVER CAN */
 void init_can(void);
@@ -219,7 +219,7 @@ static void prog_exit(void)
  * Transmet l'information via le bus CAN
  * attend la reception de la donnée, puis génère le voltage de la commande reçu
  */
-static void task_in(long arg)
+void task_in(long arg)
 {
 	u8 data_send_in[4];
 	unsigned int adc_value, angle_num_in, pos_num_in;
@@ -274,7 +274,7 @@ static void task_in(long arg)
  * Traitement
  * Envoi de la commande
  */
-static void task_out(long arg)
+void task_out(long arg)
 {
 	u8 data_send_out[2];
 	unsigned int command_out;
