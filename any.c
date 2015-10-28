@@ -262,16 +262,16 @@ void task_in(long arg)
 		printk("task_in : loop\n");
 #endif
 		rt_task_wait_period();
-#if 0
 		/* Attente de reception */
+#if 0
 		while(glb_task_in_wait);
 		glb_task_in_wait = 1;
+#endif
 		/* Actionneur */
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_in : received command_in = %d\n",command_in);
 #endif
         set_DA(0, command_in);	// on ecrit dans le canal 0, la "commande"
-#endif
 	}
 }
 
@@ -374,7 +374,7 @@ void emission(u16 id,u8 *data,u8 lenght,u8 RTR_bit)
 #if DEBUG_AFF_CAN >= 2
 	printk("emission : id 1ere partie :\t%x\n", id_p1);
 	printk("emission : id,RTR,longueur :\t%x\n", id_p2);
-	printk("emission : data :\t%x\n", data);
+	printk("emission : data :\t%x\n", data[0]);
 #endif
 	outb(id_p1,CAN_TX_IDENTIFIER);
 	outb(id_p2,CAN_TX_RTB_BIT);
