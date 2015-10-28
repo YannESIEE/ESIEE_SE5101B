@@ -7,9 +7,10 @@
 #define TEST_POS_NUM_IN 	1024
 #define TEST_COMMANDE_OUT 	1024
 /* AFFICHAGE : Attention, il est conseillé de ne pas activé tous les affichage à la fois */
-#define DEBUG_AFF_CAN 		0
+#define DEBUG_AFF_CAN 		2
 #define DEBUG_AFF_DAC 		0
 #define DEBUG_AFF_ROUTINE 	2
+#define DEBUG_AFF_INTERUPT 	2
 #define DEBUG_AFF_MAT 		0
 /**************************************************************************\
 |********************* - define pour tache periodique - *******************|
@@ -320,6 +321,10 @@ void task_out(long arg)
  */
 static void routine_reception(void)
 {
+
+#if DEBUG_AFF_INTERUPT >= 1
+		printk("task_out : trame received");
+#endif
 	int value[2];
 	reception(CAN_FOCUS_ID, value);	// Lecture
 	/* repartition selon  */
@@ -453,7 +458,6 @@ void reception(int focus, int * data)
  */
 void set_DA(int canal, unsigned int value_n)
 {
-#if 0
 	int lsb, msb;
 #if DEBUG_AFF_DAC >= 1 
 	printk("set_DA\n");
@@ -470,7 +474,6 @@ void set_DA(int canal, unsigned int value_n)
 	/* WRITE OUTPUT */
 	outb(lsb,BASE_DAC_0+2*canal);
 	outb(msb,BASE_DAC_1+2*canal);
-#endif
 }
 
 /**************************************************************************\
