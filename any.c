@@ -183,8 +183,8 @@ static int prog_init(void)
 	//Tache d'acquisition
 	ierr_in = rt_task_init(&tache_in,task_in,0,STACK_SIZE, PRIORITE, 1, 0);
 	rt_task_make_periodic(&tache_in, now, nano2count(PERIODE_CONTROL));
-	ierr_out = rt_task_init(&tache_out,task_out,0,STACK_SIZE, PRIORITE, 1, 0);
-	rt_task_make_periodic(&tache_out, now, nano2count(PERIODE_CONTROL));
+	// ierr_out = rt_task_init(&tache_out,task_out,0,STACK_SIZE, PRIORITE, 1, 0);
+	// rt_task_make_periodic(&tache_out, now, nano2count(PERIODE_CONTROL));
 
 	//Interuption de lecture de donnée.
 	rt_global_cli();									// Desactivation des IT
@@ -205,7 +205,7 @@ static void prog_exit(void)
 
     stop_rt_timer();
     rt_task_delete(&tache_in);
-    rt_task_delete(&tache_out);
+    // rt_task_delete(&tache_out);
 
     printk("EXIT\n");
 }
@@ -221,6 +221,13 @@ static void prog_exit(void)
  */
 void task_in(long arg)
 {
+	printk("task_in : init");
+	while(1)
+	{
+		printk("task_in : loop");
+		rt_task_wait_period();
+	}
+#if 0
 	u8 data_send_in[4];
 	unsigned int adc_value, angle_num_in, pos_num_in;
 	glb_task_in_wait = 1;
@@ -265,6 +272,7 @@ void task_in(long arg)
 #endif
         set_DA(0, command_in);	// on ecrit dans le canal 0, la "commande"
 	}
+#endif
 }
 
 /*
