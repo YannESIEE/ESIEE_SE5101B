@@ -256,10 +256,8 @@ void task_in(long arg)
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_in : send angle_num_in = %d & pos_num_in = %d\n",angle_num_in, pos_num_in);
 #endif
-#if 0
 		emission(CAN_SEND_ID,data_send_in, 4, 0);
 		/* Swich de routine en attendant la réponse.... */
-#endif
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_in : loop\n");
 #endif
