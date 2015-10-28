@@ -6,10 +6,10 @@
 #define TEST_ANGLE_NUM_IN 	1024
 #define TEST_POS_NUM_IN 	1024
 #define TEST_COMMANDE_OUT 	1024
-#define DEBUG_AFF_CAN 		2
-#define DEBUG_AFF_DAC 		2
+#define DEBUG_AFF_CAN 		0
+#define DEBUG_AFF_DAC 		0
 #define DEBUG_AFF_ROUTINE 	2
-#define DEBUG_AFF_MAT 		2
+#define DEBUG_AFF_MAT 		0
 /**************************************************************************\
 |********************* - define pour tache periodique - *******************|
 \**************************************************************************/
@@ -259,9 +259,6 @@ void task_in(long arg)
 #endif
 		emission(CAN_SEND_ID,data_send_in, 4, 0);
 		/* Swich de routine en attendant la réponse.... */
-#if DEBUG_AFF_ROUTINE >= 2
-		printk("task_in : loop\n");
-#endif
 		rt_task_wait_period();
 		/* Attente de reception */
 #if 0
