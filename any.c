@@ -269,7 +269,7 @@ void task_in(long arg)
 			rt_task_wait_period();
 			/* Attente de reception */
 		}
-		while(glb_task_in_wait)rt_task_wait_period();
+		while(glb_task_in_wait);
 		glb_task_in_wait = 1;
 		/* Actionneur */
 #if DEBUG_AFF_ROUTINE >= 2
