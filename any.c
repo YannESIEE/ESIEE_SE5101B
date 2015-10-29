@@ -12,13 +12,13 @@
 #define DEBUG_AFF_DAC 		0
 #define DEBUG_AFF_ROUTINE 	2
 #define DEBUG_AFF_INTERUPT 	0
-#define DEBUG_AFF_MAT 		2
+#define DEBUG_AFF_MAT 		0
 /**************************************************************************\
 |********************* - define pour tache periodique - *******************|
 \**************************************************************************/
 #define STACK_SIZE			2000
 #define TICK_PERIOD			1000000		//1 ms
-#define PERIODE_CONTROL		20000000	//20ms
+#define PERIODE_CONTROL		10000000	//20ms
 #define N_BOUCLE			10000000
 #define NUMERO				1
 #define PRIORITE			1
@@ -66,8 +66,9 @@
 /**************************************************************************\
 |************************** - INFO SUR LES BANC - *************************|
 \**************************************************************************/
-#define MODE_PENDULE 		1 			// 1 ou 2 selon 1 ou deux bancs
-#define MAX_ANGL        	0.305		// (+35° = 0.61 rad)
+#define PI 					3.14159265359
+#define MODE_PENDULE 		2 			// 1 ou 2 selon 1 ou deux bancs
+#define MAX_ANGL        	(35.0/2.0*PI/180.0) //0.305		// (+35° = 0.61 rad)
 #define MAX_POS            	0.6 		// 0.60 m
 #define CHANNEL_ANGL        0
 #define CHANNEL_POS       	1
@@ -77,17 +78,17 @@
 #define BANC        3        //CHOISIR ENTRE 2,3,4,5 ou autre(défaut) **** /!\ choisir le banc déporter si MODE_PENDULE == 2 ****
 
 #if (BANC == 2)
-	#define BC_A0 		2048
+	#define BC_A0 		2007
     #define BC_PMn		367
     #define BC_PMx		3839
-    #define BC_AMn		1195
-    #define BC_AMx		2823
+    #define BC_AMn		1100
+    #define BC_AMx		2900
 #elif (BANC == 3)
-	#define BC_A0 		2048
-    #define BC_PMn		400//3
-    #define BC_PMx		3900//4094
-    #define BC_AMn		1200//1217
-    #define BC_AMx		2836//2819
+	#define BC_A0 		2040 // Verifier
+    #define BC_PMn		400 //3
+    #define BC_PMx		3900 //4094
+    #define BC_AMn		1200 //1217
+    #define BC_AMx		2800 //2819
 #elif (BANC == 4)
 	#define BC_A0 		2048
     #define BC_PMn		5
@@ -113,8 +114,9 @@
 \**************************************************************************/
 // #define POS_CONERT(x)	( ( ( (x - BC_PMn)	*MAX_POS*2.0) 	/ (BC_PMx-BC_PMn) )- MAX_POS) // verif OK (by nico)
 // #define ANG_CONERT(x)	( ( ( (x - BC_AMn)	*MAX_ANGL*2.0)	/ (BC_AMx-BC_AMn) )- MAX_ANGL)// verif OK (by nico)
-#define POS_CONVERT(x)	( ( ( (x - BC_PMn)	*MAX_POS*2.0) 	/ (BC_PMx-BC_PMn) )- MAX_POS)	// verif OK (by nico)
-#define ANG_CONVERT(x)	((x - BC_A0 ) * 20.0 / 4095.0)
+//#define POS_CONVERT(x)	( ( ( ((int)x - BC_PMn - (BC_PMx-BC_PMn)/2.0) * MAX_POS*2.0) / (BC_PMx-BC_PMn) )- MAX_POS)	// verif OK (by nico)
+#define POS_CONVERT(x)	(((int)x - (BC_PMx-BC_PMn)/2.0) * MAX_POS*2.0 / (BC_PMx-BC_PMn)) // BY Yann
+#define ANG_CONVERT(x)	(((int)x - BC_A0 ) * MAX_ANGL*2.0 / (BC_AMx-BC_AMn)) // By Yann
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -191,7 +193,7 @@ static int prog_init(void)
 #endif
 	RTIME now;
 
-	printk("\n\n\n\nProgramme Initialisation...\n");
+	printk("\n\n\n\nprog_init : Programme Initialisation...\n");
 	rt_set_oneshot_mode();
 
 	start_rt_timer(nano2count(TICK_PERIOD));
@@ -225,7 +227,7 @@ static int prog_init(void)
 
 static void prog_exit(void)
 {
-	printk("inside tpcan_exit\n");
+	printk("prog_exit : stoping prog\n");
 #if MODE_PENDULE == 2
 	rt_shutdown_irq(5);                                 // Desactivation de l IT
 	rt_free_global_irq(5);                              // Desinstallation du handler
@@ -239,7 +241,7 @@ static void prog_exit(void)
 	rt_task_delete(&tache_one);
 #endif
 
-	printk("EXIT\n");
+	printk("prog_exit : EXIT\n");
 }
 
 /**************************************************************************\
@@ -263,9 +265,6 @@ void task_in(long arg)
 
 	while(1)
 	{
-#if DEBUG_AFF_ROUTINE >= 1
-		printk("task_in : begin loop\n");
-#endif
 		/* Acquisition */
 #if TEST == 1
 		angle_num_in 	= TEST_ANGLE_NUM_IN;
@@ -289,7 +288,7 @@ void task_in(long arg)
 #endif
 		do
 		{
-#if DEBUG_AFF_ROUTINE >= 2
+#if DEBUG_AFF_ROUTINE >= 3
 			printk("task_in : retry to send\n");
 #endif
 			data_send_in[0] = ((angle_num_in >> 8) & 0x0F) + CAN_COMM_ACQUISITION;
@@ -330,21 +329,18 @@ void task_out(long arg)
 	angle_num_out = 2048;
 	while(1)
 	{
-#if DEBUG_AFF_ROUTINE >= 1
-		printk("task_out : begin loop\n");
-#endif
-		/* Attende de reception */
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_out : received angle_num_out = %d & pos_num_out = %d\n",angle_num_out, pos_num_out);
 #endif
 		/* Conversion */
 	    y[1] = POS_CONVERT(pos_num_out);
-		y[0] = ANG_CONVERT(angle_num_out);	
+		y[0] = ANG_CONVERT(angle_num_out);
 		/* Traitement */
 #if TEST == 1
 		command_out = TEST_COMMANDE_OUT;
 #elif TEST == 0
 		command_out = (unsigned int)((calc_matrix() + 10.0) * 4095.0 / 20.0); // Convertion Volt/numerique
+		command_out = command_out<0 ? 0 : command_out>4095 ? 4095 : command_out;
 #endif
 		/* renvoi des donnée */
 		data_send_out[0] = ((command_out >> 8) & 0x0F) + CAN_COMM_COMMAND;
@@ -354,13 +350,14 @@ void task_out(long arg)
 #endif
 		do
 		{
-#if DEBUG_AFF_ROUTINE >= 2
+#if DEBUG_AFF_ROUTINE >= 3
 			printk("task_out : retry to send\n");
 #endif
 			emission(CAN_SEND_ID,data_send_out, 2, 0);
 			/* SWITCH ROUTINE */
 			rt_task_wait_period();
 		}
+		/* Attende de reception */
 		while(glb_task_out_wait);
 		glb_task_out_wait = 1;
 
@@ -376,7 +373,8 @@ void task_one(long arg)
 	printk("task_one : init\n");
 #endif
 	unsigned int adc_value, angle_num_one, pos_num_one;
-	unsigned int command_one;
+	int command_one;
+	float commande_float;
 	while(1)
 	{
 		/* ACQUISITION */
@@ -390,10 +388,26 @@ void task_one(long arg)
 		adc_value = adc_read_value();		// recuperation du (canal + valeur) concaténés
 		if 		((adc_value & 0x0F) == 1){pos_num_one 	= adc_value >> 4 ;}
 		else if ((adc_value & 0x0F) == 0){angle_num_one	= adc_value >> 4 ;}
-	    y[1] = POS_CONVERT(pos_num_out);
-		y[0] = ANG_CONVERT(angle_num_out);
+		y[0] = -ANG_CONVERT(angle_num_one);//angle_num_one
+	    y[1] = POS_CONVERT(pos_num_one);
 		/* TRAITEMENT */
-		command_one = (unsigned int)((calc_matrix() + 10.0) * 4095.0 / 20.0); 					// Convertion Volt/numerique
+		command_one = (int)((calc_matrix() + 10.0) * 4095.0 / 20.0); 					// Convertion Volt/numerique
+		command_one = command_one<0 ? 0 : command_one>4095 ? 4095 : command_one;
+#if DEBUG_AFF_ROUTINE == 3
+		/** Affichages des angles **/
+		printk("task_one :\n\tangle_num =\t%d\n\tangle_rad =\t",angle_num_one,pos_num_one);
+		affichage_float(y[0]);
+		printk("\n");
+#elif DEBUG_AFF_ROUTINE == 4
+		/** Affichages de position **/
+		printk("task_one :\n\tpos_num =\t%d\n\tpos_metre =\t",pos_num_one);
+		affichage_float(y[1]);
+		printk("\n");
+#endif
+#if DEBUG_AFF_ROUTINE >= 2
+		/** affichage de la commande **/
+		printk("task_one :\n\tcommande_num = %d\n", command_one);
+#endif
 		/* ACTIONNEUR */
 		set_DA(0, command_one);	// on ecrit dans le canal 0, la "commande"
 		rt_task_wait_period();
@@ -714,58 +728,43 @@ float calc_matrix(void)
 				- Cdc[1]*(x_save[1])
 				- Cdc[2]*(x_save[2])
 				- Cdc[3]*(x_save[3]);
+#if DEBUG_AFF_MAT >= 2
+	// Affichage de debugage niveau 2
+	printk("calc_matrix :\n\tx =\t\t");affichage_float(x[0]);printk(" ; ");affichage_float(x[1]);printk(" ; ");affichage_float(x[2]);printk(" ; ");affichage_float(x[3]);
+	printk("\n\tx+1 =\t\t");affichage_float(x_save[0]);printk(" ; ");affichage_float(x_save[1]);printk(" ; ");affichage_float(x_save[2]);printk(" ; ");affichage_float(x_save[3]);
+	printk("\n\ty =\t\t");affichage_float(y[0]);printk(" ; ");affichage_float(y[1]);
+	printk("\n\tcommande = \t"); affichage_float(commande);
+	printk("\n");
+#endif
 	/** MEMORISATION DE LA MATRICE D'ETATS ACTUEL **/
 	x[0]=(x_save[0]);
 	x[1]=(x_save[1]);
 	x[2]=(x_save[2]);
 	x[3]=(x_save[3]);
-#if DEBUG_AFF_MAT >= 2
-
-
-	printk("\t x = ");affichage_float(x[0]);printk(" ; ");affichage_float(x[1]);printk(" ; ");affichage_float(x[2]);printk(" ; ");affichage_float(x[3]);
-	printk("\n\t y = ");affichage_float(y[0]);printk(" ; ");affichage_float(y[1]);
-	printk("\n\tCommande * 100 = %d\n", (int)(commande*100)); // Affichage de debugage niveau 2
-	affichage_float(0.005);
-	affichage_float(-0.005);
-	affichage_float(-10.005);
-#endif
 	/** GESTION EXTREMUM **/
-	return commande>10.0 ? 10.0 : commande<-10.0 ? -10.0 : commande;
-	/*if(commande > 10.0)
-	{
-		return 10.0;
-	}
-	else if(commande < -10.0)
-	{
-		return -10.0;
-	}
-	return commande;*/
+	return commande;
 }
 
-
-
+/*
+ * affichage_float
+ * Si float corrompu : -210000000,00-2100000;
+ */
 void affichage_float(float val)
 {
 	if(val>=0)
 	{
-		printk("%d,%3d", (int)(val) , (int)(val*1000)-((int)val)*1000);
-
-
-		/*
 		int decimal = (int)(val*1000)-((int)val)*1000;
-		if(decimal>100)				printk("%d,%d", (int)val,  (int)(val*1000)-((int)val)*1000 );
-		else if(decimal > 10 )		printk("%d,0%d", (int)val, (int)(val*1000)-((int)val)*1000 );
-		else						printk("%d,00%d", (int)val,(int)(val*1000)-((int)val)*1000 );
-		*/
+		if		(decimal>100)	printk("%d,%d", 	(int)val,	(int)(val*1000)-((int)val)*1000 );
+		else if	(decimal > 10 )	printk("%d,0%d", 	(int)val,	(int)(val*1000)-((int)val)*1000 );
+		else					printk("%d,00%d", 	(int)val,	(int)(val*1000)-((int)val)*1000 );
+		
 	}
 	else
 	{
-		printk("-%d,%3d", (int)(-val) , (int)(-val*1000)-((int)-val)*1000);
-		/*
-		int decimal = (int)((-val)*1000)-((int)(val))*1000;
-		if(decimal>100)				printk("-%d,%d", (int)(-val),  	(int)((-val)*1000)-((int)(-val))*1000 );
-		else if(decimal > 10 )		printk("-%d,0%d", (int)(-val),  (int)((-val)*1000)-((int)(-val))*1000 );
-		else						printk("-%d,00%d", (int)(-val), (int)((-val)*1000)-((int)(-val))*1000 );
-		*/
+		int decimal = (int)((-val)*1000)-((int)(-val))*1000;
+		if		(decimal>100)	printk("-%d,%d", 	(int)(-val),	(int)((-val)*1000)-((int)(-val))*1000 );
+		else if	(decimal > 10 )	printk("-%d,0%d", 	(int)(-val),	(int)((-val)*1000)-((int)(-val))*1000 );
+		else					printk("-%d,00%d", 	(int)(-val),	(int)((-val)*1000)-((int)(-val))*1000 );
+		
 	}
 }
