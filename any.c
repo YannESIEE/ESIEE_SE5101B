@@ -173,6 +173,7 @@ void 	ad_range_select	(int canal, int range);
 /* MATRICE */
 void  	init_matrix 	(void);
 float 	calc_matrix 	(void);
+void 	affichage_float (float val);
 
 /**************************************************************************\
 |*********************** - LANCEMENT DU PROGRAMME - ***********************|
@@ -710,16 +711,23 @@ float calc_matrix(void)
 	x_save[3]= Adc[3][0]*x[0] + Adc[3][1]*x[1] + Adc[3][2]*x[2] + Adc[3][3]*x[3] + Bdc[3][0]*y[0] + Bdc[3][1]*y[1];
 	/** CALCULE DE LA COMMANDE commande = u = -Cdc * X **/
 	commande =  - Cdc[0]*(x_save[0])
-			 	- Cdc[1]*(x_save[1])
-			 	- Cdc[2]*(x_save[2])
-			 	- Cdc[3]*(x_save[3]);
+				- Cdc[1]*(x_save[1])
+				- Cdc[2]*(x_save[2])
+				- Cdc[3]*(x_save[3]);
 	/** MEMORISATION DE LA MATRICE D'ETATS ACTUEL **/
 	x[0]=(x_save[0]);
 	x[1]=(x_save[1]);
 	x[2]=(x_save[2]);
 	x[3]=(x_save[3]);
 #if DEBUG_AFF_MAT >= 2
-	printk("\tCommande * 100 = %d\n", (int)(commande*100)); // Affichage de debugage niveau 2
+
+
+	printk("\t x = ");affichage_float(x[0]);printk(" ; ");affichage_float(x[1]);printk(" ; ");affichage_float(x[2]);printk(" ; ");affichage_float(x[3]);
+	printk("\n\t y = ");affichage_float(y[0]);printk(" ; ");affichage_float(y[1]);
+	printk("\n\tCommande * 100 = %d\n", (int)(commande*100)); // Affichage de debugage niveau 2
+	affichage_float(0.005);
+	affichage_float(-0.005);
+	affichage_float(-10.005);
 #endif
 	/** GESTION EXTREMUM **/
 	return commande>10.0 ? 10.0 : commande<-10.0 ? -10.0 : commande;
@@ -736,4 +744,28 @@ float calc_matrix(void)
 
 
 
+void affichage_float(float val)
+{
+	if(val>=0)
+	{
+		printk("%d,%3d", (int)(val) , (int)(val*1000)-((int)val)*1000);
 
+
+		/*
+		int decimal = (int)(val*1000)-((int)val)*1000;
+		if(decimal>100)				printk("%d,%d", (int)val,  (int)(val*1000)-((int)val)*1000 );
+		else if(decimal > 10 )		printk("%d,0%d", (int)val, (int)(val*1000)-((int)val)*1000 );
+		else						printk("%d,00%d", (int)val,(int)(val*1000)-((int)val)*1000 );
+		*/
+	}
+	else
+	{
+		printk("-%d,%3d", (int)(-val) , (int)(-val*1000)-((int)-val)*1000);
+		/*
+		int decimal = (int)((-val)*1000)-((int)(val))*1000;
+		if(decimal>100)				printk("-%d,%d", (int)(-val),  	(int)((-val)*1000)-((int)(-val))*1000 );
+		else if(decimal > 10 )		printk("-%d,0%d", (int)(-val),  (int)((-val)*1000)-((int)(-val))*1000 );
+		else						printk("-%d,00%d", (int)(-val), (int)((-val)*1000)-((int)(-val))*1000 );
+		*/
+	}
+}
