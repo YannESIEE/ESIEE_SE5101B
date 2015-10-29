@@ -143,6 +143,7 @@ float Adc[4][4];
 float Bdc[4][2];
 float Cdc[4];
 float x[4];
+float x_save[4];
 float y[2];
 unsigned int didit;
 
