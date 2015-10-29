@@ -66,42 +66,55 @@
 /**************************************************************************\
 |************************** - INFO SUR LES BANC - *************************|
 \**************************************************************************/
-#define MODE_PENDULE 		2
-#define MAX_ANGL        	0.305    //(+35° = 0.61 rad)
-#define MAX_POS            	0.6
+#define MODE_PENDULE 		1 			// 1 ou 2 selon 1 ou deux bancs
+#define MAX_ANGL        	0.305		// (+35° = 0.61 rad)
+#define MAX_POS            	0.6 		// 0.60 m
 #define CHANNEL_ANGL        0
 #define CHANNEL_POS       	1
 
 // EXTREMES ARCOM
 //Banc 2 à revérifier
-#define BANC        3        //CHOISIR ENTRE 2,3,4,5 ou autre(défaut) *************************
+#define BANC        3        //CHOISIR ENTRE 2,3,4,5 ou autre(défaut) **** /!\ choisir le banc déporter si MODE_PENDULE == 2 ****
 
 #if (BANC == 2)
-    #define BC_PMn        367
-    #define BC_PMx        3839
-    #define BC_AMn        1195
-    #define BC_AMx        2823
+	#define BC_A0 		2048
+    #define BC_PMn		367
+    #define BC_PMx		3839
+    #define BC_AMn		1195
+    #define BC_AMx		2823
 #elif (BANC == 3)
-    #define BC_PMn        400//3
-    #define BC_PMx        3900//4094
-    #define BC_AMn        1200//1217
-    #define BC_AMx        2836//2819
+	#define BC_A0 		2048
+    #define BC_PMn		400//3
+    #define BC_PMx		3900//4094
+    #define BC_AMn		1200//1217
+    #define BC_AMx		2836//2819
 #elif (BANC == 4)
-    #define BC_PMn        5
-    #define BC_PMx        4095
-    #define BC_AMn        1291
-    #define BC_AMx        2760
+	#define BC_A0 		2048
+    #define BC_PMn		5
+    #define BC_PMx		4095
+    #define BC_AMn		1291
+    #define BC_AMx		2760
 #elif (BANC == 5)
-    #define BC_PMn        0
-    #define BC_PMx        4095
-    #define BC_AMn        1235
-    #define BC_AMx        2800
+	#define BC_A0 		2048
+    #define BC_PMn		0
+    #define BC_PMx		4095
+    #define BC_AMn		1235
+    #define BC_AMx		2800
 #else
-    #define BC_PMn        380
-    #define BC_PMx        3820
-    #define BC_AMn        1200
-    #define BC_AMx        2820
+	#define BC_A0 		2048
+    #define BC_PMn		380
+    #define BC_PMx		3820
+    #define BC_AMn		1200
+    #define BC_AMx		2820
 #endif
+
+/**************************************************************************\
+|******************************** - MACRO - *******************************|
+\**************************************************************************/
+// #define POS_CONERT(x)	( ( ( (x - BC_PMn)	*MAX_POS*2.0) 	/ (BC_PMx-BC_PMn) )- MAX_POS) // verif OK (by nico)
+// #define ANG_CONERT(x)	( ( ( (x - BC_AMn)	*MAX_ANGL*2.0)	/ (BC_AMx-BC_AMn) )- MAX_ANGL)// verif OK (by nico)
+#define POS_CONVERT(x)	( ( ( (x - BC_PMn)	*MAX_POS*2.0) 	/ (BC_PMx-BC_PMn) )- MAX_POS)	// verif OK (by nico)
+#define ANG_CONVERT(x)	((x - BC_A0 ) * 20.0 / 4095.0)
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -121,43 +134,44 @@ MODULE_LICENSE("GPL");
 |***************** - Declaration des variables globales - *****************|
 \**************************************************************************/
 /* RT_TASK */
-static RT_TASK tache_in, tache_out;
+static RT_TASK tache_in, tache_out, tache_one;
 int glb_task_in_wait;
 int glb_task_out_wait;
 unsigned int command_in, angle_num_out, pos_num_out; // information communiqué par bus CAN
 /* Matrice */
 float Adc[4][4];
 float Bdc[4][2];
-float Cdc[1][4];
-float x[4][1];
-float y[2][1];
+float Cdc[4];
+float x[4];
+float y[2];
 unsigned int didit;
 
 /**************************************************************************\
 |************************ - PROTYPE DES FONCTIONS - ***********************|
 \**************************************************************************/
 /* LANCEMENT */
-static int prog_init(void);
+static int 	prog_init(void);
 static void prog_exit(void);
 /* ROUTINE */
-void task_in(long arg);
-void task_out(long arg);
-static void routine_reception(void);
+void			task_in 			(long arg);
+void			task_out 			(long arg);
+void			task_one 			(long arg);
+static void 	routine_reception 	(void);
 /* DRIVER CAN */
-void init_can(void);
-void emission(u16 id,u8 *data,u8 lenght,u8 RTR_bit);
-void reception(int focus, int * data);
+void 	init_can 		(void);
+void 	emission 		(u16 id,u8 *data,u8 lenght,u8 RTR_bit);
+void 	reception 		(int focus, int * data);
 /* DRIVER DAC */
-void set_DA(int canal, unsigned int value_n);
+void 	set_DA 			(int canal, unsigned int value_n);
 /* DRIVER ADC */
-void init_3718(void);
-void trigger(void);
-int adc_read_eoc(void);
-int adc_read_value(void);
-void ad_range_select(int canal, int range);
+void 	init_3718 		(void);
+void 	trigger 		(void);
+int 	adc_read_eoc 	(void);
+int 	adc_read_value 	(void);
+void 	ad_range_select	(int canal, int range);
 /* MATRICE */
-void init_matrix(void);
-float calc_matrix(void);
+void  	init_matrix 	(void);
+float 	calc_matrix 	(void);
 
 /**************************************************************************\
 |*********************** - LANCEMENT DU PROGRAMME - ***********************|
@@ -167,8 +181,12 @@ module_exit(prog_exit);
 
 static int prog_init(void)
 {
+#if MODE_PENDULE == 2
 	int ierr_in;
 	int ierr_out;
+#elif MODE_PENDULE == 1
+	int ierr_one;
+#endif
 	RTIME now;
 
 	printk("\n\n\n\nProgramme Initialisation...\n");
@@ -177,40 +195,49 @@ static int prog_init(void)
 	start_rt_timer(nano2count(TICK_PERIOD));
 	now = rt_get_time();
 
-	init_can();
-	init_matrix();		// initialisation des matrices
-	init_3718();		// init de l'adc
-
 	printk("prog_init :\n\tBanc : %d\n\tBC_PMn = %d\n\tBC_PMx = %d\n\tBC_AMn = %d\n\tBC_AMx = %d\n", BANC, BC_PMn, BC_PMx, BC_AMn, BC_AMx );
 
-	//Tache d'acquisition
+	init_matrix();		// initialisation des matrices
+	init_3718();		// init de l'adc
+#if MODE_PENDULE == 2
+	init_can();			// Initialisation du bus CAN
+	// Tache d'acquisition/action
 	ierr_in = rt_task_init(&tache_in,task_in,0,STACK_SIZE, PRIORITE, 1, 0);
 	rt_task_make_periodic(&tache_in, now, nano2count(PERIODE_CONTROL));
+	// Tache de traitement déporter
 	ierr_out = rt_task_init(&tache_out,task_out,0,STACK_SIZE, PRIORITE, 1, 0);
 	rt_task_make_periodic(&tache_out, now, nano2count(PERIODE_CONTROL));
-
 	//Interuption de lecture de donnée.
 	rt_global_cli();									// Desactivation des IT
 	rt_request_global_irq(5,routine_reception);			// Association de l interruption avec la routine
 	rt_startup_irq(5);									// Activation de la ligne d interruption
 	rt_global_sti();									// Re-activation des IT
-
+#elif MODE_PENDULE == 1
+	// Tache d'asservissement sans communication CAN
+	ierr_one = rt_task_init(&tache_one,task_one,0,STACK_SIZE, PRIORITE, 1, 0);
+	rt_task_make_periodic(&tache_one, now, nano2count(PERIODE_CONTROL));
+#endif
 	printk("prog_init : exiting init\n");
-
 	return(0);
 }
 
 static void prog_exit(void)
 {
-    printk("inside tpcan_exit\n");
+	printk("inside tpcan_exit\n");
+#if MODE_PENDULE == 2
 	rt_shutdown_irq(5);                                 // Desactivation de l IT
 	rt_free_global_irq(5);                              // Desinstallation du handler
+#endif
 
-    stop_rt_timer();
-    rt_task_delete(&tache_in);
-    rt_task_delete(&tache_out);
+	stop_rt_timer();
+#if MODE_PENDULE == 2
+	rt_task_delete(&tache_in);
+	rt_task_delete(&tache_out);
+#elif MODE_PENDULE == 1
+	rt_task_delete(&tache_one);
+#endif
 
-    printk("EXIT\n");
+	printk("EXIT\n");
 }
 
 /**************************************************************************\
@@ -230,8 +257,7 @@ void task_in(long arg)
 	u8 data_send_in[4];
 	unsigned int adc_value, angle_num_in, pos_num_in;
 	glb_task_in_wait = 1;
-	command_in = 0; 			// Initialisation en cas d'erreur 
-	init_3718();
+	command_in = 0; 			// Initialisation en cas d'erreur
 
 	while(1)
 	{
@@ -279,7 +305,7 @@ void task_in(long arg)
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_in : received command_in = %d\n",command_in);
 #endif
-        set_DA(0, command_in);	// on ecrit dans le canal 0, la "commande"
+		set_DA(0, command_in);	// on ecrit dans le canal 0, la "commande"
 	}
 }
 
@@ -309,9 +335,10 @@ void task_out(long arg)
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_out : received angle_num_out = %d & pos_num_out = %d\n",angle_num_out, pos_num_out);
 #endif
+		/* Conversion */
+	    y[1] = POS_CONVERT(pos_num_out);
+		y[0] = ANG_CONVERT(angle_num_out);	
 		/* Traitement */
-	    y[1][0] = ( ( ( (pos_num_out	- BC_PMn)	*MAX_POS*2.0) 	/ (BC_PMx-BC_PMn) )- MAX_POS);	// verif OK (by nico)
-		y[0][0] = ( ( ( (angle_num_out	- BC_AMn)	*MAX_ANGL*2.0)	/ (BC_AMx-BC_AMn) )- MAX_ANGL);	// verif OK (by nico)
 #if TEST == 1
 		command_out = TEST_COMMANDE_OUT;
 #elif TEST == 0
@@ -336,6 +363,40 @@ void task_out(long arg)
 		glb_task_out_wait = 1;
 
 	}
+}
+
+/*
+ * task_one routine de gestion d'un pendule.
+ */
+void task_one(long arg)
+{
+#if DEBUG_AFF_ROUTINE >= 1
+	printk("task_one : init\n");
+#endif
+	unsigned int adc_value, angle_num_one, pos_num_one;
+	unsigned int command_one;
+	while(1)
+	{
+		/* ACQUISITION */
+		trigger();
+		while(adc_read_eoc() != 1);			// Attente de fin d'acquisition
+		adc_value = adc_read_value();		// recuperation du (canal + valeur) concaténés
+		if 		((adc_value & 0x0F) == 1){pos_num_one 	= adc_value >> 4 ;}
+		else if ((adc_value & 0x0F) == 0){angle_num_one	= adc_value >> 4 ;}
+		trigger();
+		while(adc_read_eoc() != 1);			// Attente de fin d'acquisition
+		adc_value = adc_read_value();		// recuperation du (canal + valeur) concaténés
+		if 		((adc_value & 0x0F) == 1){pos_num_one 	= adc_value >> 4 ;}
+		else if ((adc_value & 0x0F) == 0){angle_num_one	= adc_value >> 4 ;}
+	    y[1] = POS_CONVERT(pos_num_out);
+		y[0] = ANG_CONVERT(angle_num_out);
+		/* TRAITEMENT */
+		command_one = (unsigned int)((calc_matrix() + 10.0) * 4095.0 / 20.0); 					// Convertion Volt/numerique
+		/* ACTIONNEUR */
+		set_DA(0, command_one);	// on ecrit dans le canal 0, la "commande"
+		rt_task_wait_period();
+	}
+
 }
 
 /*
@@ -574,6 +635,10 @@ void ad_range_select(int canal, int range)
 /**************************************************************************\
 |***************************** - LIB MATRIX - *****************************|
 \**************************************************************************/
+/*
+ * init_matrix
+ * Fonction d'initialisation des matrices en fonction du mode
+ */
 void init_matrix(void)
 {
 #if DEBUG_AFF_MAT >= 1
@@ -591,7 +656,7 @@ void init_matrix(void)
 	Bdc[2][0]=-1.0133;    Bdc[2][1]= 1.8954;
 	Bdc[3][0]= 3.0534;    Bdc[3][1]=-0.9858;
 
-	Cdc[0][0]=-80.3092;    Cdc[0][1]=-9.6237;    Cdc[0][2]=-14.1215;    Cdc[0][3]=-23.6260;
+	Cdc[0]=-80.3092;    Cdc[1]=-9.6237;    Cdc[2]=-14.1215;    Cdc[3]=-23.6260;
 
 #elif MODE_PENDULE == 2
 	//Matrice deux pendules (Allah vérifier) (NE MARCHE PAS POUR PENDULE SEUL)
@@ -605,16 +670,16 @@ void init_matrix(void)
 	Bdc[2][0]=1.0887;    Bdc[2][1]=2.0141;
 	Bdc[3][0]=3.1377;    Bdc[3][1]=1.6599;
 
-	Cdc[0][0]=-80.3092;    Cdc[0][1]=-9.6237;    Cdc[0][2]=-14.1215;    Cdc[0][3]=-23.6260;
+	Cdc[0]=-80.3092;    Cdc[1]=-9.6237;    Cdc[2]=-14.1215;    Cdc[3]=-23.6260;
 #endif
 
-	y[0][0]=0;
-	y[1][0]=0;
+	y[0]=0;
+	y[1]=0;
 
-	x[0][0]=0;
-	x[1][0]=0;
-	x[2][0]=0;
-	x[3][0]=0;
+	x[0]=0;
+	x[1]=0;
+	x[2]=0;
+	x[3]=0;
 #if DEBUG_AFF_MAT >= 1
 	printk("init_matrix : end initialization\n");
 #endif
@@ -625,51 +690,47 @@ void init_matrix(void)
  */
 float calc_matrix(void)
 {
-	float commande;
-float commande2;
+	/* Declaration de variable */
+	float commande; // commande : varaible de sortie
 #if DEBUG_AFF_MAT >= 1
-	printk("calc_matrix:\n");
+	printk("calc_matrix:\n"); // Affichage de debugage niveau 1.
 #endif
-//?????????????????????????????????????????????????????????? Yann : X n'est jamais mi a jour... : X=0 => Adc x X = 0 .... commande ne dépend que de Bdc et Y ???????
-	/*commande = 	- Cdc[0][0]*(Adc[0][0]*x[0][0] + Adc[0][1]*x[1][0] + Adc[0][2]*x[2][0] + Adc[0][3]*x[3][0] +Bdc[0][0]*y[0][0] +Bdc[0][1]*y[1][0])
-			 	- Cdc[0][1]*(Adc[1][0]*x[0][0] + Adc[1][1]*x[1][0] + Adc[1][2]*x[2][0] + Adc[1][3]*x[3][0] +Bdc[1][0]*y[0][0] +Bdc[1][1]*y[1][0])
-			 	- Cdc[0][2]*(Adc[2][0]*x[0][0] + Adc[2][1]*x[1][0] + Adc[2][2]*x[2][0] + Adc[2][3]*x[3][0] +Bdc[2][0]*y[0][0] +Bdc[2][1]*y[1][0])
-			 	- Cdc[0][3]*(Adc[3][0]*x[0][0] + Adc[3][1]*x[1][0] + Adc[3][2]*x[2][0] + Adc[3][3]*x[3][0] +Bdc[3][0]*y[0][0] +Bdc[3][1]*y[1][0]);
-*/
-
-	// commande = 
-commande = 11.0;
+	/* CALCULE DE LA COMMANDE */
+	/*
+	x[0]=y[0];
+	x[1]=y[1];
+	x[2]=vit_ang;
+	x[3]=vit_pos;
+	*/
+	/** CALCULE DE LA MATRICE D'ETAT X = Adc * X + Bdc * Y **/
+	x_save[0]= Adc[0][0]*x[0] + Adc[0][1]*x[1] + Adc[0][2]*x[2] + Adc[0][3]*x[3] + Bdc[0][0]*y[0] + Bdc[0][1]*y[1];
+	x_save[1]= Adc[1][0]*x[0] + Adc[1][1]*x[1] + Adc[1][2]*x[2] + Adc[1][3]*x[3] + Bdc[1][0]*y[0] + Bdc[1][1]*y[1];
+	x_save[2]= Adc[2][0]*x[0] + Adc[2][1]*x[1] + Adc[2][2]*x[2] + Adc[2][3]*x[3] + Bdc[2][0]*y[0] + Bdc[2][1]*y[1];
+	x_save[3]= Adc[3][0]*x[0] + Adc[3][1]*x[1] + Adc[3][2]*x[2] + Adc[3][3]*x[3] + Bdc[3][0]*y[0] + Bdc[3][1]*y[1];
+	/** CALCULE DE LA COMMANDE commande = u = -Cdc * X **/
+	commande =  - Cdc[0]*(x_save[0])
+			 	- Cdc[1]*(x_save[1])
+			 	- Cdc[2]*(x_save[2])
+			 	- Cdc[3]*(x_save[3]);
+	/** MEMORISATION DE LA MATRICE D'ETATS ACTUEL **/
+	x[0]=(x_save[0]);
+	x[1]=(x_save[1]);
+	x[2]=(x_save[2]);
+	x[3]=(x_save[3]);
 #if DEBUG_AFF_MAT >= 2
-//	printk("\tCommande * 100 = %d\n", (int)(commande*100));
-printk("\tcommande ok;\n");
+	printk("\tCommande * 100 = %d\n", (int)(commande*100)); // Affichage de debugage niveau 2
 #endif
-	
-//	printk("nfijerzafiuerzafriri \n");
-//	commande = (int)(commande*100)>(int)(10.0*100) ? 10.0 : (int)(commande*100)<(-10.0*100) ? -10.0 : commande; 
-//printk(" dezaidliezafe\n");
-
-// TRAP HANDLER
-int commande_num = (int)(commande*100/1);
-
-//commande = commande_num>1000 ? 10.0 : commande_num<-1000 ? -10.0 : commande;
-
-	if(commande_num > 1000)
+	/** GESTION EXTREMUM **/
+	return commande>10.0 ? 10.0 : commande<-10.0 ? -10.0 : commande;
+	/*if(commande > 10.0)
 	{
-		//printk("\tOVER MAX\n");
-		//commande2 = 10;
-		//return 10.0;
 		return 10.0;
 	}
-	else if(commande_num < -1000)
+	else if(commande < -10.0)
 	{
-		//printk("\tOVER MIN\n");
-		//commande2 = -10;
 		return -10.0;
 	}
-	else
-	{
-    	return commande;
-	}
+	return commande;*/
 }
 
 
