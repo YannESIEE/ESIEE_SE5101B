@@ -10,7 +10,7 @@
 #define DEBUG_AFF_CAN 		0 // niveau trois est un peu HARD pour arcom
 #define DEBUG_AFF_CAN_REC	0
 #define DEBUG_AFF_DAC 		0
-#define DEBUG_AFF_ROUTINE 	2
+#define DEBUG_AFF_ROUTINE 	0
 #define DEBUG_AFF_INTERUPT 	0
 #define DEBUG_AFF_MAT 		0
 /**************************************************************************\
@@ -67,15 +67,15 @@
 |************************** - INFO SUR LES BANC - *************************|
 \**************************************************************************/
 #define PI 					3.14159265359
-#define MODE_PENDULE 		2 			// 1 ou 2 selon 1 ou deux bancs
+#define MODE_PENDULE 		1								// 1 ou 2 selon 1 ou deux bancs
 #define MAX_ANGL        	(35.0/2.0*PI/180.0) //0.305		// (+35° = 0.61 rad)
-#define MAX_POS            	0.6 		// 0.60 m
+#define MAX_POS            	0.6 							// 0.60 m
 #define CHANNEL_ANGL        0
 #define CHANNEL_POS       	1
 
 // EXTREMES ARCOM
 //Banc 2 à revérifier
-#define BANC        3        //CHOISIR ENTRE 2,3,4,5 ou autre(défaut) **** /!\ choisir le banc déporter si MODE_PENDULE == 2 ****
+#define BANC        0        //CHOISIR ENTRE 2,3,4,5 ou autre(défaut) **** /!\ choisir le banc déporter si MODE_PENDULE == 2 ****
 
 #if (BANC == 2)
 	#define BC_A0 		2007
@@ -106,17 +106,14 @@
     #define BC_PMn		380
     #define BC_PMx		3820
     #define BC_AMn		1200
-    #define BC_AMx		2820
+    #define BC_AMx		2800
 #endif
 
 /**************************************************************************\
 |******************************** - MACRO - *******************************|
 \**************************************************************************/
-// #define POS_CONERT(x)	( ( ( (x - BC_PMn)	*MAX_POS*2.0) 	/ (BC_PMx-BC_PMn) )- MAX_POS) // verif OK (by nico)
-// #define ANG_CONERT(x)	( ( ( (x - BC_AMn)	*MAX_ANGL*2.0)	/ (BC_AMx-BC_AMn) )- MAX_ANGL)// verif OK (by nico)
-//#define POS_CONVERT(x)	( ( ( ((int)x - BC_PMn - (BC_PMx-BC_PMn)/2.0) * MAX_POS*2.0) / (BC_PMx-BC_PMn) )- MAX_POS)	// verif OK (by nico)
-#define POS_CONVERT(x)	(((int)x - (BC_PMx-BC_PMn)/2.0) * MAX_POS*2.0 / (BC_PMx-BC_PMn)) // BY Yann
-#define ANG_CONVERT(x)	(((int)x - BC_A0 ) * MAX_ANGL*2.0 / (BC_AMx-BC_AMn)) // By Yann
+#define POS_CONVERT(x)	(((int)x - (BC_PMx-BC_PMn)/2.0) * MAX_POS*2.0 / (BC_PMx-BC_PMn))    // BY Yann
+#define ANG_CONVERT(x)	(-((int)x - BC_A0 ) * MAX_ANGL*2.0 / (BC_AMx-BC_AMn))               // By Yann
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -136,9 +133,14 @@ MODULE_LICENSE("GPL");
 |***************** - Declaration des variables globales - *****************|
 \**************************************************************************/
 /* RT_TASK */
-static RT_TASK tache_in, tache_out, tache_one;
+
+#if MODE_PENDULE == 1
+static RT_TASK tache_one;
+#elif MODE_PENDULE == 2
+static RT_TASK tache_in, tache_out;
 int glb_task_in_wait;
 int glb_task_out_wait;
+#endif
 unsigned int command_in, angle_num_out, pos_num_out; // information communiqué par bus CAN
 /* Matrice */
 float Adc[4][4];
@@ -156,10 +158,13 @@ unsigned int didit;
 static int 	prog_init(void);
 static void prog_exit(void);
 /* ROUTINE */
+#if MODE_PENDULE == 2
 void			task_in 			(long arg);
 void			task_out 			(long arg);
-void			task_one 			(long arg);
 static void 	routine_reception 	(void);
+#elif MODE_PENDULE == 1
+void			task_one 			(long arg);
+#endif
 /* DRIVER CAN */
 void 	init_can 		(void);
 void 	emission 		(u16 id,u8 *data,u8 lenght,u8 RTR_bit);
@@ -183,6 +188,11 @@ void 	affichage_float (float val);
 module_init(prog_init);
 module_exit(prog_exit);
 
+/*
+ * prog_init
+ * Fonction de lancement des taches et des interuption.
+ * @return : 1 succes de l'opération
+ */
 static int prog_init(void)
 {
 #if MODE_PENDULE == 2
@@ -225,14 +235,17 @@ static int prog_init(void)
 	return(0);
 }
 
+/*
+ * prog_exit
+ * Fonction d'arret des taches et des interuptions
+ */
 static void prog_exit(void)
 {
 	printk("prog_exit : stoping prog\n");
 #if MODE_PENDULE == 2
-	rt_shutdown_irq(5);                                 // Desactivation de l IT
-	rt_free_global_irq(5);                              // Desinstallation du handler
+	rt_shutdown_irq(5);			// Desactivation de l IT
+	rt_free_global_irq(5);		// Desinstallation du handler
 #endif
-
 	stop_rt_timer();
 #if MODE_PENDULE == 2
 	rt_task_delete(&tache_in);
@@ -240,7 +253,6 @@ static void prog_exit(void)
 #elif MODE_PENDULE == 1
 	rt_task_delete(&tache_one);
 #endif
-
 	printk("prog_exit : EXIT\n");
 }
 
@@ -248,7 +260,9 @@ static void prog_exit(void)
 |********************** - Declaration des routines - **********************|
 \**************************************************************************/
 
+#if MODE_PENDULE == 2
 /*
+ * task_in
  * Cette routine gère l'acquisition A-N du banc (in)
  * Transmet l'information via le bus CAN
  * attend la reception de la donnée, puis génère le voltage de la commande reçu
@@ -259,18 +273,17 @@ void task_in(long arg)
 	printk("task_in : init\n");
 #endif
 	u8 data_send_in[4];
-	unsigned int adc_value, angle_num_in, pos_num_in;
+	unsigned int adc_value, angle_num_in=0, pos_num_in=0;
 	glb_task_in_wait = 1;
 	command_in = 0; 			// Initialisation en cas d'erreur
-
 	while(1)
 	{
 		/* Acquisition */
-#if TEST == 1
+#if TEST
 		angle_num_in 	= TEST_ANGLE_NUM_IN;
 		pos_num_in		= TEST_POS_NUM_IN;
-		adc_value 		= 0; // warning only
-#elif TEST == 0
+		adc_value 		= 0;				// uniquement pour eviter un warning
+#else
 		trigger();
 		while(adc_read_eoc() != 1);			// Attente de fin d'acquisition
 		adc_value = adc_read_value();		// recuperation du (canal + valeur) concaténés
@@ -323,7 +336,7 @@ void task_out(long arg)
 	printk("task_out : init\n");
 #endif
 	u8 data_send_out[2];
-	unsigned int command_out;
+	int command_out;
 	glb_task_out_wait = 1;
 	pos_num_out = 2048;
 	angle_num_out = 2048;
@@ -336,10 +349,10 @@ void task_out(long arg)
 	    y[1] = POS_CONVERT(pos_num_out);
 		y[0] = ANG_CONVERT(angle_num_out);
 		/* Traitement */
-#if TEST == 1
+#if TEST
 		command_out = TEST_COMMANDE_OUT;
-#elif TEST == 0
-		command_out = (unsigned int)((calc_matrix() + 10.0) * 4095.0 / 20.0); // Convertion Volt/numerique
+#else
+		command_out = (int)((calc_matrix() + 10.0) * 4095.0 / 20.0); // Convertion Volt/numerique
 		command_out = command_out<0 ? 0 : command_out>4095 ? 4095 : command_out;
 #endif
 		/* renvoi des donnée */
@@ -364,17 +377,19 @@ void task_out(long arg)
 	}
 }
 
+#elif MODE_PENDULE == 1
 /*
- * task_one routine de gestion d'un pendule.
+ * task_one 
+ * routine de gestion d'un pendule.
+ * Pas de communication CAN
  */
 void task_one(long arg)
 {
 #if DEBUG_AFF_ROUTINE >= 1
 	printk("task_one : init\n");
 #endif
-	unsigned int adc_value, angle_num_one, pos_num_one;
+	unsigned int adc_value, angle_num_one=0, pos_num_one=0;
 	int command_one;
-	float commande_float;
 	while(1)
 	{
 		/* ACQUISITION */
@@ -388,7 +403,7 @@ void task_one(long arg)
 		adc_value = adc_read_value();		// recuperation du (canal + valeur) concaténés
 		if 		((adc_value & 0x0F) == 1){pos_num_one 	= adc_value >> 4 ;}
 		else if ((adc_value & 0x0F) == 0){angle_num_one	= adc_value >> 4 ;}
-		y[0] = -ANG_CONVERT(angle_num_one);//angle_num_one
+		y[0] = ANG_CONVERT(angle_num_one);//angle_num_one
 	    y[1] = POS_CONVERT(pos_num_one);
 		/* TRAITEMENT */
 		command_one = (int)((calc_matrix() + 10.0) * 4095.0 / 20.0); 					// Convertion Volt/numerique
@@ -412,10 +427,12 @@ void task_one(long arg)
 		set_DA(0, command_one);	// on ecrit dans le canal 0, la "commande"
 		rt_task_wait_period();
 	}
-
 }
+#endif
 
+#if MODE_PENDULE == 2
 /*
+ * routine_reception
  * Interuption de reception de donnée.
  */
 static void routine_reception(void)
@@ -456,6 +473,7 @@ static void routine_reception(void)
 #endif
 	return;
 }
+#endif
 
 /**************************************************************************\
 |***************************** - DRIVER CAN - *****************************|
@@ -518,6 +536,7 @@ void reception(int focus, int * data)
 	unsigned int rx_msg_complet;
 	int rx_size;
 	u16 rx_id;
+	int j;
 #if DEBUG_AFF_CAN_REC >= 1
 	printk("reception : message received...\n");
 #endif
@@ -531,7 +550,6 @@ void reception(int focus, int * data)
 #if DEBUG_AFF_CAN_REC >=2
 			printk("reception :\n\tid :\t %d\n\tsize :\t%d\n",rx_id,rx_size);
 #endif
-			int j;
 			for(j=0; j < rx_size; j++)	// On recupere d abord les buffer ayant les data de poids fort
 			{
 				rx_msg[j] = inb(CAN_RX_BUFFER+j);
