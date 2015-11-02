@@ -133,6 +133,24 @@ a19:
 	@echo
 	ssh arcom@arcom19.esiee.fr
 
+a15:
+	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~
+	-rm -r .tmp*
+	@echo Cleaned
+	@echo
+
+	@echo PWD = $(PWD)
+	@echo CURRENT = $(CURRENT)
+	@echo KDIR = $(KDIR)
+	i386 -B --uname-2.6 make -C $(KDIR) M=$(PWD) modules
+	@echo Built
+	@echo
+	
+	
+	scp *.ko runarcom arcom@arcom15.esiee.fr:/home/arcom
+	@echo
+	ssh arcom@arcom15.esiee.fr
+
 a20:
 	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~
 	-rm -r .tmp*
@@ -150,6 +168,24 @@ a20:
 	scp *.ko runarcom arcom@arcom20.esiee.fr:/home/arcom
 	@echo
 	ssh arcom@arcom20.esiee.fr
+
+a5:
+	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~
+	-rm -r .tmp*
+	@echo Cleaned
+	@echo
+
+	@echo PWD = $(PWD)
+	@echo CURRENT = $(CURRENT)
+	@echo KDIR = $(KDIR)
+	i386 -B --uname-2.6 make -C $(KDIR) M=$(PWD) modules
+	@echo Built
+	@echo
+	
+	
+	scp *.ko runarcom arcom@arcom5.esiee.fr:/home/arcom
+	@echo
+	ssh arcom@arcom5.esiee.fr
 
 a1:
 	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~

@@ -17,7 +17,7 @@
 |********************* - define pour tache periodique - *******************|
 \**************************************************************************/
 #define STACK_SIZE			2000
-#define TICK_PERIOD			1000000		//1 ms
+#define TICK_PERIOD			100000		//1 ms
 #define PERIODE_CONTROL		10000000	//20ms
 #define N_BOUCLE			10000000
 #define NUMERO				1
@@ -113,7 +113,7 @@
 |******************************** - MACRO - *******************************|
 \**************************************************************************/
 #define POS_CONVERT(x)	(((int)x - (BC_PMx-BC_PMn)/2.0) * MAX_POS*2.0 / (BC_PMx-BC_PMn))    // BY Yann
-#define ANG_CONVERT(x)	(-((int)x - BC_A0 ) * MAX_ANGL*2.0 / (BC_AMx-BC_AMn))               // By Yann
+#define ANG_CONVERT(x)	(((int)x - BC_A0 ) * MAX_ANGL*2.0 / (BC_AMx-BC_AMn))               // By Yann
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -678,17 +678,54 @@ void init_matrix(void)
 #if DEBUG_AFF_MAT >= 1
 	printk("init_matrix : begin initialization\n");
 #endif
+
+/*
+* Matrice de CELA selon SAGLAM *
+*float A[4][4]={{0.6300,   -0.1206,   -0.0008,    0.0086},
+                {-0.0953,    0.6935,    0.0107,    0.0012},
+                {-0.2896,   -1.9184,    1.1306,    0.2351},
+                {-3.9680,   -1.7733,   -0.1546,    0.7222}};
+
+    float B[4][2]={ {0.3658,    0.1200},
+                    {0.0993,    0.3070},
+                    {1.0887,    2.0141},
+                    {3.1377,    1.6599}};
+* Matrice de SAGLMA *
+float A[4][4]={{0.6601,   0.0680,   -0.0008,    0.0086},
+    {0.0662,    0.7861,    0.0107,    0.0012},
+    {1.3274,   -0.8919,    1.1306,    0.2351},
+    {-3.1767,   0.4320,   -0.1546,    0.7222}};
+
+    float B[4][2]={{0.3358,    -0.0686},
+        {-0.0622,    0.2144},
+        {-0.5283,    0.9876},
+        {2.3464,    -0.5454}};
+
+float C[4]={-80.3092,   -9.6237,  -14.1215,  -23.6260};
+
+*/
 #if MODE_PENDULE == 1
 	//Matrice un seul pendule
-	Adc[0][0]= 0.6196;    Adc[0][1]= 0.0968;    Adc[0][2]=-0.0008;    Adc[0][3]= 0.0086;
+	/*Adc[0][0]= 0.6196;    Adc[0][1]= 0.0968;    Adc[0][2]=-0.0008;    Adc[0][3]= 0.0086;
 	Adc[1][0]= 0.0971;    Adc[1][1]= 0.7038;    Adc[1][2]= 0.0107;    Adc[1][3]= 0.0012;
 	Adc[2][0]= 1.8124;    Adc[2][1]=-1.7997;    Adc[2][2]= 1.1306;    Adc[2][3]= 0.2351;
 	Adc[3][0]=-3.8837;    Adc[3][1]= 0.8724;    Adc[3][2]=-0.1546;    Adc[3][3]= 0.7222;
-
+	
 	Bdc[0][0]= 0.3762;    Bdc[0][1]=-0.0973;
 	Bdc[1][0]=-0.0931;    Bdc[1][1]= 0.2966;
 	Bdc[2][0]=-1.0133;    Bdc[2][1]= 1.8954;
-	Bdc[3][0]= 3.0534;    Bdc[3][1]=-0.9858;
+	Bdc[3][0]= 3.0534;    Bdc[3][1]=-0.9858;*/
+	
+	
+	Adc[0][0]= 0.6601;    Adc[0][1]= 0.0680;    Adc[0][2]=-0.0008;    Adc[0][3]= 0.0086;
+	Adc[1][0]= 0.0662;    Adc[1][1]= 0.7861;    Adc[1][2]= 0.0107;    Adc[1][3]= 0.0012;
+	Adc[2][0]= 1.3274;    Adc[2][1]=-0.8919;    Adc[2][2]= 1.1306;    Adc[2][3]= 0.2351;
+	Adc[3][0]=-3.1767;    Adc[3][1]= 0.4320;    Adc[3][2]=-0.1546;    Adc[3][3]= 0.7222;
+	
+	Bdc[0][0]= 0.3358;    Bdc[0][1]=-0.0686;
+	Bdc[1][0]=-0.0622;    Bdc[1][1]= 0.2144;
+	Bdc[2][0]=-0.5283;    Bdc[2][1]= 0.9876;
+	Bdc[3][0]= 2.3464;    Bdc[3][1]=-0.5454;
 
 	Cdc[0]=-80.3092;    Cdc[1]=-9.6237;    Cdc[2]=-14.1215;    Cdc[3]=-23.6260;
 
@@ -742,10 +779,10 @@ float calc_matrix(void)
 	x_save[2]= Adc[2][0]*x[0] + Adc[2][1]*x[1] + Adc[2][2]*x[2] + Adc[2][3]*x[3] + Bdc[2][0]*y[0] + Bdc[2][1]*y[1];
 	x_save[3]= Adc[3][0]*x[0] + Adc[3][1]*x[1] + Adc[3][2]*x[2] + Adc[3][3]*x[3] + Bdc[3][0]*y[0] + Bdc[3][1]*y[1];
 	/** CALCULE DE LA COMMANDE commande = u = -Cdc * X **/
-	commande =  - Cdc[0]*(x_save[0])
-				- Cdc[1]*(x_save[1])
-				- Cdc[2]*(x_save[2])
-				- Cdc[3]*(x_save[3]);
+	commande =  + Cdc[0]*(x_save[0])
+				+ Cdc[1]*(x_save[1])
+				+ Cdc[2]*(x_save[2])
+				+ Cdc[3]*(x_save[3]);
 #if DEBUG_AFF_MAT >= 2
 	// Affichage de debugage niveau 2
 	printk("calc_matrix :\n\tx =\t\t");affichage_float(x[0]);printk(" ; ");affichage_float(x[1]);printk(" ; ");affichage_float(x[2]);printk(" ; ");affichage_float(x[3]);
