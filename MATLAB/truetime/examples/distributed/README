@@ -1,0 +1,82 @@
+-----------------------------------------------
+ TrueTime 1.5
+ Example: Distributed Control System
+ Directory: $DIR/examples/distributed
+-----------------------------------------------
+
+1. INTRODUCTION
+
+This example simulates distributed control of a DC-servo. The example
+contains four computer nodes, each represented by a TrueTime kernel
+block. A time-driven sensor node samples the process periodically and
+sends the samples over the network to the controller node. The control
+task in this node calculates the control signal and sends the result
+to the actuator node, where it is subsequently actuated. The
+simulation also involves an interfering node sending disturbing
+traffic over the network, and a disturbing high-priority task
+executing in the controller node.
+
+
+2. COMPILING THE SIMULATION FILES
+
+2.1 Configuring the TrueTime Environment
+
+    Before starting Matlab, you must set the environment variable
+    TTKERNEL to point to the directory with the TrueTime kernel files:
+
+        Unix/Linux: > export TTKERNEL=$DIR/kernel
+        Windows:  Control Panel / System / Advanced / Environment Variables
+
+    Then add the following lines to your MATLAB startup script. This
+    will set up all necessary paths to the TrueTime kernel files.
+
+        addpath(getenv('TTKERNEL'))
+        init_truetime;
+
+2.2 Compilation
+
+    As described in the reference manual it is possible to write a
+    TrueTime simulation (i.e. the code functions for the tasks and the
+    initialization commands) either as m-files or as C++ functions.
+    Both approaches are provided for this example and the compilations
+    needed for the respective alternatives are described below.
+
+    2.2.1 Matlab version
+   
+        Since the TrueTime archive contains pre-compiled files, no 
+        compilation is required to run TrueTime in the Matlab version. 
+        However, if needed, the files may be re-compiled by issuing  
+        the command make_truetime from the command prompt.
+
+    2.2.2 C++ version
+    
+        Compilation of the init scripts of the four computer blocks is
+        performed by the m-file make.m. Run this file from the Matlab
+        command prompt:
+
+        >> make
+    
+        NOTE: If changes are made to the code functions or the
+        initialization commands, the affected init scripts need to be
+        re-compiled. Copy and paste from make.m to compile the
+        relevant files individually.
+    
+
+3. SIMULATIONS
+
+Open the model distributed.mdl to run the simulation. 
+
+ - Run a first simulation without disturbing traffic and without
+   interference in the controller node. This is obtained by setting the
+   variable BWshare in the code function of the interfering node to
+   zero, and by commenting out the creation of the task 'dummy' in
+   controller_init. In this case we will get a constant round-trip delay
+   and satisfactory control performance. Study the network schedule and
+   the resulting control performance.
+
+ - Switch on the disturbing node and the interfering task in the
+   controller node. Set the variable BWshare to the percentage of the
+   network bandwidth to be used by the disturbing node. Again study the
+   network schedule and the resulting control performance. Experiment
+   with different network protocols and different scheduling policies in
+   the controller node.

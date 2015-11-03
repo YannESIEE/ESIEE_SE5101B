@@ -1,0 +1,61 @@
+--------------------------------------------------
+ TrueTime 1.5
+ Example: Control and Coordination of Mobile Motes
+ Directory: $DIR/examples/motes
+--------------------------------------------------
+
+1. INTRODUCTION
+
+This example shows how to visualise the movements of dynamically
+moving motes using the built in functionality of Matlab. The example
+consists of three motes, with dynamics in the "x" and "y" directions
+modeled using simple integrators. The motes are sent out on a mission
+which consists of visiting a number of checkpoints, seen as red marks
+in the animation window. In the window, the transmission range of the
+motes can be seen as large partly transparent coloured circles around
+the smaller coloured motes. The checkpoints should be visited at least
+once by some node in the group. When the motes are able to
+communicate, they tell each other where they are heading and share
+information on which nodes that have been visited by the group. When a
+checkpoint has been visited it changes colour from green to red.
+
+2. COMPILING THE SIMULATION FILES
+
+2.1 Configuring the TrueTime Environment
+
+    Before starting Matlab, you must set the environment variable
+    TTKERNEL to point to the directory with the TrueTime kernel files:
+
+        Unix/Linux: > export TTKERNEL=$DIR/kernel
+        Windows:  Control Panel / System / Advanced / Environment Variables
+
+    Then add the following lines to your MATLAB startup script. This
+    will set up all necessary paths to the TrueTime kernel files.
+
+        addpath(getenv('TTKERNEL'))
+        init_truetime;
+
+2.2 Compilation
+
+    As described in the reference manual it is possible to write a
+    TrueTime simulation (i.e. the code functions for the tasks and the
+    initialization commands) either as m-files or as C++ functions. For
+    this example only the m-file approach is provided.
+   
+    Since the TrueTime archive contains pre-compiled files, no 
+    compilation is required to run TrueTime in the Matlab version. 
+    However, if needed, the files may be re-compiled by issuing the 
+    command make_truetime from the command prompt.
+
+
+3. SIMULATIONS
+
+Open the model motes.mdl to run the simulation. 
+
+ - Run init.m to set up the data structures before you run the simulation.
+
+ - Run the simulation to see the animation. If you are interested in building
+   your own custom animation, look at the file moteanimation.m where the
+   "patch" command is used to paint the initial picture of every mote. These
+   pictures are then moved with the "set" command using the "XData" and "YData"
+   parameters.
