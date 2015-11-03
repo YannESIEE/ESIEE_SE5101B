@@ -1,0 +1,68 @@
+----------------------------------------------
+ TrueTime 1.5
+ Example: Deadline Overrun Handling
+ Directory: $DIR/examples/overrun
+----------------------------------------------
+
+1. INTRODUCTION
+
+This example will show how to use the TrueTime overrun handling
+functionality. TrueTime provides two types of overrun handlers;
+deadline and worst-case execution time overrun handlers. The example
+considers PID-control of a DC-servo, with the controller task having a
+stochastically varying execution time that occasionally will exceed
+the sampling interval. Two approaches to deal with the period overruns
+are evaluated in the simulation. The first allows the task to continue
+into next sample (no overrun handler is attached), whereas the second
+uses an overrun handler that terminates the current job if the
+deadline is exceeded.
+
+
+2. COMPILING THE SIMULATION FILES
+
+2.1 Configuring the TrueTime Environment
+
+    Before starting Matlab, you must set the environment variable
+    TTKERNEL to point to the directory with the TrueTime kernel files:
+
+        Unix/Linux: > export TTKERNEL=$DIR/kernel
+        Windows:  Control Panel / System / Advanced / Environment Variables
+
+    Then add the following lines to your MATLAB startup script. This
+    will set up all necessary paths to the TrueTime kernel files.
+
+        addpath(getenv('TTKERNEL'))
+        init_truetime;
+
+2.2 Compilation
+
+    As described in the reference manual it is possible to write a
+    TrueTime simulation (i.e. the code functions for the tasks and the
+    initialization commands) either as m-files or as C++ functions. For
+    this example only the m-file approach is provided.
+    
+    Since the TrueTime archive contains pre-compiled files, no 
+    compilation is required to run TrueTime in the Matlab version. 
+    However, if needed, the files may be re-compiled by issuing the 
+    command make_truetime from the command prompt.
+
+
+3. SIMULATIONS
+
+Open the model overrun.mdl to run the simulation. 
+
+- The period of the controller task is 6 ms, and the execution time is
+  modeled as C = 5 + U(0,2) ms. Consequently, the task will experience
+  overruns. The bad control performance is due to the long delays and the
+  sampling period jitter induced by the overruns.
+
+- Uncomment the last two lines of the initialization file
+  (overrun_init.m). This will create an interrupt handler and attach
+  it to the controller task as a deadline handler. Study the code
+  executed by the overrun handler (hdlcode.m).
+  
+- Run a simulation to evaluate the performance obtained by terminating
+  jobs at the deadline (is this a good approach?). Studying the control 
+  signal, one can notice that it often remains constant over several 
+  samples.
+

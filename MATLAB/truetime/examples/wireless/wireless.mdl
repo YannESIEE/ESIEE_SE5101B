@@ -1,0 +1,1736 @@
+Model {
+  Name			  "wireless"
+  Version		  4.00
+  SampleTimeColors	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  off
+  ShowStorageClass	  off
+  ExecutionOrder	  off
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  InitFcn		  "clear functions"
+  Created		  "Tue Jun 26 13:16:28 2001"
+  Creator		  "anton"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "anton"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Wed Jan  3 17:00:54 2007"
+  ModelVersionFormat	  "1.%<AutoIncrement:237>"
+  ConfigurationManager	  "none"
+  SimParamPage		  "WorkspaceI/O"
+  StartTime		  "0.0"
+  StopTime		  "10"
+  SolverMode		  "Auto"
+  Solver		  "ode45"
+  RelTol		  "1e-3"
+  AbsTol		  "auto"
+  Refine		  "1"
+  MaxStep		  "auto"
+  MinStep		  "auto"
+  MaxNumMinSteps	  "-1"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  MaxOrder		  5
+  OutputOption		  "RefineOutputTimes"
+  OutputTimes		  "[]"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  SaveTime		  off
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  off
+  OutputSaveName	  "yout"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  SaveFormat		  "Array"
+  LimitDataPoints	  on
+  MaxDataPoints		  "1000"
+  Decimation		  "1"
+  AlgebraicLoopMsg	  "warning"
+  MinStepSizeMsg	  "warning"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  SingleTaskRateTransMsg  "none"
+  MultiTaskRateTransMsg	  "error"
+  IntegerOverflowMsg	  "warning"
+  CheckForMatrixSingularity "none"
+  UnnecessaryDatatypeConvMsg "none"
+  Int32ToFloatConvMsg	  "warning"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  LinearizationMsg	  "none"
+  VectorMatrixConversionMsg "none"
+  SfunCompatibilityCheckMsg "none"
+  BlockPriorityViolationMsg "warning"
+  ArrayBoundsChecking	  "none"
+  ConsistencyChecking	  "none"
+  ZeroCross		  on
+  Profile		  off
+  SimulationMode	  "normal"
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWOptions		  "-aEnforceIntegerDowncast=1 -aFoldNonRolledExpr=1 -a"
+"InlineInvariantSignals=0 -aInlineParameters=0 -aLocalBlockOutputs=1 -aRollThr"
+"eshold=5 -aGenerateReport=0 -aGenCodeOnly=0 -aRTWVerbose=1 -aIncludeHyperlink"
+"InReport=0 -aLaunchReport=0 -aForceParamTrailComments=0 -aGenerateComments=1 "
+"-aIgnoreCustomStorageClasses=1 -aIncHierarchyInIds=0 -aMaxRTWIdLen=31 -aShowE"
+"liminatedStatements=0 -aPrefixModelToSubsysFcnNames=1 -aIncDataTypeInIds=0 -a"
+"InsertBlockDesc=0 -aSimulinkBlockComments=1 -aInlinedPrmAccess=\"Literals\"  "
+"-aSuppressErrorStatus=0 -aModelReferenceCompliant=1 -aSupportNonInlinedSFcns="
+"1 -aSupportContinuousTime=1 -aSupportComplex=1 -aSupportNonFinite=1 -aSupport"
+"AbsoluteTime=1 -aTargetPreCompLibLocation=\"\" -aTargetLibSuffix=\"\" -aTarge"
+"tFcnLib=\"ansi_tfl_tmw.mat\" -aMultiInstanceERTCode=0 -aLogVarNameModifier=\""
+"rt_\" -aIsPILTarget=0 -aCombineOutputUpdateFcns=0 -aGenerateASAP2=0 -aGenerat"
+"eSampleERTMain=0 -aGenerateFullHeader=1 -aUtilityFuncGeneration=\"Auto\" -aIn"
+"cludeFileDelimiter=\"Auto\" -aIncludeMdlTerminateFcn=1 -aPurelyIntegerCode=0 "
+"-aERTCustomFileBanners=0 -aRTWCAPIStates=0 -aRTWCAPIParams=0 -aRTWCAPISignals"
+"=0 -aMatFileLogging=1 -aGenFloatMathFcnCalls=\"ANSI_C\" -aExtModeMexFile=\"ex"
+"t_comm\" -aExtModeTransport=0 -aExtModeStaticAllocSize=1000000 -aExtModeTesti"
+"ng=0 -aExtModeStaticAlloc=0 -aExtMode=0  "
+  RTWInlineParameters	  off
+  RTWRetainRTWFile	  off
+  RTWTemplateMakefile	  "grt_default_tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock off
+  OptimizeBlockIOStorage  on
+  BufferReuse		  on
+  ParameterPooling	  on
+  BlockReductionOpt	  off
+  RTWExpressionDepthLimit 5
+  BooleanDataType	  off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "wireless"
+    Location		    [16, 93, 703, 434]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "portrait"
+    PaperPositionMode	    "auto"
+    PaperType		    "A4"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      Clock
+      Name		      "Clock"
+      Position		      [60, 25, 80, 45]
+      DisplayTime	      off
+      Decimation	      "10"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "DC Servo"
+      Position		      [245, 102, 305, 138]
+      Numerator		      "[1000]"
+      Denominator	      "[1 1 0]"
+      AbsoluteTolerance	      "auto"
+      Realization	      "auto"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display"
+      Ports		      [1]
+      Position		      [120, 20, 210, 50]
+      Format		      "short"
+      Decimation	      "1"
+      Floating		      off
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From1"
+      Position		      [470, 152, 510, 168]
+      ShowName		      off
+      CloseFcn		      "tagdialog Close"
+      GotoTag		      "P2"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From2"
+      Position		      [20, 107, 60, 123]
+      ShowName		      off
+      CloseFcn		      "tagdialog Close"
+      GotoTag		      "rcv1"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From3"
+      Position		      [470, 127, 510, 143]
+      ShowName		      off
+      CloseFcn		      "tagdialog Close"
+      GotoTag		      "rcv2"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From4"
+      Position		      [480, 287, 520, 303]
+      ShowName		      off
+      CloseFcn		      "tagdialog Close"
+      GotoTag		      "snd2"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From5"
+      Position		      [25, 147, 65, 163]
+      ShowName		      off
+      CloseFcn		      "tagdialog Close"
+      GotoTag		      "P1"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From7"
+      Position		      [480, 247, 520, 263]
+      ShowName		      off
+      CloseFcn		      "tagdialog Close"
+      GotoTag		      "snd1"
+    }
+    Block {
+      BlockType		      Goto
+      Name		      "Goto"
+      Position		      [640, 237, 675, 253]
+      ShowName		      off
+      GotoTag		      "rcv1"
+      TagVisibility	      "global"
+    }
+    Block {
+      BlockType		      Goto
+      Name		      "Goto1"
+      Position		      [640, 257, 675, 273]
+      ShowName		      off
+      GotoTag		      "rcv2"
+      TagVisibility	      "global"
+    }
+    Block {
+      BlockType		      Goto
+      Name		      "Goto2"
+      Position		      [640, 277, 675, 293]
+      ShowName		      off
+      GotoTag		      "P1"
+      TagVisibility	      "global"
+    }
+    Block {
+      BlockType		      Goto
+      Name		      "Goto3"
+      Position		      [640, 127, 675, 143]
+      ShowName		      off
+      GotoTag		      "snd2"
+      TagVisibility	      "global"
+    }
+    Block {
+      BlockType		      Goto
+      Name		      "Goto4"
+      Position		      [170, 142, 205, 158]
+      ShowName		      off
+      GotoTag		      "snd1"
+      TagVisibility	      "global"
+    }
+    Block {
+      BlockType		      Goto
+      Name		      "Goto5"
+      Position		      [640, 297, 675, 313]
+      ShowName		      off
+      GotoTag		      "P2"
+      TagVisibility	      "global"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux"
+      Ports		      [2, 1]
+      Position		      [585, 31, 590, 69]
+      ShowName		      off
+      Inputs		      "2"
+      DisplayOption	      "bar"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Node 1\n(Sensor/Actuator)"
+      Ports		      [3, 2]
+      Position		      [85, 106, 150, 164]
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      System {
+	Name			"Node 1\n(Sensor/Actuator)"
+	Location		[226, 633, 573, 958]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Rcv"
+	  Position		  [15, 73, 45, 87]
+	  Port			  "1"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "A/D"
+	  Position		  [15, 13, 45, 27]
+	  Port			  "2"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "P"
+	  Position		  [15, 193, 45, 207]
+	  Port			  "3"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Battery, Actuator"
+	  Ports			  [1]
+	  Position		  [255, 174, 285, 206]
+	  Floating		  off
+	  Location		  [8, 51, 332, 290]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "OneTimeTick"
+	  ZoomMode		  "on"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  List {
+	    ListType		    SelectedSignals
+	    axes1		    ""
+	  }
+	  Grid			  "on"
+	  TimeRange		  "10"
+	  YMin			  "0"
+	  YMax			  "0.3"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData1"
+	  DataFormat		  "StructureWithTime"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [20, 45, 40, 65]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [2, 1]
+	  Position		  [75, 171, 80, 209]
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule, actuator node"
+	  Ports			  [1]
+	  Position		  [275, 54, 300, 76]
+	  Floating		  off
+	  Location		  [6, 391, 785, 684]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  List {
+	    ListType		    SelectedSignals
+	    axes1		    ""
+	  }
+	  Grid			  "on"
+	  TimeRange		  "10"
+	  YMin			  "1"
+	  YMax			  "6"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [290, 115, 310, 135]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Battery"
+	  Ports			  [1, 1]
+	  Position		  [105, 171, 155, 209]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Battery"
+	  SourceType		  ""
+	  energy		  "0.3"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "TrueTime Kernel"
+	  Ports			  [4, 5]
+	  Position		  [80, 27, 195, 103]
+	  DropShadow		  on
+	  AncestorBlock		  "truetime/TrueTime Kernel"
+	  ShowPortLabels	  on
+	  TreatAsAtomicUnit	  off
+	  RTWSystemCode		  "Auto"
+	  RTWFcnNameOpts	  "Auto"
+	  RTWFileNameOpts	  "Auto"
+	  MaskPromptString	  "Name of init function (MEX or MATLAB)|Init "
+"function argument|Battery|Clock drift|Clock offset"
+	  MaskStyleString	  "edit,edit,checkbox,edit,edit"
+	  MaskTunableValueString  "off,off,off,off,off"
+	  MaskCallbackString	  "||batterychange||"
+	  MaskEnableString	  "on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on"
+	  MaskVariables		  "sfun=&1;args=@2;battery=@3;clockdrift=@4;cl"
+"ockoffset=@5;"
+	  MaskSelfModifiable	  on
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "actuator_init|0|on|0|0"
+	  MaskVariableAliases	  ",,,,"
+	  System {
+	    Name		    "TrueTime Kernel"
+	    Location		    [345, 356, 835, 561]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "A/D"
+	      Position		      [25, 33, 55, 47]
+	      Port		      "1"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Interrupts"
+	      Position		      [25, 68, 55, 82]
+	      Port		      "2"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Rcv"
+	      Position		      [25, 108, 55, 122]
+	      Port		      "3"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "E"
+	      Position		      [30, 140, 50, 160]
+	      Port		      "4"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      Clock
+	      Name		      "Clock"
+	      Position		      [180, 150, 200, 170]
+	      DisplayTime	      off
+	      Decimation	      "10"
+	    }
+	    Block {
+	      BlockType		      "S-Function"
+	      Name		      "S-Function"
+	      Ports		      [4, 5]
+	      Position		      [120, 40, 320, 110]
+	      FunctionName	      "eval(eval(['''sfunchk(''''' sfun ''''')"
+"''']))"
+	      Parameters	      "sfun, args, clockdrift, clockoffset"
+	      PortCounts	      "[]"
+	      SFunctionModules	      "''"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      "none"
+	      MaskIconUnits	      "autoscale"
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator"
+	      Position		      [230, 150, 250, 170]
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "D/A"
+	      Position		      [440, 13, 470, 27]
+	      Port		      "1"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Snd"
+	      Position		      [440, 48, 470, 62]
+	      Port		      "2"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Schedule"
+	      Position		      [440, 83, 470, 97]
+	      Port		      "3"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Monitors"
+	      Position		      [440, 118, 470, 132]
+	      Port		      "4"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "P"
+	      Position		      [440, 153, 470, 167]
+	      Port		      "5"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Line {
+	      SrcBlock		      "Clock"
+	      SrcPort		      1
+	      DstBlock		      "Terminator"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Rcv"
+	      SrcPort		      1
+	      Points		      [45, 0]
+	      DstBlock		      "S-Function"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "Interrupts"
+	      SrcPort		      1
+	      Points		      [45, 0]
+	      DstBlock		      "S-Function"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "S-Function"
+	      SrcPort		      4
+	      Points		      [70, 0; 0, 35]
+	      DstBlock		      "Monitors"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "S-Function"
+	      SrcPort		      3
+	      Points		      [100, 0]
+	      DstBlock		      "Schedule"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "S-Function"
+	      SrcPort		      1
+	      Points		      [15, 0; 0, -25]
+	      DstBlock		      "D/A"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "S-Function"
+	      SrcPort		      2
+	      Points		      [100, 0]
+	      DstBlock		      "Snd"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "A/D"
+	      SrcPort		      1
+	      Points		      [45, 0]
+	      DstBlock		      "S-Function"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "E"
+	      SrcPort		      1
+	      Points		      [50, 0]
+	      DstBlock		      "S-Function"
+	      DstPort		      4
+	    }
+	    Line {
+	      SrcBlock		      "S-Function"
+	      SrcPort		      5
+	      Points		      [50, 0; 0, 55]
+	      DstBlock		      "P"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "D/A"
+	  Position		  [295, 13, 325, 27]
+	  Port			  "1"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Snd"
+	  Position		  [235, 33, 265, 47]
+	  Port			  "2"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Line {
+	  SrcBlock		  "A/D"
+	  SrcPort		  1
+	  Points		  [0, 15]
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Rcv"
+	  SrcPort		  1
+	  Points		  [15, 0]
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  Labels		  [1, 0]
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [10, 0; 0, -15]
+	  DstBlock		  "D/A"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [20, 0]
+	  DstBlock		  "Snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  DstBlock		  "Schedule, actuator node"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0; 0, 45]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Battery"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "P"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [5, 0; 0, 65; -145, 0]
+	  DstBlock		  "Mux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Battery"
+	  SrcPort		  1
+	  Points		  [25, 0]
+	  Branch {
+	    DstBlock		    "Battery, Actuator"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -50; -120, 0]
+	    DstBlock		    "TrueTime Kernel"
+	    DstPort		    4
+	  }
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Node 2\n(Controller)"
+      Ports		      [3, 1]
+      Position		      [550, 96, 620, 174]
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      System {
+	Name			"Node 2\n(Controller)"
+	Location		[460, 567, 808, 857]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "A/D"
+	  Position		  [15, 18, 45, 32]
+	  Port			  "1"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Rcv"
+	  Position		  [15, 83, 45, 97]
+	  Port			  "2"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "P"
+	  Position		  [25, 213, 55, 227]
+	  Port			  "3"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Battery, controller"
+	  Ports			  [1]
+	  Position		  [230, 194, 260, 226]
+	  Floating		  off
+	  Location		  [342, 51, 666, 290]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "OneTimeTick"
+	  ZoomMode		  "yonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  List {
+	    ListType		    SelectedSignals
+	    axes1		    ""
+	  }
+	  Grid			  "on"
+	  TimeRange		  "10"
+	  YMin			  "0"
+	  YMax			  "0.3"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData2"
+	  DataFormat		  "StructureWithTime"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [35, 50, 55, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [2, 1]
+	  Position		  [85, 191, 90, 229]
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule, computer node"
+	  Ports			  [1]
+	  Position		  [270, 68, 295, 92]
+	  Floating		  off
+	  Location		  [473, 73, 1213, 319]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "OneTimeTick"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  List {
+	    ListType		    SelectedSignals
+	    axes1		    ""
+	  }
+	  Grid			  "on"
+	  TimeRange		  "10"
+	  YMin			  "1"
+	  YMax			  "5"
+	  SaveToWorkspace	  on
+	  SaveName		  "schedule"
+	  DataFormat		  "StructureWithTime"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [305, 15, 325, 35]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator2"
+	  Position		  [300, 130, 320, 150]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Battery"
+	  Ports			  [1, 1]
+	  Position		  [115, 191, 165, 229]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Battery"
+	  SourceType		  ""
+	  energy		  "0.3"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "TrueTime Kernel"
+	  Ports			  [4, 5]
+	  Position		  [85, 42, 200, 118]
+	  DropShadow		  on
+	  AncestorBlock		  "truetime/TrueTime Kernel"
+	  ShowPortLabels	  on
+	  TreatAsAtomicUnit	  off
+	  RTWSystemCode		  "Auto"
+	  RTWFcnNameOpts	  "Auto"
+	  RTWFileNameOpts	  "Auto"
+	  MaskPromptString	  "Name of init function (MEX or MATLAB)|Init "
+"function argument|Battery|Clock drift|Clock offset"
+	  MaskStyleString	  "edit,edit,checkbox,edit,edit"
+	  MaskTunableValueString  "off,off,off,off,off"
+	  MaskCallbackString	  "||batterychange||"
+	  MaskEnableString	  "on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on"
+	  MaskVariables		  "sfun=&1;args=@2;battery=@3;clockdrift=@4;cl"
+"ockoffset=@5;"
+	  MaskSelfModifiable	  on
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "controller_init|0|on|0|0"
+	  MaskVariableAliases	  ",,,,"
+	  System {
+	    Name		    "TrueTime Kernel"
+	    Location		    [345, 356, 835, 561]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "A/D"
+	      Position		      [25, 33, 55, 47]
+	      Port		      "1"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Interrupts"
+	      Position		      [25, 68, 55, 82]
+	      Port		      "2"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Rcv"
+	      Position		      [25, 108, 55, 122]
+	      Port		      "3"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "E"
+	      Position		      [30, 140, 50, 160]
+	      Port		      "4"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      Clock
+	      Name		      "Clock"
+	      Position		      [180, 150, 200, 170]
+	      DisplayTime	      off
+	      Decimation	      "10"
+	    }
+	    Block {
+	      BlockType		      "S-Function"
+	      Name		      "S-Function"
+	      Ports		      [4, 5]
+	      Position		      [120, 40, 320, 110]
+	      FunctionName	      "eval(eval(['''sfunchk(''''' sfun ''''')"
+"''']))"
+	      Parameters	      "sfun, args, clockdrift, clockoffset"
+	      PortCounts	      "[]"
+	      SFunctionModules	      "''"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      "none"
+	      MaskIconUnits	      "autoscale"
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator"
+	      Position		      [230, 150, 250, 170]
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "D/A"
+	      Position		      [440, 13, 470, 27]
+	      Port		      "1"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Snd"
+	      Position		      [440, 48, 470, 62]
+	      Port		      "2"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Schedule"
+	      Position		      [440, 83, 470, 97]
+	      Port		      "3"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Monitors"
+	      Position		      [440, 118, 470, 132]
+	      Port		      "4"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "P"
+	      Position		      [440, 153, 470, 167]
+	      Port		      "5"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Line {
+	      SrcBlock		      "Clock"
+	      SrcPort		      1
+	      DstBlock		      "Terminator"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Rcv"
+	      SrcPort		      1
+	      Points		      [45, 0]
+	      DstBlock		      "S-Function"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "Interrupts"
+	      SrcPort		      1
+	      Points		      [45, 0]
+	      DstBlock		      "S-Function"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "S-Function"
+	      SrcPort		      4
+	      Points		      [70, 0; 0, 35]
+	      DstBlock		      "Monitors"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "S-Function"
+	      SrcPort		      3
+	      Points		      [100, 0]
+	      DstBlock		      "Schedule"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "S-Function"
+	      SrcPort		      1
+	      Points		      [15, 0; 0, -25]
+	      DstBlock		      "D/A"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "S-Function"
+	      SrcPort		      2
+	      Points		      [100, 0]
+	      DstBlock		      "Snd"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "A/D"
+	      SrcPort		      1
+	      Points		      [45, 0]
+	      DstBlock		      "S-Function"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "E"
+	      SrcPort		      1
+	      Points		      [50, 0]
+	      DstBlock		      "S-Function"
+	      DstPort		      4
+	    }
+	    Line {
+	      SrcBlock		      "S-Function"
+	      SrcPort		      5
+	      Points		      [50, 0; 0, 55]
+	      DstBlock		      "P"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Snd"
+	  Position		  [260, 33, 290, 47]
+	  Port			  "1"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0; 0, -25]
+	  DstBlock		  "Snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  Points		  [0, 10]
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "A/D"
+	  SrcPort		  1
+	  Points		  [20, 0]
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  DstBlock		  "Schedule, computer node"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [10, 0; 0, -25]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  DstBlock		  "TrueTime Battery"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "P"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [5, 0; 0, 65; -140, 0]
+	  DstBlock		  "Mux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [15, 0; 0, 45]
+	  DstBlock		  "Terminator2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Battery"
+	  SrcPort		  1
+	  Points		  [25, 0]
+	  Branch {
+	    DstBlock		    "Battery, controller"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -55; -125, 0]
+	    DstBlock		    "TrueTime Kernel"
+	    DstPort		    4
+	  }
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Wireless Network"
+      Ports		      [2, 4]
+      Position		      [550, 236, 610, 314]
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      System {
+	Name			"Wireless Network"
+	Location		[216, 495, 638, 715]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "snd1"
+	  Position		  [60, 33, 90, 47]
+	  Port			  "1"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "snd2"
+	  Position		  [60, 58, 90, 72]
+	  Port			  "2"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  Position		  [15, 90, 45, 120]
+	  Value			  "0"
+	  VectorParams1D	  on
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant1"
+	  Position		  [15, 155, 45, 185]
+	  Value			  "20"
+	  VectorParams1D	  on
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [300, 12, 305, 63]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux1"
+	  Ports			  [1, 2]
+	  Position		  [300, 106, 305, 144]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [2, 1]
+	  Position		  [130, 25, 135, 80]
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux1"
+	  Ports			  [2, 1]
+	  Position		  [120, 96, 125, 134]
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux2"
+	  Ports			  [2, 1]
+	  Position		  [120, 141, 125, 179]
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Network Schedule"
+	  Ports			  [1]
+	  Position		  [360, 62, 385, 88]
+	  Floating		  off
+	  Location		  [13, 726, 1271, 970]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "OneTimeTick"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  List {
+	    ListType		    SelectedSignals
+	    axes1		    ""
+	  }
+	  Grid			  "on"
+	  TimeRange		  "10"
+	  YMin			  "1"
+	  YMax			  "2.5"
+	  SaveToWorkspace	  on
+	  SaveName		  "nschedule"
+	  DataFormat		  "StructureWithTime"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Wireless \nNetwork"
+	  Ports			  [3, 3]
+	  Position		  [165, 47, 260, 103]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Wireless \nNetwork"
+	  SourceType		  "Wireless Network"
+	  nwtype		  "802.11b (WLAN)"
+	  nwnbr			  "1"
+	  nnodes		  "2"
+	  rate			  "800000"
+	  minsize		  "272"
+	  transpower		  "20"
+	  threshold		  "-48"
+	  pathloss		  "3.5"
+	  use_pathloss_function	  off
+	  acktimeout		  "0.00004"
+	  retrylimit		  "5"
+	  error_threshold	  "0.03"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "rcv1"
+	  Position		  [325, 18, 355, 32]
+	  Port			  "1"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "rcv2"
+	  Position		  [325, 43, 355, 57]
+	  Port			  "2"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "P1"
+	  Position		  [355, 108, 385, 122]
+	  Port			  "3"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "P2"
+	  Position		  [355, 128, 385, 142]
+	  Port			  "4"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  DstBlock		  "rcv1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  DstBlock		  "rcv2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd1"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  DstBlock		  "Mux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd2"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  DstBlock		  "Mux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "TrueTime Wireless \nNetwork"
+	  SrcPort		  1
+	  Points		  [5, 0; 0, -15]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Wireless \nNetwork"
+	  SrcPort		  2
+	  DstBlock		  "Network Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  DstBlock		  "TrueTime Wireless \nNetwork"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Wireless \nNetwork"
+	  SrcPort		  3
+	  Points		  [20, 0]
+	  DstBlock		  "Demux1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Mux2"
+	  SrcPort		  1
+	  Points		  [10, 0; 0, -65]
+	  DstBlock		  "TrueTime Wireless \nNetwork"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux1"
+	  SrcPort		  1
+	  Points		  [0, -30; 20, 0]
+	  DstBlock		  "TrueTime Wireless \nNetwork"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  1
+	  DstBlock		  "P1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  2
+	  DstBlock		  "P2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  Points		  [40, 0]
+	  Branch {
+	    DstBlock		    "Mux1"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 20]
+	    Branch {
+	      DstBlock		      "Mux1"
+	      DstPort		      2
+	    }
+	    Branch {
+	      Points		      [0, 25]
+	      DstBlock		      "Mux2"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Line {
+	  SrcBlock		  "Constant1"
+	  SrcPort		  1
+	  DstBlock		  "Mux2"
+	  DstPort		  2
+	}
+      }
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "r, y"
+      Ports		      [1]
+      Position		      [635, 38, 660, 62]
+      Floating		      off
+      Location		      [722, 89, 1257, 328]
+      Open		      off
+      NumInputPorts	      "1"
+      TickLabels	      "OneTimeTick"
+      ZoomMode		      "xonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+      }
+      Grid		      "on"
+      TimeRange		      "10"
+      YMin		      "-0.717285"
+      YMax		      "1.85596"
+      SaveToWorkspace	      off
+      SaveName		      "y"
+      DataFormat	      "StructureWithTime"
+      LimitDataPoints	      off
+      MaxDataPoints	      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      DiscretePulseGenerator
+      Name		      "reference"
+      Position		      [415, 93, 460, 127]
+      PulseType		      "Time-based"
+      Amplitude		      "1"
+      Period		      "1.2"
+      PulseWidth	      "50"
+      PhaseDelay	      "0"
+      SampleTime	      "1"
+      VectorParams1D	      on
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "u"
+      Ports		      [1]
+      Position		      [265, 167, 290, 193]
+      Floating		      off
+      Location		      [722, 385, 1256, 623]
+      Open		      off
+      NumInputPorts	      "1"
+      TickLabels	      "OneTimeTick"
+      ZoomMode		      "yonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+      }
+      Grid		      "on"
+      TimeRange		      "10"
+      YMin		      "-2"
+      YMax		      "6"
+      SaveToWorkspace	      off
+      SaveName		      "u"
+      DataFormat	      "StructureWithTime"
+      LimitDataPoints	      off
+      MaxDataPoints	      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Line {
+      SrcBlock		      "From7"
+      SrcPort		      1
+      Points		      [0, 0]
+      DstBlock		      "Wireless Network"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Wireless Network"
+      SrcPort		      1
+      DstBlock		      "Goto"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Node 1\n(Sensor/Actuator)"
+      SrcPort		      1
+      Points		      [65, 0]
+      Branch {
+	DstBlock		"DC Servo"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, 60]
+	DstBlock		"u"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Node 2\n(Controller)"
+      SrcPort		      1
+      DstBlock		      "Goto3"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "From2"
+      SrcPort		      1
+      DstBlock		      "Node 1\n(Sensor/Actuator)"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Clock"
+      SrcPort		      1
+      DstBlock		      "Display"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "reference"
+      SrcPort		      1
+      Points		      [60, 0]
+      Branch {
+	DstBlock		"Node 2\n(Controller)"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -50]
+	DstBlock		"Mux"
+	DstPort			2
+      }
+    }
+    Line {
+      SrcBlock		      "Wireless Network"
+      SrcPort		      2
+      DstBlock		      "Goto1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "From3"
+      SrcPort		      1
+      DstBlock		      "Node 2\n(Controller)"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Mux"
+      SrcPort		      1
+      DstBlock		      "r, y"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "DC Servo"
+      SrcPort		      1
+      Points		      [0, 0; 20, 0]
+      Branch {
+	Points			[0, -80]
+	DstBlock		"Mux"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, 100; -320, 0; 0, -85]
+	DstBlock		"Node 1\n(Sensor/Actuator)"
+	DstPort			2
+      }
+    }
+    Line {
+      SrcBlock		      "Node 1\n(Sensor/Actuator)"
+      SrcPort		      2
+      DstBlock		      "Goto4"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "From4"
+      SrcPort		      1
+      Points		      [0, 0]
+      DstBlock		      "Wireless Network"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Wireless Network"
+      SrcPort		      4
+      DstBlock		      "Goto5"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Wireless Network"
+      SrcPort		      3
+      DstBlock		      "Goto2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "From1"
+      SrcPort		      1
+      DstBlock		      "Node 2\n(Controller)"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "From5"
+      SrcPort		      1
+      DstBlock		      "Node 1\n(Sensor/Actuator)"
+      DstPort		      3
+    }
+    Annotation {
+      Position		      [188, 111]
+      Text		      "u"
+    }
+    Annotation {
+      Position		      [342, 123]
+      Text		      "y"
+    }
+    Annotation {
+      Position		      [512, 103]
+      Text		      "r"
+    }
+    Annotation {
+      Position		      [181, 291]
+      Text		      "TrueTime 1.5  Distributed Wireless Control Syst"
+"em\nCopyright (c) 2007\nMartin Ohlin, Dan Henriksson and Anton Cervin\nDepart"
+"ment of Automatic Control, Lund University, Sweden\nPlease direct questions a"
+"nd bug reports to:  truetime@control.lth.se "
+    }
+  }
+}

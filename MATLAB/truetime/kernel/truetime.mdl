@@ -1,0 +1,1066 @@
+Library {
+  Name			  "truetime"
+  Version		  4.00
+  LibraryLinkDisplay	  "none"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  off
+  StatusBar		  off
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Wed Mar 27 15:52:34 2002"
+  Creator		  "dan"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "anton"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Wed Nov  7 11:58:03 2007"
+  ModelVersionFormat	  "1.%<AutoIncrement:161>"
+  ConfigurationManager	  "None"
+  SimParamPage		  "Solver"
+  AlgebraicLoopMsg	  "warning"
+  MinStepSizeMsg	  "warning"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  SingleTaskRateTransMsg  "none"
+  MultiTaskRateTransMsg	  "error"
+  IntegerOverflowMsg	  "warning"
+  CheckForMatrixSingularity "none"
+  UnnecessaryDatatypeConvMsg "none"
+  Int32ToFloatConvMsg	  "warning"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  LinearizationMsg	  "none"
+  VectorMatrixConversionMsg "none"
+  SfunCompatibilityCheckMsg "none"
+  BlockPriorityViolationMsg "warning"
+  ArrayBoundsChecking	  "none"
+  ConsistencyChecking	  "none"
+  Profile		  off
+  SimulationMode	  "normal"
+  RTWRetainRTWFile	  off
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "truetime"
+    Location		    [178, 299, 659, 609]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "A4"
+    PaperUnits		    "centimeters"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      SubSystem
+      Name		      "TrueTime Battery"
+      Ports		      [1, 1]
+      Position		      [75, 141, 125, 179]
+      DropShadow	      on
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskPromptString	      "Watt seconds (Joule)"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "on"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "energy=@1;"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1"
+      System {
+	Name			"TrueTime Battery"
+	Location		[759, 402, 1074, 549]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "P"
+	  Position		  [15, 33, 45, 47]
+	  Port			  "1"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain"
+	  Position		  [120, 25, 150, 55]
+	  Gain			  "-1"
+	  Multiplication	  "Element-wise(K.*u)"
+	  SaturateOnIntegerOverflow on
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "Integrator"
+	  Ports			  [1, 1]
+	  Position		  [175, 25, 205, 55]
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "energy"
+	  LimitOutput		  on
+	  UpperSaturationLimit	  "energy"
+	  LowerSaturationLimit	  "0"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum"
+	  Ports			  [1, 1]
+	  Position		  [65, 30, 85, 50]
+	  ShowName		  off
+	  IconShape		  "rectangular"
+	  Inputs		  "1"
+	  SaturateOnIntegerOverflow on
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "E"
+	  Position		  [245, 33, 275, 47]
+	  Port			  "1"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Line {
+	  SrcBlock		  "Integrator"
+	  SrcPort		  1
+	  DstBlock		  "E"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Gain"
+	  SrcPort		  1
+	  DstBlock		  "Integrator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "P"
+	  SrcPort		  1
+	  DstBlock		  "Sum"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Sum"
+	  SrcPort		  1
+	  DstBlock		  "Gain"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "TrueTime Kernel"
+      Ports		      [3, 5]
+      Position		      [40, 27, 155, 103]
+      DropShadow	      on
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskPromptString	      "Name of init function (MEX or MATLAB)|Init func"
+"tion argument|Battery|Clock drift|Clock offset"
+      MaskStyleString	      "edit,edit,checkbox,edit,edit"
+      MaskTunableValueString  "off,off,off,off,off"
+      MaskCallbackString      "||kernel_callback||"
+      MaskEnableString	      "on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on"
+      MaskVariables	      "sfun=&1;args=@2;battery=@3;clockdrift=@4;clocko"
+"ffset=@5;"
+      MaskSelfModifiable      on
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "node_init|0|off|0|0"
+      MaskVariableAliases     ",,,,"
+      System {
+	Name			"TrueTime Kernel"
+	Location		[345, 356, 835, 561]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "A/D"
+	  Position		  [25, 33, 55, 47]
+	  Port			  "1"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Interrupts"
+	  Position		  [25, 68, 55, 82]
+	  Port			  "2"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Rcv"
+	  Position		  [25, 108, 55, 122]
+	  Port			  "3"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Clock
+	  Name			  "Clock"
+	  Position		  [180, 150, 200, 170]
+	  DisplayTime		  off
+	  Decimation		  "10"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "E"
+	  Position		  [30, 140, 50, 160]
+	  Value			  "1"
+	  VectorParams1D	  on
+	}
+	Block {
+	  BlockType		  "S-Function"
+	  Name			  "S-Function"
+	  Ports			  [4, 5]
+	  Position		  [120, 40, 320, 110]
+	  FunctionName		  "eval(eval(['''sfunchk(''''' sfun ''''')''']"
+"))"
+	  Parameters		  "sfun, args, clockdrift, clockoffset"
+	  PortCounts		  "[]"
+	  SFunctionModules	  "''"
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [230, 150, 250, 170]
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "D/A"
+	  Position		  [440, 13, 470, 27]
+	  Port			  "1"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Snd"
+	  Position		  [440, 48, 470, 62]
+	  Port			  "2"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Schedule"
+	  Position		  [440, 83, 470, 97]
+	  Port			  "3"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Monitors"
+	  Position		  [440, 118, 470, 132]
+	  Port			  "4"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "P"
+	  Position		  [440, 153, 470, 167]
+	  Port			  "5"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Line {
+	  SrcBlock		  "S-Function"
+	  SrcPort		  5
+	  Points		  [50, 0; 0, 55]
+	  DstBlock		  "P"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "E"
+	  SrcPort		  1
+	  Points		  [50, 0]
+	  DstBlock		  "S-Function"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "A/D"
+	  SrcPort		  1
+	  Points		  [45, 0]
+	  DstBlock		  "S-Function"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "S-Function"
+	  SrcPort		  2
+	  Points		  [100, 0]
+	  DstBlock		  "Snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "S-Function"
+	  SrcPort		  1
+	  Points		  [15, 0; 0, -25]
+	  DstBlock		  "D/A"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "S-Function"
+	  SrcPort		  3
+	  Points		  [100, 0]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "S-Function"
+	  SrcPort		  4
+	  Points		  [70, 0; 0, 35]
+	  DstBlock		  "Monitors"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Interrupts"
+	  SrcPort		  1
+	  Points		  [45, 0]
+	  DstBlock		  "S-Function"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Rcv"
+	  SrcPort		  1
+	  Points		  [45, 0]
+	  DstBlock		  "S-Function"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Clock"
+	  SrcPort		  1
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "TrueTime Network"
+      Ports		      [1, 2]
+      Position		      [225, 35, 320, 90]
+      DropShadow	      on
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "Real-Time Network"
+      MaskPromptString	      "Network type|Network number|Number of nodes|Dat"
+"a rate (bits/s)|Minimum frame size (bits)|Loss probability (0-1)|Bandwidth al"
+"locations|Slotsize (bits)|Cyclic schedule|Total switch memory (bits)|Switch b"
+"uffer type|Switch overflow behavior"
+      MaskStyleString	      "popup(CSMA/CD (Ethernet)|CSMA/AMP (CAN)|Round R"
+"obin|FDMA|TDMA|Switched Ethernet),edit,edit,edit,edit,edit,edit,edit,edit,edi"
+"t,popup(Common buffer|Symmetric output buffers),popup(Retransmit|Drop)"
+      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskCallbackString      "network_callback||network_callback|network_call"
+"back|||network_callback|network_callback|network_callback|||"
+      MaskEnableString	      "on,on,on,on,on,on,off,off,off,off,off,off"
+      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskVariables	      "nwtype=@1;nwnbr=@2;nnodes=@3;rate=@4;minsize=@5"
+";lossprob=@6;bandwidths=@7;slotsize=@8;schedule=@9;memsize=@10;buftype=@11;ov"
+"erflow=@12;"
+      MaskDisplay	      "disp(nwnbr)"
+      MaskSelfModifiable      on
+      MaskIconFrame	      on
+      MaskIconOpaque	      off
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "CSMA/CD (Ethernet)|1|2|10000000|512|0|[0.5 0.5]"
+"|512|[1 1 2]|80000|Common buffer|Retransmit"
+      MaskVariableAliases     ",,,,,,,,,,,"
+      System {
+	Name			"TrueTime Network"
+	Location		[298, 562, 568, 737]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Snd"
+	  Position		  [25, 38, 55, 52]
+	  Port			  "1"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  "S-Function"
+	  Name			  "ttnetwork"
+	  Ports			  [1, 2]
+	  Position		  [80, 26, 150, 64]
+	  FunctionName		  "ttnetwork"
+	  Parameters		  "nwtype,nwnbr,nnodes,rate,minsize,lossprob,b"
+"andwidths,slotsize,schedule,memsize,buftype,overflow"
+	  PortCounts		  "[]"
+	  SFunctionModules	  "''"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Rcv"
+	  Position		  [185, 28, 215, 42]
+	  Port			  "1"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Schedule"
+	  Position		  [185, 63, 215, 77]
+	  Port			  "2"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Line {
+	  SrcBlock		  "ttnetwork"
+	  SrcPort		  2
+	  Points		  [0, 15]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "ttnetwork"
+	  SrcPort		  1
+	  DstBlock		  "Rcv"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Snd"
+	  SrcPort		  1
+	  DstBlock		  "ttnetwork"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "TrueTime Wireless \nNetwork"
+      Ports		      [3, 3]
+      Position		      [225, 132, 320, 188]
+      DropShadow	      on
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "Wireless Network"
+      MaskPromptString	      "Network type|Network Number|Number of nodes|Dat"
+"a rate (bits/s)|Minimum frame size (bits)|Transmit power (dbm)|Receiver signa"
+"l threshold (dbm)|Pathloss exponent (1/distance^x)|Special pathloss function|"
+"Matlab pathloss function|ACK timeout (s)|Retry limit|Error coding threshold"
+      MaskStyleString	      "popup(802.11b (WLAN)|802.15.4 (ZigBee)),edit,ed"
+"it,edit,edit,edit,edit,edit,checkbox,edit,edit,edit,edit"
+      MaskTunableValueString  "off,off,off,off,off,off,off,off,off,off,off,off"
+",off"
+      MaskCallbackString      "wnetwork_callback||||||||pathloss_button||||"
+      MaskEnableString	      "on,on,on,on,on,on,on,on,on,off,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskVariables	      "nwtype=@1;nwnbr=@2;nnodes=@3;rate=@4;minsize=@5"
+";transpower=@6;threshold=@7;pathloss=@8;use_pathloss_function=&9;pathloss_fun"
+"ction=&10;acktimeout=@11;retrylimit=@12;error_threshold=@13;"
+      MaskDisplay	      "disp(nwnbr)"
+      MaskSelfModifiable      on
+      MaskIconFrame	      on
+      MaskIconOpaque	      off
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "802.11b (WLAN)|1|2|800000|272|20|-48|3.5|off||0"
+".00004|5|0.03"
+      MaskVariableAliases     ",,,,,,,,,,,,"
+      System {
+	Name			"TrueTime Wireless \nNetwork"
+	Location		[540, 703, 810, 878]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Snd"
+	  Position		  [15, 28, 45, 42]
+	  Port			  "1"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "x"
+	  Position		  [15, 68, 45, 82]
+	  Port			  "2"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "y"
+	  Position		  [15, 128, 45, 142]
+	  Port			  "3"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  "S-Function"
+	  Name			  "ttwnetwork"
+	  Ports			  [3, 3]
+	  Position		  [80, 26, 150, 64]
+	  FunctionName		  "ttwnetwork"
+	  Parameters		  "nwtype,nwnbr,nnodes,rate,minsize,transpower"
+",threshold,pathloss,use_pathloss_function,pathloss_function,acktimeout,retryl"
+"imit,error_threshold"
+	  PortCounts		  "[]"
+	  SFunctionModules	  "''"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Rcv"
+	  Position		  [195, 13, 225, 27]
+	  Port			  "1"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Schedule"
+	  Position		  [195, 43, 225, 57]
+	  Port			  "2"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "P"
+	  Position		  [185, 88, 215, 102]
+	  Port			  "3"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Line {
+	  SrcBlock		  "ttwnetwork"
+	  SrcPort		  3
+	  Points		  [5, 0; 0, 40]
+	  DstBlock		  "P"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Snd"
+	  SrcPort		  1
+	  DstBlock		  "ttwnetwork"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "ttwnetwork"
+	  SrcPort		  1
+	  Points		  [0, -15]
+	  DstBlock		  "Rcv"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "ttwnetwork"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "x"
+	  SrcPort		  1
+	  Points		  [5, 0; 0, -30]
+	  DstBlock		  "ttwnetwork"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "y"
+	  SrcPort		  1
+	  Points		  [15, 0]
+	  DstBlock		  "ttwnetwork"
+	  DstPort		  3
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "ttGetMsg"
+      Ports		      [1, 1]
+      Position		      [375, 37, 425, 83]
+      DropShadow	      on
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      on
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskPromptString	      "network number|receiver id|trigger output"
+      MaskStyleString	      "edit,edit,checkbox"
+      MaskTunableValueString  "off,off,off"
+      MaskCallbackString      "||getmsg_callback"
+      MaskEnableString	      "on,on,on"
+      MaskVisibilityString    "on,on,on"
+      MaskToolTipString	      "on,on,on"
+      MaskVariables	      "network=@1;receiver=@2;trigger=@3;"
+      MaskSelfModifiable      on
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1|1|off"
+      MaskVariableAliases     ",,"
+      System {
+	Name			"ttGetMsg"
+	Location		[234, 613, 677, 806]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "rcv"
+	  Position		  [60, 48, 90, 62]
+	  Port			  "1"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Subsystem"
+	  Ports			  [0, 1, 0, 1]
+	  Position		  [250, 25, 295, 85]
+	  ShowPortLabels	  on
+	  TreatAsAtomicUnit	  on
+	  RTWSystemCode		  "Auto"
+	  RTWFcnNameOpts	  "Auto"
+	  RTWFileNameOpts	  "Auto"
+	  System {
+	    Name		    "Subsystem"
+	    Location		    [712, 401, 1024, 666]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      TriggerPort
+	      Name		      "Trigger"
+	      Ports		      [0, 1]
+	      Position		      [30, 180, 50, 200]
+	      TriggerType	      "either"
+	      ShowOutputPort	      on
+	      OutputDataType	      "auto"
+	    }
+	    Block {
+	      BlockType		      MATLABFcn
+	      Name		      "MATLAB Fcn1"
+	      Position		      [160, 110, 220, 140]
+	      MATLABFcn		      "ttGetMsg2(u(1), u(2), u(3))"
+	      OutputDimensions	      "-1"
+	      OutputSignalType	      "auto"
+	      Output1D		      off
+	    }
+	    Block {
+	      BlockType		      Mux
+	      Name		      "Mux"
+	      Ports		      [3, 1]
+	      Position		      [135, 25, 140, 225]
+	      ShowName		      off
+	      Inputs		      "3"
+	      DisplayOption	      "bar"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "network"
+	      Position		      [25, 45, 55, 75]
+	      Value		      "network"
+	      VectorParams1D	      on
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "receiver"
+	      Position		      [25, 110, 55, 140]
+	      Value		      "receiver"
+	      VectorParams1D	      on
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "data"
+	      Position		      [245, 118, 275, 132]
+	      Port		      "1"
+	      OutputWhenDisabled      "held"
+	      InitialOutput	      "[]"
+	    }
+	    Line {
+	      SrcBlock		      "MATLAB Fcn1"
+	      SrcPort		      1
+	      DstBlock		      "data"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Mux"
+	      SrcPort		      1
+	      DstBlock		      "MATLAB Fcn1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "network"
+	      SrcPort		      1
+	      DstBlock		      "Mux"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "receiver"
+	      SrcPort		      1
+	      DstBlock		      "Mux"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Trigger"
+	      SrcPort		      1
+	      DstBlock		      "Mux"
+	      DstPort		      3
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "trigger"
+	  Position		  [265, 130, 285, 150]
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "data"
+	  Position		  [330, 48, 360, 62]
+	  Port			  "1"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Line {
+	  SrcBlock		  "Subsystem"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  DstBlock		  "data"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "rcv"
+	  SrcPort		  1
+	  Points		  [75, 0]
+	  Branch {
+	    Points		    [0, 85]
+	    DstBlock		    "trigger"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -45]
+	    DstBlock		    "Subsystem"
+	    DstPort		    trigger
+	  }
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "ttSendMsg"
+      Ports		      [1, 1, 0, 1]
+      Position		      [375, 137, 425, 183]
+      DropShadow	      on
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      on
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskPromptString	      "network number|Add network number input port|se"
+"nder id|Add sender id input port|receiver id|Add receiver id input port|data|"
+"Add data input port|data length (bits)|Add length input port|priority (only u"
+"sed for prioritized networks)|Add priority input port|Trigger type:"
+      MaskStyleString	      "edit,checkbox,edit,checkbox,edit,checkbox,edit,"
+"checkbox,edit,checkbox,edit,checkbox,popup(rising|falling|either)"
+      MaskTunableValueString  "off,off,off,off,off,off,off,off,off,off,off,off"
+",off"
+      MaskCallbackString      "|sendmsg_callback||sendmsg_callback||sendmsg_ca"
+"llback||sendmsg_callback||sendmsg_callback||sendmsg_callback|sendmsg_callback"
+      MaskEnableString	      "on,on,on,on,on,on,off,on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskVariables	      "network=@1;network_input=@2;sender=@3;sender_in"
+"put=@4;receiver=@5;receiver_input=@6;data=@7;data_input=@8;length=@9;length_i"
+"nput=@10;prio=@11;priority_input=@12;TriggerType=&13;"
+      MaskSelfModifiable      on
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1|off|1|off|2|off|0|on|40|off|1|off|either"
+      MaskVariableAliases     ",,,,,,,,,,,,"
+      System {
+	Name			"ttSendMsg"
+	Location		[593, 354, 908, 757]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "data"
+	  Position		  [15, 173, 45, 187]
+	  Port			  "1"
+	  LatchInput		  off
+	  Interpolate		  on
+	}
+	Block {
+	  BlockType		  TriggerPort
+	  Name			  "Trigger"
+	  Ports			  [0, 1]
+	  Position		  [20, 305, 40, 325]
+	  TriggerType		  "either"
+	  ShowOutputPort	  on
+	  OutputDataType	  "auto"
+	}
+	Block {
+	  BlockType		  MATLABFcn
+	  Name			  "MATLAB Fcn1"
+	  Position		  [150, 165, 210, 195]
+	  MATLABFcn		  "ttSendMsg2(u(1), u(2), u(3), u(4:end-3), u("
+"end-2), u(end-1), u(end))"
+	  OutputDimensions	  "-1"
+	  OutputSignalType	  "auto"
+	  Output1D		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [7, 1]
+	  Position		  [125, 18, 130, 342]
+	  ShowName		  off
+	  Inputs		  "7"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "length"
+	  Position		  [15, 210, 45, 240]
+	  Value			  "length"
+	  VectorParams1D	  on
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "network"
+	  Position		  [15, 30, 45, 60]
+	  Value			  "network"
+	  VectorParams1D	  on
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "priority"
+	  Position		  [15, 255, 45, 285]
+	  Value			  "prio"
+	  VectorParams1D	  on
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "receiver"
+	  Position		  [15, 120, 45, 150]
+	  Value			  "receiver"
+	  VectorParams1D	  on
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "sender"
+	  Position		  [15, 75, 45, 105]
+	  Value			  "sender"
+	  VectorParams1D	  on
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "snd"
+	  Position		  [240, 173, 270, 187]
+	  Port			  "1"
+	  OutputWhenDisabled	  "held"
+	  InitialOutput		  "[]"
+	}
+	Line {
+	  SrcBlock		  "MATLAB Fcn1"
+	  SrcPort		  1
+	  DstBlock		  "snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "MATLAB Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Trigger"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  7
+	}
+	Line {
+	  SrcBlock		  "priority"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  6
+	}
+	Line {
+	  SrcBlock		  "length"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  5
+	}
+	Line {
+	  SrcBlock		  "data"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "receiver"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "sender"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "network"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  1
+	}
+      }
+    }
+    Annotation {
+      Position		      [231, 266]
+      Text		      "TrueTime Block Library 1.5\nCopyright (c) 2007"
+"\nMartin Ohlin, Dan Henriksson and Anton Cervin\nDepartment of Automatic Cont"
+"rol, Lund University, Sweden\nPlease direct questions and bug reports to:  tr"
+"uetime@control.lth.se "
+    }
+  }
+}

@@ -1,0 +1,69 @@
+----------------------------------------------
+ TrueTime 1.5
+ Example: Task Synchronization using Monitors
+ Directory: $DIR/examples/synch
+----------------------------------------------
+
+1. INTRODUCTION
+
+This example shows how to use monitors to obtain mutual exclusion in
+TrueTime. A cascaded controller for a ball-and-beam process (3rd order
+system) is implemented using separate tasks for the two loops in the
+cascade. The output from the outer controller is used as input to the
+inner controller and is communicated using a global variable. This
+variable is a shared resource, and mutual exclusion is achieved by a
+TrueTime monitor.
+
+
+2. COMPILING THE SIMULATION FILES
+
+2.1 Configuring the TrueTime Environment
+
+    Before starting Matlab, you must set the environment variable
+    TTKERNEL to point to the directory with the TrueTime kernel files:
+
+        Unix/Linux: > export TTKERNEL=$DIR/kernel
+        Windows:  Control Panel / System / Advanced / Environment Variables
+
+    Then add the following lines to your MATLAB startup script. This
+    will set up all necessary paths to the TrueTime kernel files.
+
+        addpath(getenv('TTKERNEL'))
+        init_truetime;
+
+2.2 Compilation
+
+    As described in the reference manual it is possible to write a
+    TrueTime simulation (i.e. the code functions for the tasks and the
+    initialization commands) either as m-files or as C++ functions. For
+    this example only the m-file approach is provided.
+
+    Since the TrueTime archive contains pre-compiled files, no 
+    compilation is required to run TrueTime in the Matlab version. 
+    However, if needed, the files may be re-compiled by issuing the 
+    command make_truetime from the command prompt.
+
+
+3. SIMULATIONS
+
+Open the model synch.mdl to run the simulation. 
+
+- Study the initialization function (synch_init.m). This creates two
+  tasks for the outer and inner loop, respectively. A global variable,
+  outerU, is used for task communication. This variable is the output
+  from the outer controller (thus its name) and is used as reference
+  for the inner controller. Finally, a TrueTime monitor is created.
+
+- Study the code functions for the controller tasks (outercode.m and
+  innercode.m). To ensure that no further instructions are executed in
+  the case that ttEnterMonitor fails, this primitive needs to be called
+  from its own segment (since all code of a TrueTime segment is executed
+  at once before scheduling decisions are made). The same holds for 
+  ttExitMonitor to make sure that no further code is executed in the
+  case a context switch will occur when the monitor is released.
+
+- Study the monitor schedule of the simulation. This graph displays when 
+  the various tasks have been holding the monitor during the simulation.
+
+- Try modifying the periods of the tasks to change the phasing and to see 
+  which loop that is most sensitive to slower sampling.  

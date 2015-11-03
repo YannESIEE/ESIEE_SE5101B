@@ -1,0 +1,4641 @@
+Model {
+  Name			  "soccer"
+  Version		  4.00
+  SampleTimeColors	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  off
+  ShowStorageClass	  off
+  ExecutionOrder	  off
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  PostLoadFcn		  "init_motes"
+  InitFcn		  "clear functions"
+  Created		  "Tue Jun 26 13:16:28 2001"
+  Creator		  "anton"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "anton"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Wed Jan  3 17:47:06 2007"
+  ModelVersionFormat	  "1.%<AutoIncrement:335>"
+  ConfigurationManager	  "none"
+  SimParamPage		  "Solver"
+  StartTime		  "0.0"
+  StopTime		  "150"
+  SolverMode		  "Auto"
+  Solver		  "ode45"
+  RelTol		  "1e-3"
+  AbsTol		  "auto"
+  Refine		  "1"
+  MaxStep		  "auto"
+  MinStep		  "auto"
+  MaxNumMinSteps	  "-1"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  MaxOrder		  5
+  OutputOption		  "RefineOutputTimes"
+  OutputTimes		  "[]"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  SaveTime		  off
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  off
+  OutputSaveName	  "yout"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  SaveFormat		  "Array"
+  LimitDataPoints	  on
+  MaxDataPoints		  "1000"
+  Decimation		  "1"
+  AlgebraicLoopMsg	  "warning"
+  MinStepSizeMsg	  "warning"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  SingleTaskRateTransMsg  "none"
+  MultiTaskRateTransMsg	  "error"
+  IntegerOverflowMsg	  "warning"
+  CheckForMatrixSingularity "none"
+  UnnecessaryDatatypeConvMsg "none"
+  Int32ToFloatConvMsg	  "warning"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  LinearizationMsg	  "none"
+  VectorMatrixConversionMsg "none"
+  SfunCompatibilityCheckMsg "none"
+  BlockPriorityViolationMsg "warning"
+  ArrayBoundsChecking	  "none"
+  ConsistencyChecking	  "none"
+  ZeroCross		  on
+  Profile		  off
+  SimulationMode	  "normal"
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWOptions		  "-aEnforceIntegerDowncast=1 -aFoldNonRolledExpr=1 -a"
+"InlineInvariantSignals=0 -aInlineParameters=0 -aLocalBlockOutputs=1 -aRollThr"
+"eshold=5 -aGenerateReport=0 -aGenCodeOnly=0 -aRTWVerbose=1 -aIncludeHyperlink"
+"InReport=0 -aLaunchReport=0 -aForceParamTrailComments=0 -aGenerateComments=1 "
+"-aIgnoreCustomStorageClasses=1 -aIncHierarchyInIds=0 -aMaxRTWIdLen=31 -aShowE"
+"liminatedStatements=0 -aPrefixModelToSubsysFcnNames=1 -aIncDataTypeInIds=0 -a"
+"InsertBlockDesc=0 -aSimulinkBlockComments=1 -aInlinedPrmAccess=\"Literals\"  "
+"-aSuppressErrorStatus=0 -aModelReferenceCompliant=1 -aSupportNonInlinedSFcns="
+"1 -aSupportContinuousTime=1 -aSupportComplex=1 -aSupportNonFinite=1 -aSupport"
+"AbsoluteTime=1 -aTargetPreCompLibLocation=\"\" -aTargetLibSuffix=\"\" -aTarge"
+"tFcnLib=\"ansi_tfl_tmw.mat\" -aMultiInstanceERTCode=0 -aLogVarNameModifier=\""
+"rt_\" -aERTFirstTimeCompliant=0 -aIsPILTarget=0 -aCombineOutputUpdateFcns=0 -"
+"aGenerateASAP2=0 -aGenerateTestInterfaces=0 -aGenerateSampleERTMain=0 -aGener"
+"ateFullHeader=1 -aUtilityFuncGeneration=\"Auto\" -aIncludeFileDelimiter=\"Aut"
+"o\" -aIncludeERTFirstTime=1 -aIncludeMdlTerminateFcn=1 -aPurelyIntegerCode=0 "
+"-aERTCustomFileBanners=0 -aRTWCAPIStates=0 -aRTWCAPIParams=0 -aRTWCAPISignals"
+"=0 -aMatFileLogging=1 -aGenFloatMathFcnCalls=\"ANSI_C\" -aExtModeMexFile=\"ex"
+"t_comm\" -aExtModeTransport=0 -aExtModeStaticAllocSize=1000000 -aExtModeTesti"
+"ng=0 -aExtModeStaticAlloc=0 -aExtMode=0  "
+  RTWInlineParameters	  off
+  RTWRetainRTWFile	  off
+  RTWTemplateMakefile	  "grt_default_tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock off
+  OptimizeBlockIOStorage  on
+  BufferReuse		  on
+  ParameterPooling	  on
+  BlockReductionOpt	  off
+  RTWExpressionDepthLimit 5
+  BooleanDataType	  off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "soccer"
+    Location		    [24, 69, 407, 743]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "portrait"
+    PaperPositionMode	    "auto"
+    PaperType		    "A4"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      SubSystem
+      Name		      "Animation"
+      Ports		      []
+      Position		      [265, 189, 365, 266]
+      BackgroundColor	      "green"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskPromptString	      "Number of nodes"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "on"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "N=@1;"
+      MaskInitialization      "%Remove all \"From\" blocks\n%Remove all lines "
+"from the \"From\" blocks\nmuxblocks = {'xMux', 'yMux'};\nfromblocks={'x', 'y'"
+"};\nfor j=1:length(muxblocks),\n  Nold=str2num(get_param(strcat(strcat(gcb,'/"
+"'), muxblocks{j}),'Inputs'));\n  for k=1:Nold\n    to_name=strcat(strcat(muxb"
+"locks{j}, '/'), num2str(k));\n    from_name=strcat(strcat(fromblocks{j}, num2"
+"str(k)), '/1');\n    delete_line(gcb, from_name, to_name);\n    delete_block("
+"strcat(strcat(gcb, '/'), strcat(fromblocks{j}, num2str(k))));\n  end\n  set_p"
+"aram(strcat(strcat(gcb,'/'), muxblocks{j}),'Inputs',num2str(N));\nend\n\nfor "
+"k=1:N\n    name=strcat(strcat(gcb,'/x'),num2str(k));\n    add_block('built-in"
+"/From',name,'Position',[15 15+(k-1)*20 45 15+k*20],'GotoTag',strcat('x',num2s"
+"tr(k)));\n    add_line(gcb,strcat(strcat('x',num2str(k)),'/1'),strcat('xMux/'"
+",num2str(k)));\n    \n    name=strcat(strcat(gcb,'/y'),num2str(k));\n    add_"
+"block('built-in/From',name,'Position',[80 150+(k-1)*20 110 150+k*20],'GotoTag"
+"',strcat('y',num2str(k)));\n    add_line(gcb,strcat(strcat('y',num2str(k)),'/"
+"1'),strcat('yMux/',num2str(k)));\nend    "
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "10"
+      System {
+	Name			"Animation"
+	Location		[495, 301, 999, 681]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Ball Motion1"
+	  Ports			  [2]
+	  Position		  [235, 167, 310, 218]
+	  ShowPortLabels	  on
+	  TreatAsAtomicUnit	  off
+	  RTWSystemCode		  "Auto"
+	  RTWFcnNameOpts	  "Auto"
+	  RTWFileNameOpts	  "Auto"
+	  MaskPromptString	  "Number of Motes"
+	  MaskStyleString	  "edit"
+	  MaskTunableValueString  "on"
+	  MaskEnableString	  "on"
+	  MaskVisibilityString	  "on"
+	  MaskToolTipString	  "on"
+	  MaskVariables		  "numMotes=@1;"
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "10"
+	  System {
+	    Name		    "Ball Motion1"
+	    Location		    [471, 761, 694, 881]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "x"
+	      Position		      [20, 28, 50, 42]
+	      Port		      "1"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "y"
+	      Position		      [20, 63, 50, 77]
+	      Port		      "2"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      "S-Function"
+	      Name		      "Mote Animation"
+	      Ports		      [1]
+	      Position		      [115, 37, 195, 73]
+	      DeleteFcn		      "if ~isempty(findobj('type','figure','na"
+"me','dblpend1 Animation'));close('dblpend1 Animation'); end;"
+	      FunctionName	      "ballmotion"
+	      Parameters	      "[numMotes,xBall,yBall]"
+	      PortCounts	      "[]"
+	      SFunctionModules	      "''"
+	    }
+	    Block {
+	      BlockType		      Mux
+	      Name		      "Mux"
+	      Ports		      [2, 1]
+	      Position		      [85, 36, 90, 74]
+	      ShowName		      off
+	      Inputs		      "2"
+	      DisplayOption	      "bar"
+	    }
+	    Line {
+	      SrcBlock		      "x"
+	      SrcPort		      1
+	      Points		      [5, 0; 0, 10]
+	      DstBlock		      "Mux"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "y"
+	      SrcPort		      1
+	      Points		      [5, 0; 0, -5]
+	      DstBlock		      "Mux"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Mux"
+	      SrcPort		      1
+	      DstBlock		      "Mote Animation"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  "S-Function"
+	  Name			  "Mote Animation"
+	  Ports			  []
+	  Position		  [365, 117, 445, 153]
+	  DeleteFcn		  "if ~isempty(findobj('type','figure','name',"
+"'dblpend1 Animation'));close('dblpend1 Animation'); end;"
+	  FunctionName		  "mote_state"
+	  PortCounts		  "[]"
+	  SFunctionModules	  "''"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Mote Animation1"
+	  Ports			  [2]
+	  Position		  [230, 57, 305, 108]
+	  ShowPortLabels	  on
+	  TreatAsAtomicUnit	  off
+	  RTWSystemCode		  "Auto"
+	  RTWFcnNameOpts	  "Auto"
+	  RTWFileNameOpts	  "Auto"
+	  MaskPromptString	  "Number of Motes|xMax|YMax|Update period|x0|"
+"y0"
+	  MaskStyleString	  "edit,edit,edit,edit,edit,edit"
+	  MaskTunableValueString  "on,on,on,on,on,on"
+	  MaskCallbackString	  "|||||"
+	  MaskEnableString	  "on,on,on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on"
+	  MaskVariables		  "numMotes=@1;xmax=@2;ymax=@3;ts=@4;x0=@5;y0="
+"@6;"
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "10|20|30|0.1|xPos|yPos"
+	  MaskVariableAliases	  ",,,,,"
+	  System {
+	    Name		    "Mote Animation1"
+	    Location		    [501, 650, 724, 770]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "x"
+	      Position		      [20, 28, 50, 42]
+	      Port		      "1"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "y"
+	      Position		      [20, 63, 50, 77]
+	      Port		      "2"
+	      LatchInput	      off
+	      Interpolate	      on
+	    }
+	    Block {
+	      BlockType		      "S-Function"
+	      Name		      "Mote Animation"
+	      Ports		      [1]
+	      Position		      [115, 37, 195, 73]
+	      DeleteFcn		      "if ~isempty(findobj('type','figure','na"
+"me','dblpend1 Animation'));close('dblpend1 Animation'); end;"
+	      FunctionName	      "moteanimation"
+	      Parameters	      "[numMotes ts xmax ymax] x0 y0"
+	      PortCounts	      "[]"
+	      SFunctionModules	      "''"
+	    }
+	    Block {
+	      BlockType		      Mux
+	      Name		      "Mux"
+	      Ports		      [2, 1]
+	      Position		      [85, 36, 90, 74]
+	      ShowName		      off
+	      Inputs		      "2"
+	      DisplayOption	      "bar"
+	    }
+	    Line {
+	      SrcBlock		      "Mux"
+	      SrcPort		      1
+	      DstBlock		      "Mote Animation"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "y"
+	      SrcPort		      1
+	      Points		      [5, 0; 0, -5]
+	      DstBlock		      "Mux"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "x"
+	      SrcPort		      1
+	      Points		      [5, 0; 0, 10]
+	      DstBlock		      "Mux"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x1"
+	  Position		  [15, 15, 45, 35]
+	  GotoTag		  "x1"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x10"
+	  Position		  [15, 195, 45, 215]
+	  GotoTag		  "x10"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x2"
+	  Position		  [15, 35, 45, 55]
+	  GotoTag		  "x2"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x3"
+	  Position		  [15, 55, 45, 75]
+	  GotoTag		  "x3"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x4"
+	  Position		  [15, 75, 45, 95]
+	  GotoTag		  "x4"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x5"
+	  Position		  [15, 95, 45, 115]
+	  GotoTag		  "x5"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x6"
+	  Position		  [15, 115, 45, 135]
+	  GotoTag		  "x6"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x7"
+	  Position		  [15, 135, 45, 155]
+	  GotoTag		  "x7"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x8"
+	  Position		  [15, 155, 45, 175]
+	  GotoTag		  "x8"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x9"
+	  Position		  [15, 175, 45, 195]
+	  GotoTag		  "x9"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "xMux"
+	  Ports			  [10, 1]
+	  Position		  [85, 18, 90, 122]
+	  Inputs		  "10"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y1"
+	  Position		  [80, 150, 110, 170]
+	  GotoTag		  "y1"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y10"
+	  Position		  [80, 330, 110, 350]
+	  GotoTag		  "y10"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y2"
+	  Position		  [80, 170, 110, 190]
+	  GotoTag		  "y2"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y3"
+	  Position		  [80, 190, 110, 210]
+	  GotoTag		  "y3"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y4"
+	  Position		  [80, 210, 110, 230]
+	  GotoTag		  "y4"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y5"
+	  Position		  [80, 230, 110, 250]
+	  GotoTag		  "y5"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y6"
+	  Position		  [80, 250, 110, 270]
+	  GotoTag		  "y6"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y7"
+	  Position		  [80, 270, 110, 290]
+	  GotoTag		  "y7"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y8"
+	  Position		  [80, 290, 110, 310]
+	  GotoTag		  "y8"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y9"
+	  Position		  [80, 310, 110, 330]
+	  GotoTag		  "y9"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "yMux"
+	  Ports			  [10, 1]
+	  Position		  [155, 153, 160, 257]
+	  Inputs		  "10"
+	  DisplayOption		  "bar"
+	}
+	Line {
+	  SrcBlock		  "xMux"
+	  SrcPort		  1
+	  Points		  [80, 0]
+	  Branch {
+	    Points		    [0, 110]
+	    DstBlock		    "Ball Motion1"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Mote Animation1"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "yMux"
+	  SrcPort		  1
+	  Points		  [30, 0]
+	  Branch {
+	    Points		    [0, -110]
+	    DstBlock		    "Mote Animation1"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Ball Motion1"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  SrcBlock		  "x1"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "y1"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "x2"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "y2"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "x3"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "y3"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "x4"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "y4"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "x5"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  5
+	}
+	Line {
+	  SrcBlock		  "y5"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  5
+	}
+	Line {
+	  SrcBlock		  "x6"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  6
+	}
+	Line {
+	  SrcBlock		  "y6"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  6
+	}
+	Line {
+	  SrcBlock		  "x7"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  7
+	}
+	Line {
+	  SrcBlock		  "y7"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  7
+	}
+	Line {
+	  SrcBlock		  "x8"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  8
+	}
+	Line {
+	  SrcBlock		  "y8"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  8
+	}
+	Line {
+	  SrcBlock		  "x9"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  9
+	}
+	Line {
+	  SrcBlock		  "y9"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  9
+	}
+	Line {
+	  SrcBlock		  "x10"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  10
+	}
+	Line {
+	  SrcBlock		  "y10"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  10
+	}
+      }
+    }
+    Block {
+      BlockType		      Clock
+      Name		      "Clock"
+      Position		      [95, 20, 115, 40]
+      DisplayTime	      off
+      Decimation	      "10"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display"
+      Ports		      [1]
+      Position		      [180, 15, 270, 45]
+      Format		      "short"
+      Decimation	      "1"
+      Floating		      off
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mote 1"
+      Ports		      []
+      Position		      [15, 92, 115, 168]
+      BackgroundColor	      "red"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "fgdfgMOTE"
+      MaskPromptString	      "Node number"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "nodeID=@1;"
+      MaskInitialization      "set_param(strcat(gcb,'/From_rcv'),'GotoTag',str"
+"cat('rcv',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_x'),'GotoTag',strca"
+"t('x',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_y'),'GotoTag',strcat('y"
+"',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_snd'),'GotoTag',strcat('snd"
+"',num2str(nodeID)));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1"
+      System {
+	Name			"Mote 1"
+	Location		[82, 413, 536, 679]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n"
+	  Ports			  [1, 1]
+	  Position		  [210, 140, 240, 170]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "yPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n  \n"
+	  Ports			  [1, 1]
+	  Position		  [210, 185, 240, 215]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "xPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [375, 16, 380, 54]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From_rcv"
+	  Position		  [100, 77, 140, 93]
+	  ShowName		  off
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "rcv1"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_snd"
+	  Position		  [330, 42, 365, 58]
+	  ShowName		  off
+	  GotoTag		  "snd1"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_x"
+	  Position		  [150, 216, 175, 234]
+	  ShowName		  off
+	  GotoTag		  "x1"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_y"
+	  Position		  [150, 171, 175, 189]
+	  ShowName		  off
+	  GotoTag		  "y1"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [130, 50, 150, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [2, 1]
+	  Position		  [115, 16, 120, 54]
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule"
+	  Ports			  [1]
+	  Position		  [360, 74, 385, 96]
+	  Floating		  off
+	  Location		  [83, 518, 897, 977]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "3.5"
+	  YMin			  "1.8"
+	  YMax			  "3.7"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [325, 90, 345, 110]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [345, 120, 365, 140]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Kernel"
+	  Ports			  [3, 5]
+	  Position		  [170, 22, 285, 98]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Kernel"
+	  SourceType		  ""
+	  sfun			  "node_red_goalie_init"
+	  args			  "nodeID"
+	  battery		  off
+	  clockdrift		  "0"
+	  clockoffset		  "0"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  Points		  [35, 0; 0, 25]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "From_rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [0, 5]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Goto_snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 110]
+	  DstBlock		  "\n"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, 175]
+	  DstBlock		  "\n  \n"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "\n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-70, 0; 0, -110]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Goto_y"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "\n  \n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-100, 0; 0, -175]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Goto_x"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [10, 0; 0, 40]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mote 10"
+      Ports		      []
+      Position		      [140, 492, 240, 568]
+      BackgroundColor	      "lightBlue"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "fgdfgMOTE"
+      MaskPromptString	      "Node number"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "nodeID=@1;"
+      MaskInitialization      "set_param(strcat(gcb,'/From_rcv'),'GotoTag',str"
+"cat('rcv',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_x'),'GotoTag',strca"
+"t('x',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_y'),'GotoTag',strcat('y"
+"',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_snd'),'GotoTag',strcat('snd"
+"',num2str(nodeID)));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "10"
+      System {
+	Name			"Mote 10"
+	Location		[563, 72, 1206, 504]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n"
+	  Ports			  [1, 1]
+	  Position		  [210, 140, 240, 170]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "yPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n  \n"
+	  Ports			  [1, 1]
+	  Position		  [210, 185, 240, 215]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "xPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [375, 16, 380, 54]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From_rcv"
+	  Position		  [100, 77, 140, 93]
+	  ShowName		  off
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "rcv10"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_snd"
+	  Position		  [330, 42, 365, 58]
+	  ShowName		  off
+	  GotoTag		  "snd10"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_x"
+	  Position		  [150, 216, 175, 234]
+	  ShowName		  off
+	  GotoTag		  "x10"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_y"
+	  Position		  [150, 171, 175, 189]
+	  ShowName		  off
+	  GotoTag		  "y10"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [130, 50, 150, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [4, 1]
+	  Position		  [115, 16, 120, 54]
+	  ShowName		  off
+	  Inputs		  "4"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule"
+	  Ports			  [1]
+	  Position		  [360, 74, 385, 96]
+	  Floating		  off
+	  Location		  [83, 518, 897, 977]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "3.5"
+	  YMin			  "1.8"
+	  YMax			  "3.7"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [325, 90, 345, 110]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [345, 120, 365, 140]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn"
+	  Position		  [260, 137, 320, 173]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 3.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn1"
+	  Position		  [335, 182, 395, 218]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 3.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Kernel"
+	  Ports			  [3, 5]
+	  Position		  [170, 22, 285, 98]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Kernel"
+	  SourceType		  ""
+	  sfun			  "node_blue_init"
+	  args			  "nodeID"
+	  battery		  off
+	  clockdrift		  "0"
+	  clockoffset		  "0"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  Points		  [35, 0; 0, 25]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "From_rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [0, 5]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Goto_snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 110]
+	  DstBlock		  "Transfer Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, 175]
+	  DstBlock		  "Transfer Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "\n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-70, 0; 0, -125]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Goto_y"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "\n  \n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-100, 0; 0, -180]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Goto_x"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  Branch {
+	    DstBlock		    "\n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -30; -165, 0; 0, -75]
+	    DstBlock		    "Mux"
+	    DstPort		    4
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn1"
+	  SrcPort		  1
+	  Points		  [-20, 0]
+	  Branch {
+	    DstBlock		    "\n  \n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 40; -235, 0; 0, -200]
+	    DstBlock		    "Mux"
+	    DstPort		    3
+	  }
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [10, 0; 0, 40]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mote 2"
+      Ports		      []
+      Position		      [15, 192, 115, 268]
+      BackgroundColor	      "red"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "fgdfgMOTE"
+      MaskPromptString	      "Node number"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "nodeID=@1;"
+      MaskInitialization      "set_param(strcat(gcb,'/From_rcv'),'GotoTag',str"
+"cat('rcv',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_x'),'GotoTag',strca"
+"t('x',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_y'),'GotoTag',strcat('y"
+"',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_snd'),'GotoTag',strcat('snd"
+"',num2str(nodeID)));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "2"
+      System {
+	Name			"Mote 2"
+	Location		[313, 143, 956, 575]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n"
+	  Ports			  [1, 1]
+	  Position		  [210, 140, 240, 170]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "yPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n  \n"
+	  Ports			  [1, 1]
+	  Position		  [210, 185, 240, 215]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "xPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [375, 16, 380, 54]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From_rcv"
+	  Position		  [100, 77, 140, 93]
+	  ShowName		  off
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "rcv2"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_snd"
+	  Position		  [330, 42, 365, 58]
+	  ShowName		  off
+	  GotoTag		  "snd2"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_x"
+	  Position		  [150, 216, 175, 234]
+	  ShowName		  off
+	  GotoTag		  "x2"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_y"
+	  Position		  [150, 171, 175, 189]
+	  ShowName		  off
+	  GotoTag		  "y2"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [130, 50, 150, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [4, 1]
+	  Position		  [115, 16, 120, 54]
+	  ShowName		  off
+	  Inputs		  "4"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule"
+	  Ports			  [1]
+	  Position		  [360, 74, 385, 96]
+	  Floating		  off
+	  Location		  [83, 518, 897, 977]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "3.5"
+	  YMin			  "1.8"
+	  YMax			  "3.7"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [325, 90, 345, 110]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [345, 120, 365, 140]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn"
+	  Position		  [260, 137, 320, 173]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 3.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn1"
+	  Position		  [335, 182, 395, 218]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 3.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Kernel"
+	  Ports			  [3, 5]
+	  Position		  [170, 22, 285, 98]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Kernel"
+	  SourceType		  ""
+	  sfun			  "node_red_init"
+	  args			  "nodeID"
+	  battery		  off
+	  clockdrift		  "0"
+	  clockoffset		  "0"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  Points		  [35, 0; 0, 25]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "From_rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [0, 5]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Goto_snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 110]
+	  DstBlock		  "Transfer Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, 175]
+	  DstBlock		  "Transfer Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "\n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-70, 0; 0, -125]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Goto_y"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "\n  \n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-100, 0; 0, -180]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Goto_x"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  Branch {
+	    DstBlock		    "\n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -30; -165, 0; 0, -75]
+	    DstBlock		    "Mux"
+	    DstPort		    4
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn1"
+	  SrcPort		  1
+	  Points		  [-20, 0]
+	  Branch {
+	    DstBlock		    "\n  \n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 40; -235, 0; 0, -200]
+	    DstBlock		    "Mux"
+	    DstPort		    3
+	  }
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [10, 0; 0, 40]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mote 3"
+      Ports		      []
+      Position		      [15, 292, 115, 368]
+      BackgroundColor	      "red"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "fgdfgMOTE"
+      MaskPromptString	      "Node number"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "nodeID=@1;"
+      MaskInitialization      "set_param(strcat(gcb,'/From_rcv'),'GotoTag',str"
+"cat('rcv',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_x'),'GotoTag',strca"
+"t('x',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_y'),'GotoTag',strcat('y"
+"',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_snd'),'GotoTag',strcat('snd"
+"',num2str(nodeID)));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "3"
+      System {
+	Name			"Mote 3"
+	Location		[563, 72, 1206, 504]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n"
+	  Ports			  [1, 1]
+	  Position		  [210, 140, 240, 170]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "yPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n  \n"
+	  Ports			  [1, 1]
+	  Position		  [210, 185, 240, 215]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "xPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [375, 16, 380, 54]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From_rcv"
+	  Position		  [100, 77, 140, 93]
+	  ShowName		  off
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "rcv3"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_snd"
+	  Position		  [330, 42, 365, 58]
+	  ShowName		  off
+	  GotoTag		  "snd3"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_x"
+	  Position		  [150, 216, 175, 234]
+	  ShowName		  off
+	  GotoTag		  "x3"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_y"
+	  Position		  [150, 171, 175, 189]
+	  ShowName		  off
+	  GotoTag		  "y3"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [130, 50, 150, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [4, 1]
+	  Position		  [115, 16, 120, 54]
+	  ShowName		  off
+	  Inputs		  "4"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule"
+	  Ports			  [1]
+	  Position		  [360, 74, 385, 96]
+	  Floating		  off
+	  Location		  [83, 518, 897, 977]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "3.5"
+	  YMin			  "1.8"
+	  YMax			  "3.7"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [325, 90, 345, 110]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [345, 120, 365, 140]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn"
+	  Position		  [260, 137, 320, 173]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 4]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn1"
+	  Position		  [335, 182, 395, 218]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 4]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Kernel"
+	  Ports			  [3, 5]
+	  Position		  [170, 22, 285, 98]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Kernel"
+	  SourceType		  ""
+	  sfun			  "node_red_init"
+	  args			  "nodeID"
+	  battery		  off
+	  clockdrift		  "0"
+	  clockoffset		  "0"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  Points		  [35, 0; 0, 25]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "From_rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [0, 5]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Goto_snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 110]
+	  DstBlock		  "Transfer Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, 175]
+	  DstBlock		  "Transfer Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "\n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-70, 0; 0, -125]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Goto_y"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "\n  \n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-100, 0; 0, -180]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Goto_x"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  Branch {
+	    DstBlock		    "\n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -30; -165, 0; 0, -75]
+	    DstBlock		    "Mux"
+	    DstPort		    4
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn1"
+	  SrcPort		  1
+	  Points		  [-20, 0]
+	  Branch {
+	    DstBlock		    "\n  \n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 40; -235, 0; 0, -200]
+	    DstBlock		    "Mux"
+	    DstPort		    3
+	  }
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [10, 0; 0, 40]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mote 4"
+      Ports		      []
+      Position		      [15, 392, 115, 468]
+      BackgroundColor	      "red"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "fgdfgMOTE"
+      MaskPromptString	      "Node number"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "nodeID=@1;"
+      MaskInitialization      "set_param(strcat(gcb,'/From_rcv'),'GotoTag',str"
+"cat('rcv',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_x'),'GotoTag',strca"
+"t('x',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_y'),'GotoTag',strcat('y"
+"',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_snd'),'GotoTag',strcat('snd"
+"',num2str(nodeID)));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "4"
+      System {
+	Name			"Mote 4"
+	Location		[563, 72, 1206, 504]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n"
+	  Ports			  [1, 1]
+	  Position		  [210, 140, 240, 170]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "yPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n  \n"
+	  Ports			  [1, 1]
+	  Position		  [210, 185, 240, 215]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "xPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [375, 16, 380, 54]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From_rcv"
+	  Position		  [100, 77, 140, 93]
+	  ShowName		  off
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "rcv4"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_snd"
+	  Position		  [330, 42, 365, 58]
+	  ShowName		  off
+	  GotoTag		  "snd4"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_x"
+	  Position		  [150, 216, 175, 234]
+	  ShowName		  off
+	  GotoTag		  "x4"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_y"
+	  Position		  [150, 171, 175, 189]
+	  ShowName		  off
+	  GotoTag		  "y4"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [130, 50, 150, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [4, 1]
+	  Position		  [115, 16, 120, 54]
+	  ShowName		  off
+	  Inputs		  "4"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule"
+	  Ports			  [1]
+	  Position		  [360, 74, 385, 96]
+	  Floating		  off
+	  Location		  [83, 518, 897, 977]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "3.5"
+	  YMin			  "1.8"
+	  YMax			  "3.7"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [325, 90, 345, 110]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [345, 120, 365, 140]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn"
+	  Position		  [260, 137, 320, 173]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 2.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn1"
+	  Position		  [335, 182, 395, 218]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 2.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Kernel"
+	  Ports			  [3, 5]
+	  Position		  [170, 22, 285, 98]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Kernel"
+	  SourceType		  ""
+	  sfun			  "node_red_init"
+	  args			  "nodeID"
+	  battery		  off
+	  clockdrift		  "0"
+	  clockoffset		  "0"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  Points		  [35, 0; 0, 25]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "From_rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [0, 5]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Goto_snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 110]
+	  DstBlock		  "Transfer Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, 175]
+	  DstBlock		  "Transfer Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "\n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-70, 0; 0, -125]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Goto_y"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "\n  \n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-100, 0; 0, -180]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Goto_x"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  Branch {
+	    DstBlock		    "\n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -30; -165, 0; 0, -75]
+	    DstBlock		    "Mux"
+	    DstPort		    4
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn1"
+	  SrcPort		  1
+	  Points		  [-20, 0]
+	  Branch {
+	    DstBlock		    "\n  \n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 40; -235, 0; 0, -200]
+	    DstBlock		    "Mux"
+	    DstPort		    3
+	  }
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [10, 0; 0, 40]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mote 5"
+      Ports		      []
+      Position		      [15, 492, 115, 568]
+      BackgroundColor	      "red"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "fgdfgMOTE"
+      MaskPromptString	      "Node number"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "nodeID=@1;"
+      MaskInitialization      "set_param(strcat(gcb,'/From_rcv'),'GotoTag',str"
+"cat('rcv',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_x'),'GotoTag',strca"
+"t('x',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_y'),'GotoTag',strcat('y"
+"',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_snd'),'GotoTag',strcat('snd"
+"',num2str(nodeID)));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "5"
+      System {
+	Name			"Mote 5"
+	Location		[563, 72, 1206, 504]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n"
+	  Ports			  [1, 1]
+	  Position		  [210, 140, 240, 170]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "yPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n  \n"
+	  Ports			  [1, 1]
+	  Position		  [210, 185, 240, 215]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "xPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [375, 16, 380, 54]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From_rcv"
+	  Position		  [100, 77, 140, 93]
+	  ShowName		  off
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "rcv5"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_snd"
+	  Position		  [330, 42, 365, 58]
+	  ShowName		  off
+	  GotoTag		  "snd5"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_x"
+	  Position		  [150, 216, 175, 234]
+	  ShowName		  off
+	  GotoTag		  "x5"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_y"
+	  Position		  [150, 171, 175, 189]
+	  ShowName		  off
+	  GotoTag		  "y5"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [130, 50, 150, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [4, 1]
+	  Position		  [115, 16, 120, 54]
+	  ShowName		  off
+	  Inputs		  "4"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule"
+	  Ports			  [1]
+	  Position		  [360, 74, 385, 96]
+	  Floating		  off
+	  Location		  [83, 518, 897, 977]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "3.5"
+	  YMin			  "1.8"
+	  YMax			  "3.7"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [325, 90, 345, 110]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [345, 120, 365, 140]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn"
+	  Position		  [260, 137, 320, 173]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 2.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn1"
+	  Position		  [335, 182, 395, 218]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 2.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Kernel"
+	  Ports			  [3, 5]
+	  Position		  [170, 22, 285, 98]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Kernel"
+	  SourceType		  ""
+	  sfun			  "node_red_init"
+	  args			  "nodeID"
+	  battery		  off
+	  clockdrift		  "0"
+	  clockoffset		  "0"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  Points		  [35, 0; 0, 25]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "From_rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [0, 5]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Goto_snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 110]
+	  DstBlock		  "Transfer Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, 175]
+	  DstBlock		  "Transfer Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "\n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-70, 0; 0, -125]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Goto_y"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "\n  \n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-100, 0; 0, -180]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Goto_x"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  Branch {
+	    DstBlock		    "\n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -30; -165, 0; 0, -75]
+	    DstBlock		    "Mux"
+	    DstPort		    4
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn1"
+	  SrcPort		  1
+	  Points		  [-20, 0]
+	  Branch {
+	    DstBlock		    "\n  \n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 40; -235, 0; 0, -200]
+	    DstBlock		    "Mux"
+	    DstPort		    3
+	  }
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [10, 0; 0, 40]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mote 6"
+      Ports		      []
+      Position		      [140, 92, 240, 168]
+      BackgroundColor	      "lightBlue"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "fgdfgMOTE"
+      MaskPromptString	      "Node number"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "nodeID=@1;"
+      MaskInitialization      "set_param(strcat(gcb,'/From_rcv'),'GotoTag',str"
+"cat('rcv',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_x'),'GotoTag',strca"
+"t('x',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_y'),'GotoTag',strcat('y"
+"',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_snd'),'GotoTag',strcat('snd"
+"',num2str(nodeID)));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "6"
+      System {
+	Name			"Mote 6"
+	Location		[82, 413, 541, 671]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n"
+	  Ports			  [1, 1]
+	  Position		  [210, 140, 240, 170]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "yPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n  \n"
+	  Ports			  [1, 1]
+	  Position		  [210, 185, 240, 215]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "xPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [375, 16, 380, 54]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From_rcv"
+	  Position		  [100, 77, 140, 93]
+	  ShowName		  off
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "rcv6"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_snd"
+	  Position		  [330, 42, 365, 58]
+	  ShowName		  off
+	  GotoTag		  "snd6"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_x"
+	  Position		  [150, 216, 175, 234]
+	  ShowName		  off
+	  GotoTag		  "x6"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_y"
+	  Position		  [150, 171, 175, 189]
+	  ShowName		  off
+	  GotoTag		  "y6"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [130, 50, 150, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [2, 1]
+	  Position		  [115, 16, 120, 54]
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule"
+	  Ports			  [1]
+	  Position		  [360, 74, 385, 96]
+	  Floating		  off
+	  Location		  [83, 518, 897, 977]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "3.5"
+	  YMin			  "1.8"
+	  YMax			  "3.7"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [325, 90, 345, 110]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [345, 120, 365, 140]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Kernel"
+	  Ports			  [3, 5]
+	  Position		  [170, 22, 285, 98]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Kernel"
+	  SourceType		  ""
+	  sfun			  "node_blue_goalie_init"
+	  args			  "nodeID"
+	  battery		  off
+	  clockdrift		  "0"
+	  clockoffset		  "0"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  Points		  [35, 0; 0, 25]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "From_rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [0, 5]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Goto_snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 110]
+	  DstBlock		  "\n"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, 175]
+	  DstBlock		  "\n  \n"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "\n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-70, 0; 0, -110]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Goto_y"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "\n  \n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-100, 0; 0, -175]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Goto_x"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [10, 0; 0, 40]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mote 7"
+      Ports		      []
+      Position		      [140, 192, 240, 268]
+      BackgroundColor	      "lightBlue"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "fgdfgMOTE"
+      MaskPromptString	      "Node number"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "nodeID=@1;"
+      MaskInitialization      "set_param(strcat(gcb,'/From_rcv'),'GotoTag',str"
+"cat('rcv',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_x'),'GotoTag',strca"
+"t('x',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_y'),'GotoTag',strcat('y"
+"',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_snd'),'GotoTag',strcat('snd"
+"',num2str(nodeID)));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "7"
+      System {
+	Name			"Mote 7"
+	Location		[563, 72, 1206, 504]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n"
+	  Ports			  [1, 1]
+	  Position		  [210, 140, 240, 170]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "yPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n  \n"
+	  Ports			  [1, 1]
+	  Position		  [210, 185, 240, 215]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "xPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [375, 16, 380, 54]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From_rcv"
+	  Position		  [100, 77, 140, 93]
+	  ShowName		  off
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "rcv7"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_snd"
+	  Position		  [330, 42, 365, 58]
+	  ShowName		  off
+	  GotoTag		  "snd7"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_x"
+	  Position		  [150, 216, 175, 234]
+	  ShowName		  off
+	  GotoTag		  "x7"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_y"
+	  Position		  [150, 171, 175, 189]
+	  ShowName		  off
+	  GotoTag		  "y7"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [130, 50, 150, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [4, 1]
+	  Position		  [115, 16, 120, 54]
+	  ShowName		  off
+	  Inputs		  "4"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule"
+	  Ports			  [1]
+	  Position		  [360, 74, 385, 96]
+	  Floating		  off
+	  Location		  [83, 518, 897, 977]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "3.5"
+	  YMin			  "1.8"
+	  YMax			  "3.7"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [325, 90, 345, 110]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [345, 120, 365, 140]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn"
+	  Position		  [260, 137, 320, 173]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 2.3]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn1"
+	  Position		  [335, 182, 395, 218]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 2.3]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Kernel"
+	  Ports			  [3, 5]
+	  Position		  [170, 22, 285, 98]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Kernel"
+	  SourceType		  ""
+	  sfun			  "node_blue_init"
+	  args			  "nodeID"
+	  battery		  off
+	  clockdrift		  "0"
+	  clockoffset		  "0"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  Points		  [35, 0; 0, 25]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "From_rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [0, 5]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Goto_snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 110]
+	  DstBlock		  "Transfer Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, 175]
+	  DstBlock		  "Transfer Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "\n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-70, 0; 0, -125]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Goto_y"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "\n  \n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-100, 0; 0, -180]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Goto_x"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  Branch {
+	    DstBlock		    "\n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -30; -165, 0; 0, -75]
+	    DstBlock		    "Mux"
+	    DstPort		    4
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn1"
+	  SrcPort		  1
+	  Points		  [-20, 0]
+	  Branch {
+	    DstBlock		    "\n  \n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 40; -235, 0; 0, -200]
+	    DstBlock		    "Mux"
+	    DstPort		    3
+	  }
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [10, 0; 0, 40]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mote 8"
+      Ports		      []
+      Position		      [140, 292, 240, 368]
+      BackgroundColor	      "lightBlue"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "fgdfgMOTE"
+      MaskPromptString	      "Node number"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "nodeID=@1;"
+      MaskInitialization      "set_param(strcat(gcb,'/From_rcv'),'GotoTag',str"
+"cat('rcv',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_x'),'GotoTag',strca"
+"t('x',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_y'),'GotoTag',strcat('y"
+"',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_snd'),'GotoTag',strcat('snd"
+"',num2str(nodeID)));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "8"
+      System {
+	Name			"Mote 8"
+	Location		[563, 72, 1206, 504]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n"
+	  Ports			  [1, 1]
+	  Position		  [210, 140, 240, 170]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "yPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n  \n"
+	  Ports			  [1, 1]
+	  Position		  [210, 185, 240, 215]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "xPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [375, 16, 380, 54]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From_rcv"
+	  Position		  [100, 77, 140, 93]
+	  ShowName		  off
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "rcv8"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_snd"
+	  Position		  [330, 42, 365, 58]
+	  ShowName		  off
+	  GotoTag		  "snd8"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_x"
+	  Position		  [150, 216, 175, 234]
+	  ShowName		  off
+	  GotoTag		  "x8"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_y"
+	  Position		  [150, 171, 175, 189]
+	  ShowName		  off
+	  GotoTag		  "y8"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [130, 50, 150, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [4, 1]
+	  Position		  [115, 16, 120, 54]
+	  ShowName		  off
+	  Inputs		  "4"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule"
+	  Ports			  [1]
+	  Position		  [360, 74, 385, 96]
+	  Floating		  off
+	  Location		  [83, 518, 897, 977]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "3.5"
+	  YMin			  "1.8"
+	  YMax			  "3.7"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [325, 90, 345, 110]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [345, 120, 365, 140]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn"
+	  Position		  [260, 137, 320, 173]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 2.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn1"
+	  Position		  [335, 182, 395, 218]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 2.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Kernel"
+	  Ports			  [3, 5]
+	  Position		  [170, 22, 285, 98]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Kernel"
+	  SourceType		  ""
+	  sfun			  "node_blue_init"
+	  args			  "nodeID"
+	  battery		  off
+	  clockdrift		  "0"
+	  clockoffset		  "0"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  Points		  [35, 0; 0, 25]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "From_rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [0, 5]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Goto_snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 110]
+	  DstBlock		  "Transfer Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, 175]
+	  DstBlock		  "Transfer Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "\n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-70, 0; 0, -125]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Goto_y"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "\n  \n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-100, 0; 0, -180]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Goto_x"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  Branch {
+	    DstBlock		    "\n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -30; -165, 0; 0, -75]
+	    DstBlock		    "Mux"
+	    DstPort		    4
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn1"
+	  SrcPort		  1
+	  Points		  [-20, 0]
+	  Branch {
+	    DstBlock		    "\n  \n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 40; -235, 0; 0, -200]
+	    DstBlock		    "Mux"
+	    DstPort		    3
+	  }
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [10, 0; 0, 40]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mote 9"
+      Ports		      []
+      Position		      [140, 392, 240, 468]
+      BackgroundColor	      "lightBlue"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskType		      "fgdfgMOTE"
+      MaskPromptString	      "Node number"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "nodeID=@1;"
+      MaskInitialization      "set_param(strcat(gcb,'/From_rcv'),'GotoTag',str"
+"cat('rcv',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_x'),'GotoTag',strca"
+"t('x',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_y'),'GotoTag',strcat('y"
+"',num2str(nodeID)));\nset_param(strcat(gcb,'/Goto_snd'),'GotoTag',strcat('snd"
+"',num2str(nodeID)));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "9"
+      System {
+	Name			"Mote 9"
+	Location		[563, 72, 1206, 504]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n"
+	  Ports			  [1, 1]
+	  Position		  [210, 140, 240, 170]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "yPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "\n  \n"
+	  Ports			  [1, 1]
+	  Position		  [210, 185, 240, 215]
+	  Orientation		  "left"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  InitialCondition	  "xPos(nodeID)"
+	  LimitOutput		  off
+	  UpperSaturationLimit	  "inf"
+	  LowerSaturationLimit	  "-inf"
+	  ShowSaturationPort	  off
+	  ShowStatePort		  off
+	  AbsoluteTolerance	  "auto"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [375, 16, 380, 54]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From_rcv"
+	  Position		  [100, 77, 140, 93]
+	  ShowName		  off
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "rcv9"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_snd"
+	  Position		  [330, 42, 365, 58]
+	  ShowName		  off
+	  GotoTag		  "snd9"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_x"
+	  Position		  [150, 216, 175, 234]
+	  ShowName		  off
+	  GotoTag		  "x9"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "Goto_y"
+	  Position		  [150, 171, 175, 189]
+	  ShowName		  off
+	  GotoTag		  "y9"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  Position		  [130, 50, 150, 70]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [4, 1]
+	  Position		  [115, 16, 120, 54]
+	  ShowName		  off
+	  Inputs		  "4"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Schedule"
+	  Ports			  [1]
+	  Position		  [360, 74, 385, 96]
+	  Floating		  off
+	  Location		  [83, 518, 897, 977]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "on"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "3.5"
+	  YMin			  "1.8"
+	  YMax			  "3.7"
+	  SaveToWorkspace	  off
+	  SaveName		  "ScopeData"
+	  DataFormat		  "Array"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [325, 90, 345, 110]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [345, 120, 365, 140]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn"
+	  Position		  [260, 137, 320, 173]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 3.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Transfer Fcn1"
+	  Position		  [335, 182, 395, 218]
+	  Orientation		  "left"
+	  Numerator		  "[1]"
+	  Denominator		  "[1 3.5]"
+	  AbsoluteTolerance	  "auto"
+	  Realization		  "auto"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Kernel"
+	  Ports			  [3, 5]
+	  Position		  [170, 22, 285, 98]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Kernel"
+	  SourceType		  ""
+	  sfun			  "node_blue_init"
+	  args			  "nodeID"
+	  battery		  off
+	  clockdrift		  "0"
+	  clockoffset		  "0"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  3
+	  Points		  [35, 0; 0, 25]
+	  DstBlock		  "Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "From_rcv"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "TrueTime Kernel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  4
+	  Points		  [20, 0]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  1
+	  Points		  [0, 5]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  2
+	  Points		  [25, 0]
+	  DstBlock		  "Goto_snd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 110]
+	  DstBlock		  "Transfer Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, 175]
+	  DstBlock		  "Transfer Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "\n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-70, 0; 0, -125]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Goto_y"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "\n  \n"
+	  SrcPort		  1
+	  Points		  [-70, 0]
+	  Branch {
+	    Points		    [-100, 0; 0, -180]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Goto_x"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn"
+	  SrcPort		  1
+	  Points		  [0, 0]
+	  Branch {
+	    DstBlock		    "\n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -30; -165, 0; 0, -75]
+	    DstBlock		    "Mux"
+	    DstPort		    4
+	  }
+	}
+	Line {
+	  SrcBlock		  "Transfer Fcn1"
+	  SrcPort		  1
+	  Points		  [-20, 0]
+	  Branch {
+	    DstBlock		    "\n  \n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 40; -235, 0; 0, -200]
+	    DstBlock		    "Mux"
+	    DstPort		    3
+	  }
+	}
+	Line {
+	  SrcBlock		  "TrueTime Kernel"
+	  SrcPort		  5
+	  Points		  [10, 0; 0, 40]
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Network"
+      Ports		      []
+      Position		      [266, 91, 365, 167]
+      BackgroundColor	      "yellow"
+      ShowPortLabels	      on
+      TreatAsAtomicUnit	      off
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      MaskPromptString	      "Number of nodes"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "on"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "N=@1;"
+      MaskInitialization      "%Remove all \"From\" blocks\n%Remove all lines "
+"from the \"From\" blocks\nmuxblocks = {'sndMux', 'xMux', 'yMux'};\nfromblocks"
+"={'snd', 'x', 'y'};\nfor j=1:length(muxblocks),\n  Nold=str2num(get_param(str"
+"cat(strcat(gcb,'/'), muxblocks{j}),'Inputs'));\n  for k=1:Nold\n    to_name=s"
+"trcat(strcat(muxblocks{j}, '/'), num2str(k));\n    from_name=strcat(strcat(fr"
+"omblocks{j}, num2str(k)), '/1');\n    delete_line(gcb, from_name, to_name);\n"
+"    delete_block(strcat(strcat(gcb, '/'), strcat(fromblocks{j}, num2str(k))))"
+";\n  end\n  set_param(strcat(strcat(gcb,'/'), muxblocks{j}),'Inputs',num2str("
+"N));\nend\n\n%Remove all \"Goto\" blocks\n%Remove all lines to the \"Goto\" b"
+"lock\ndemuxblocks={'Demux'};\ngotoblocks={'rcv'};\nfor j=1:length(demuxblocks"
+")\n  Nold=str2num(get_param(strcat(strcat(gcb,'/'), demuxblocks{j}),'Outputs'"
+"));\n  for k=1:Nold\n    from_name=strcat(strcat(demuxblocks{j}, '/'), num2st"
+"r(k));\n    to_name=strcat(strcat(gotoblocks{j}, num2str(k)), '/1');\n    del"
+"ete_line(gcb, from_name, to_name);\n    delete_block(strcat(strcat(gcb, '/'),"
+" strcat(gotoblocks{j}, num2str(k))));\n  end\n  set_param(strcat(strcat(gcb, "
+"'/'), demuxblocks{j}), 'Outputs',num2str(N));\nend\n\n\nfor k=1:N\n    name=s"
+"trcat(strcat(gcb,'/snd'),num2str(k));\n    add_block('built-in/From',name,'Po"
+"sition',[15 30+(k-1)*20 45 30+k*20],'GotoTag',strcat('snd',num2str(k)));\n   "
+" add_line(gcb,strcat(strcat('snd',num2str(k)),'/1'),strcat('sndMux/',num2str("
+"k)));\n    \n    name=strcat(strcat(gcb,'/x'),num2str(k));\n    add_block('bu"
+"ilt-in/From',name,'Position',[60 130+(k-1)*20 90 130+k*20],'GotoTag',strcat('"
+"x',num2str(k)));\n    add_line(gcb,strcat(strcat('x',num2str(k)),'/1'),strcat"
+"('xMux/',num2str(k)));\n    \n    name=strcat(strcat(gcb,'/y'),num2str(k));\n"
+"    add_block('built-in/From',name,'Position',[105 230+(k-1)*20 135 230+k*20]"
+",'GotoTag',strcat('y',num2str(k)));\n    add_line(gcb,strcat(strcat('y',num2s"
+"tr(k)),'/1'),strcat('yMux/',num2str(k)));\n\n    name=strcat(strcat(gcb,'/rcv"
+"'),num2str(k));\n    add_block('built-in/Goto',name,'Position',[480 30+(k-1)*"
+"20 510 30+k*20],'GotoTag',strcat('rcv',num2str(k)),'TagVisibility','global');"
+"\n    add_line(gcb,strcat('Demux/',num2str(k)),strcat(strcat('rcv',num2str(k)"
+"),'/1'));\n\nend"
+      MaskSelfModifiable      on
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "10"
+      System {
+	Name			"Network"
+	Location		[704, 57, 1274, 622]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 10]
+	  Position		  [435, 55, 440, 110]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "10"
+	  BusSelectionMode	  off
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Network Schedule"
+	  Ports			  [1]
+	  Position		  [380, 62, 405, 88]
+	  Floating		  off
+	  Location		  [276, 201, 1243, 782]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  TickLabels		  "OneTimeTick"
+	  ZoomMode		  "xonly"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  Grid			  "on"
+	  TimeRange		  "40"
+	  YMin			  "1"
+	  YMax			  "3.5"
+	  SaveToWorkspace	  off
+	  SaveName		  "nschedule"
+	  DataFormat		  "StructureWithTime"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "5000"
+	  Decimation		  "1"
+	  SampleInput		  off
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator1"
+	  Position		  [315, 85, 335, 105]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "TrueTime Wireless \nNetwork"
+	  Ports			  [3, 3]
+	  Position		  [200, 47, 295, 103]
+	  DropShadow		  on
+	  SourceBlock		  "truetime/TrueTime Wireless \nNetwork"
+	  SourceType		  "Wireless Network"
+	  nwtype		  "802.11b (WLAN)"
+	  nwnbr			  "1"
+	  nnodes		  "N"
+	  rate			  "800000"
+	  minsize		  "272"
+	  transpower		  "20"
+	  threshold		  "-48"
+	  pathloss		  "3.5"
+	  use_pathloss_function	  off
+	  acktimeout		  "0.00004"
+	  retrylimit		  "5"
+	  error_threshold	  "0.03"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "rcv1"
+	  Position		  [480, 30, 510, 50]
+	  GotoTag		  "rcv1"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "rcv10"
+	  Position		  [480, 210, 510, 230]
+	  GotoTag		  "rcv10"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "rcv2"
+	  Position		  [480, 50, 510, 70]
+	  GotoTag		  "rcv2"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "rcv3"
+	  Position		  [480, 70, 510, 90]
+	  GotoTag		  "rcv3"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "rcv4"
+	  Position		  [480, 90, 510, 110]
+	  GotoTag		  "rcv4"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "rcv5"
+	  Position		  [480, 110, 510, 130]
+	  GotoTag		  "rcv5"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "rcv6"
+	  Position		  [480, 130, 510, 150]
+	  GotoTag		  "rcv6"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "rcv7"
+	  Position		  [480, 150, 510, 170]
+	  GotoTag		  "rcv7"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "rcv8"
+	  Position		  [480, 170, 510, 190]
+	  GotoTag		  "rcv8"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Goto
+	  Name			  "rcv9"
+	  Position		  [480, 190, 510, 210]
+	  GotoTag		  "rcv9"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "snd1"
+	  Position		  [15, 30, 45, 50]
+	  GotoTag		  "snd1"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "snd10"
+	  Position		  [15, 210, 45, 230]
+	  GotoTag		  "snd10"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "snd2"
+	  Position		  [15, 50, 45, 70]
+	  GotoTag		  "snd2"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "snd3"
+	  Position		  [15, 70, 45, 90]
+	  GotoTag		  "snd3"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "snd4"
+	  Position		  [15, 90, 45, 110]
+	  GotoTag		  "snd4"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "snd5"
+	  Position		  [15, 110, 45, 130]
+	  GotoTag		  "snd5"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "snd6"
+	  Position		  [15, 130, 45, 150]
+	  GotoTag		  "snd6"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "snd7"
+	  Position		  [15, 150, 45, 170]
+	  GotoTag		  "snd7"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "snd8"
+	  Position		  [15, 170, 45, 190]
+	  GotoTag		  "snd8"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "snd9"
+	  Position		  [15, 190, 45, 210]
+	  GotoTag		  "snd9"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "sndMux"
+	  Ports			  [10, 1]
+	  Position		  [80, 55, 85, 110]
+	  Inputs		  "10"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x1"
+	  Position		  [60, 130, 90, 150]
+	  GotoTag		  "x1"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x10"
+	  Position		  [60, 310, 90, 330]
+	  GotoTag		  "x10"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x2"
+	  Position		  [60, 150, 90, 170]
+	  GotoTag		  "x2"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x3"
+	  Position		  [60, 170, 90, 190]
+	  GotoTag		  "x3"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x4"
+	  Position		  [60, 190, 90, 210]
+	  GotoTag		  "x4"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x5"
+	  Position		  [60, 210, 90, 230]
+	  GotoTag		  "x5"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x6"
+	  Position		  [60, 230, 90, 250]
+	  GotoTag		  "x6"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x7"
+	  Position		  [60, 250, 90, 270]
+	  GotoTag		  "x7"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x8"
+	  Position		  [60, 270, 90, 290]
+	  GotoTag		  "x8"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "x9"
+	  Position		  [60, 290, 90, 310]
+	  GotoTag		  "x9"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "xMux"
+	  Ports			  [10, 1]
+	  Position		  [125, 155, 130, 210]
+	  Inputs		  "10"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y1"
+	  Position		  [105, 230, 135, 250]
+	  GotoTag		  "y1"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y10"
+	  Position		  [105, 410, 135, 430]
+	  GotoTag		  "y10"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y2"
+	  Position		  [105, 250, 135, 270]
+	  GotoTag		  "y2"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y3"
+	  Position		  [105, 270, 135, 290]
+	  GotoTag		  "y3"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y4"
+	  Position		  [105, 290, 135, 310]
+	  GotoTag		  "y4"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y5"
+	  Position		  [105, 310, 135, 330]
+	  GotoTag		  "y5"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y6"
+	  Position		  [105, 330, 135, 350]
+	  GotoTag		  "y6"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y7"
+	  Position		  [105, 350, 135, 370]
+	  GotoTag		  "y7"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y8"
+	  Position		  [105, 370, 135, 390]
+	  GotoTag		  "y8"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "y9"
+	  Position		  [105, 390, 135, 410]
+	  GotoTag		  "y9"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "yMux"
+	  Ports			  [10, 1]
+	  Position		  [180, 255, 185, 310]
+	  Inputs		  "10"
+	  DisplayOption		  "bar"
+	}
+	Line {
+	  SrcBlock		  "TrueTime Wireless \nNetwork"
+	  SrcPort		  3
+	  DstBlock		  "Terminator1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "sndMux"
+	  SrcPort		  1
+	  Points		  [0, -30]
+	  DstBlock		  "TrueTime Wireless \nNetwork"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "TrueTime Wireless \nNetwork"
+	  SrcPort		  1
+	  Points		  [120, 0]
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  Labels		  [0, 0]
+	  SrcBlock		  "xMux"
+	  SrcPort		  1
+	  Points		  [30, 0; 0, -110]
+	  DstBlock		  "TrueTime Wireless \nNetwork"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "TrueTime Wireless \nNetwork"
+	  SrcPort		  2
+	  DstBlock		  "Network Schedule"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "yMux"
+	  SrcPort		  1
+	  Points		  [0, -190]
+	  DstBlock		  "TrueTime Wireless \nNetwork"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "snd1"
+	  SrcPort		  1
+	  DstBlock		  "sndMux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "x1"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "y1"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  DstBlock		  "rcv1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd2"
+	  SrcPort		  1
+	  DstBlock		  "sndMux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "x2"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "y2"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  DstBlock		  "rcv2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd3"
+	  SrcPort		  1
+	  DstBlock		  "sndMux"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "x3"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "y3"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  3
+	  DstBlock		  "rcv3"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd4"
+	  SrcPort		  1
+	  DstBlock		  "sndMux"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "x4"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "y4"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  4
+	  DstBlock		  "rcv4"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd5"
+	  SrcPort		  1
+	  DstBlock		  "sndMux"
+	  DstPort		  5
+	}
+	Line {
+	  SrcBlock		  "x5"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  5
+	}
+	Line {
+	  SrcBlock		  "y5"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  5
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  5
+	  DstBlock		  "rcv5"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd6"
+	  SrcPort		  1
+	  DstBlock		  "sndMux"
+	  DstPort		  6
+	}
+	Line {
+	  SrcBlock		  "x6"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  6
+	}
+	Line {
+	  SrcBlock		  "y6"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  6
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  6
+	  DstBlock		  "rcv6"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd7"
+	  SrcPort		  1
+	  DstBlock		  "sndMux"
+	  DstPort		  7
+	}
+	Line {
+	  SrcBlock		  "x7"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  7
+	}
+	Line {
+	  SrcBlock		  "y7"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  7
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  7
+	  DstBlock		  "rcv7"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd8"
+	  SrcPort		  1
+	  DstBlock		  "sndMux"
+	  DstPort		  8
+	}
+	Line {
+	  SrcBlock		  "x8"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  8
+	}
+	Line {
+	  SrcBlock		  "y8"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  8
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  8
+	  DstBlock		  "rcv8"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd9"
+	  SrcPort		  1
+	  DstBlock		  "sndMux"
+	  DstPort		  9
+	}
+	Line {
+	  SrcBlock		  "x9"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  9
+	}
+	Line {
+	  SrcBlock		  "y9"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  9
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  9
+	  DstBlock		  "rcv9"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "snd10"
+	  SrcPort		  1
+	  DstBlock		  "sndMux"
+	  DstPort		  10
+	}
+	Line {
+	  SrcBlock		  "x10"
+	  SrcPort		  1
+	  DstBlock		  "xMux"
+	  DstPort		  10
+	}
+	Line {
+	  SrcBlock		  "y10"
+	  SrcPort		  1
+	  DstBlock		  "yMux"
+	  DstPort		  10
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  10
+	  DstBlock		  "rcv10"
+	  DstPort		  1
+	}
+      }
+    }
+    Line {
+      SrcBlock		      "Clock"
+      SrcPort		      1
+      Points		      [0, 0]
+      DstBlock		      "Display"
+      DstPort		      1
+    }
+    Annotation {
+      Position		      [186, 626]
+      Text		      "TrueTime 1.5  Soccer example\nCopyright (c) 200"
+"7\nMartin Ohlin, Dan Henriksson and Anton Cervin\nDepartment of Automatic Con"
+"trol, Lund University, Sweden\nPlease direct questions and bug reports to:  t"
+"ruetime@control.lth.se "
+    }
+  }
+}
