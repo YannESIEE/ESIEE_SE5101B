@@ -96,7 +96,7 @@
     #define BC_AMn		1302 	// +3.64V et -3.64V
     #define BC_AMx		2793
 #elif (BANC == 5)
-	#define BC_A0 		2048
+	#define BC_A0 		2040    // 2007 : verif nico par oscilo le 03/11 || le pendule penche toujours dans le meme sens ! (2050 pour essayer de le recalibrer) 
     #define BC_PMn		594
     #define BC_PMx		4073
     #define BC_AMn		1247
@@ -113,7 +113,7 @@
 |******************************** - MACRO - *******************************|
 \**************************************************************************/
 #define POS_CONVERT(x)	(((int)x - (BC_PMx-BC_PMn)/2.0) * MAX_POS*2.0 / (BC_PMx-BC_PMn))    // BY Yann
-#define ANG_CONVERT(x)	(-((int)x - BC_A0 ) * MAX_ANGL*2.0 / (BC_AMx-BC_AMn))               // By Yann
+#define ANG_CONVERT(x)	(((int)x - BC_A0 ) * MAX_ANGL*2.0 / (BC_AMx-BC_AMn))               // By Yann
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -782,19 +782,20 @@ float calc_matrix(void)
 	/*
 	x[0]=y[0];
 	x[1]=y[1];
-	x[2]=vit_ang;
-	x[3]=vit_pos;
+	x[2]=vit_ang;   
+	x[3]=vit_pos;   	
 	*/
 	/** CALCULE DE LA MATRICE D'ETAT X = Adc * X + Bdc * Y **/
+	
 	x_save[0]= Adc[0][0]*x[0] + Adc[0][1]*x[1] + Adc[0][2]*x[2] + Adc[0][3]*x[3] + Bdc[0][0]*y[0] + Bdc[0][1]*y[1];
 	x_save[1]= Adc[1][0]*x[0] + Adc[1][1]*x[1] + Adc[1][2]*x[2] + Adc[1][3]*x[3] + Bdc[1][0]*y[0] + Bdc[1][1]*y[1];
 	x_save[2]= Adc[2][0]*x[0] + Adc[2][1]*x[1] + Adc[2][2]*x[2] + Adc[2][3]*x[3] + Bdc[2][0]*y[0] + Bdc[2][1]*y[1];
 	x_save[3]= Adc[3][0]*x[0] + Adc[3][1]*x[1] + Adc[3][2]*x[2] + Adc[3][3]*x[3] + Bdc[3][0]*y[0] + Bdc[3][1]*y[1];
 	/** CALCULE DE LA COMMANDE commande = u = -Cdc * X **/
-	commande =  - Cdc[0]*(x_save[0])
-				- Cdc[1]*(x_save[1])
-				- Cdc[2]*(x_save[2])
-				- Cdc[3]*(x_save[3]);
+	commande =  + Cdc[0]*(x_save[0])
+				+ Cdc[1]*(x_save[1])
+				+ Cdc[2]*(x_save[2])
+				+ Cdc[3]*(x_save[3]);
 #if DEBUG_AFF_MAT >= 2
 	// Affichage de debugage niveau 2
 	printk("calc_matrix :\n\tx =\t\t");affichage_float(x[0]);printk(" ; ");affichage_float(x[1]);printk(" ; ");affichage_float(x[2]);printk(" ; ");affichage_float(x[3]);
