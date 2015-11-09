@@ -6,10 +6,6 @@
 #define TEST_ANGLE_NUM_IN 	3072
 #define TEST_POS_NUM_IN 	3072
 #define TEST_COMMANDE_OUT 	3072
-/* AFFICHAGE : Attention, il est conseillé de ne pas activé tous les affichage à la fois */
-#define DEBUG_AFF_CAN 		0 // niveau trois est un peu HARD pour arcom
-#define DEBUG_AFF_CAN_REC	0
-#define DEBUG_AFF_DAC 		0
 #define DEBUG_AFF_ROUTINE 	0
 #define DEBUG_AFF_INTERUPT 	0
 #define DEBUG_AFF_MAT 		0
@@ -22,47 +18,6 @@
 #define N_BOUCLE			10000000
 #define NUMERO				1
 #define PRIORITE			1
-/**************************************************************************\
-|********************************* - CAN - ********************************|
-\**************************************************************************/
-#define CAN_COMM_COMMAND 		0x10
-#define CAN_COMM_ACQUISITION 	0x20
-#define CAN_FOCUS_ID 			2
-#define CAN_SEND_ID 			2
-/* define pour gestion registres CAN 7841 */
-#define base2					0x180
-#define CAN_CONTROL 			base2
-#define CAN_COMMAND 			(base2+1)
-#define CAN_STATUS 				(base2+2)
-#define CAN_INTERRUPT 			(base2+3)
-#define CAN_ACCEPTANCE_CODE		(base2+4)
-#define CAN_ACCEPTANCE_MASK		(base2+5)
-#define CAN_BUS_TIMING_0		(base2+6)
-#define CAN_BUS_TIMING_1		(base2+7)
-#define CAN_OUTPUT_CTRL			(base2+8)
-#define CAN_TEST				(base2+9)
-#define CAN_TX_IDENTIFIER		(base2+10)
-#define CAN_TX_RTB_BIT			(base2+11)
-#define CAN_TX_BUFFER			(base2+12)
-#define CAN_RX_IDENTIFIER		(base2+20)
-#define CAN_RX_RTB_BIT			(base2+21)
-#define CAN_RX_BUFFER			(base2+22)
-/**************************************************************************\
-|********************************* - ADC - ********************************|
-\**************************************************************************/
-#define BASE_ADC_0 0x0320
-#define BASE_ADC_1 (BASE_ADC_0+1)
-#define BASE_ADC_2 (BASE_ADC_0+2)
-#define BASE_ADC_3 (BASE_ADC_0+3)
-#define BASE_ADC_8 (BASE_ADC_0+8)
-/**************************************************************************\
-|********************************* - DAC - ********************************|
-\**************************************************************************/
-#define BASE_DAC_0 0x0300
-#define BASE_DAC_1 (BASE_DAC_0+1)
-#define BASE_DAC_2 (BASE_DAC_0+2)
-#define BASE_DAC_3 (BASE_DAC_0+3)
-#define BASE_DAC_8 (BASE_DAC_0+8)
 /**************************************************************************\
 |************************** - INFO SUR LES BANC - *************************|
 \**************************************************************************/
@@ -112,8 +67,8 @@
 /**************************************************************************\
 |******************************** - MACRO - *******************************|
 \**************************************************************************/
-#define POS_CONVERT(x)	(((int)x - (BC_PMx-BC_PMn)/2.0) * MAX_POS*2.0 / (BC_PMx-BC_PMn))    // BY Yann
-#define ANG_CONVERT(x)	(((int)x - BC_A0 ) * MAX_ANGL*2.0 / (BC_AMx-BC_AMn))               // By Yann
+#define POS_CONVERT(x)	(((int)x - (BC_PMx-BC_PMn)/2.0) * MAX_POS*2.0 / (BC_PMx-BC_PMn))	// BY Yann
+#define ANG_CONVERT(x)	(((int)x - BC_A0 ) * MAX_ANGL*2.0 / (BC_AMx-BC_AMn))				// By Yann
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -125,7 +80,9 @@
 #include <rtai_sched.h>
 #include <rtai_fifos.h>
 
-//#include "3712.h"
+#include "ADC.c"
+#include "DAC.c"
+#include "CAN.c"
 
 MODULE_LICENSE("GPL");
 
@@ -165,21 +122,9 @@ static void 	routine_reception 	(void);
 #elif MODE_PENDULE == 1
 void			task_one 			(long arg);
 #endif
-/* DRIVER CAN */
-void 	init_can 		(void);
-void 	emission 		(u16 id,u8 *data,u8 lenght,u8 RTR_bit);
-void 	reception 		(int focus, int * data);
-/* DRIVER DAC */
-void 	set_DA 			(int canal, unsigned int value_n);
-/* DRIVER ADC */
-void 	init_3718 		(void);
-void 	trigger 		(void);
-int 	adc_read_eoc 	(void);
-int 	adc_read_value 	(void);
-void 	ad_range_select	(int canal, int range);
 /* MATRICE */
 void  	init_matrix 	(void);
-float 	calc_matrix 	(void);
+float 	calc_matrix 	(float *y, float *x);
 void 	affichage_float (float val);
 
 /**************************************************************************\
@@ -340,19 +285,21 @@ void task_out(long arg)
 	glb_task_out_wait = 1;
 	pos_num_out = 2048;
 	angle_num_out = 2048;
+	float y[2] = {0,0};
+	float x[4] = {0,0,0,0};	
 	while(1)
 	{
 #if DEBUG_AFF_ROUTINE >= 2
 		printk("task_out : received angle_num_out = %d & pos_num_out = %d\n",angle_num_out, pos_num_out);
 #endif
 		/* Conversion */
-	    y[1] = POS_CONVERT(pos_num_out);
 		y[0] = ANG_CONVERT(angle_num_out);
+	    y[1] = POS_CONVERT(pos_num_out);
 		/* Traitement */
 #if TEST
 		command_out = TEST_COMMANDE_OUT;
 #else
-		command_out = (int)((calc_matrix() + 10.0) * 4095.0 / 20.0); // Convertion Volt/numerique
+		command_out = (int)((calc_matrix(y,x) + 10.0) * 4095.0 / 20.0); // Convertion Volt/numerique
 		command_out = command_out<0 ? 0 : command_out>4095 ? 4095 : command_out;
 #endif
 		/* renvoi des donnée */
@@ -390,6 +337,8 @@ void task_one(long arg)
 #endif
 	unsigned int adc_value, angle_num_one=0, pos_num_one=0;
 	int command_one;
+	float y[2] = {0,0};
+	float x[4] = {0,0,0,0};
 	while(1)
 	{
 		/* ACQUISITION */
@@ -406,14 +355,15 @@ void task_one(long arg)
 		y[0] = ANG_CONVERT(angle_num_one);//angle_num_one
 	    y[1] = POS_CONVERT(pos_num_one);
 		/* TRAITEMENT */
-		command_one = (int)((calc_matrix() + 10.0) * 4095.0 / 20.0); 					// Convertion Volt/numerique
-		command_one = command_one<0 ? 0 : command_one>4095 ? 4095 : command_one;
-#if DEBUG_AFF_ROUTINE == 3
+		command_one = (int)((calc_matrix(y,x) + 10.0) * 4095.0 / 20.0); 					// Convertion Volt/numerique
+		command_one = command_one<0 ? 0 : command_one>4095 ? 4095 : command_one;			// Borne: [0:4095] en numérique (-10:+10 V)
+		comande_one = y[1]>0.5 || y[1]<-0.5 ? 2048 : command_one;							// vérification de bordure.
+#if DEBUG_AFF_ROUTINE == 3 // Affichage Angle & position trop important pour ARCOM -> Crache : Affichage angle unique
 		/** Affichages des angles **/
 		printk("task_one :\n\tangle_num =\t%d\n\tangle_rad =\t",angle_num_one,pos_num_one);
 		affichage_float(y[0]);
 		printk("\n");
-#elif DEBUG_AFF_ROUTINE == 4
+#elif DEBUG_AFF_ROUTINE == 4 // Affichage Angle & position trop important pour ARCOM -> Crache : Affichage position unique
 		/** Affichages de position **/
 		printk("task_one :\n\tpos_num =\t%d\n\tpos_metre =\t",pos_num_one);
 		affichage_float(y[1]);
@@ -475,196 +425,6 @@ static void routine_reception(void)
 }
 #endif
 
-/**************************************************************************\
-|***************************** - DRIVER CAN - *****************************|
-\**************************************************************************/
-/*
- * init_can : Fonction d'initialisation du bus CAN
- */
-void init_can(void)
-{
-	outb(0x01,CAN_CONTROL);
-	outb(0x03,CAN_CONTROL);				// Activation des interruptions en cas de reception
-	outb(0x00,CAN_ACCEPTANCE_CODE);
-	outb(0x00,CAN_ACCEPTANCE_MASK);
-	outb(0x03,CAN_BUS_TIMING_0);
-	outb(0x1C,CAN_BUS_TIMING_1);
-	outb(0xFA,CAN_OUTPUT_CTRL);
-	inb(CAN_INTERRUPT);					// Lecture du registre d interruptions pour terminer leur activation
-	outb(0x02,CAN_CONTROL);
-#if DEBUG_AFF_CAN >= 1
-	printk("init_can done\n");
-#endif
-}
-/*
- * Fonction d emission sur le bus CAN
- */
-void emission(u16 id,u8 *data,u8 lenght,u8 RTR_bit)
-{
-	u8 id_p1, id_p2;
-	id_p1 = id >> 3;
-	id_p2 = ((id & 0x007) << 5) + (RTR_bit*16) + (lenght&0x0F);	// Securite sur la longueur pour etre sur qu elle ne depasse pas 4 bits
-#if DEBUG_AFF_CAN >= 1
-	printk("emission : id 1ere partie :\t0x%x\n", id_p1);
-	printk("emission : id,RTR,longueur :\t0x%x\n", id_p2);
-	printk("emission : data :\t\t0x%x\n", data[0]);
-#endif
-	outb(id_p1,CAN_TX_IDENTIFIER);
-	outb(id_p2,CAN_TX_RTB_BIT);
-	
-	if(inb(CAN_STATUS) && 0x04)		// Verifie que les buffers d emission sont libres
-	{
-		int i;
-		// premiers buffers contiennent poids forts de la data a envoyer
-		for(i=0 ; i<lenght ; i++)
-		{
-			/*outb((data >> ((lenght-1-i)*8)) & 0xFF , CAN_TX_BUFFER+i);*/
-			outb(data[i] , CAN_TX_BUFFER+i);
-		}
-		while(!(inb(CAN_STATUS) && 0x08));	// Verifie que la transmission precedente s est bien terminee avant de lancer la nouvelle
-		outb(0x01,CAN_COMMAND);	// Lance la transmission
-	}
-}
-
-/*
-* Cette fonction permet de lire le buffer de reception
-* si reception il y a 
-*/
-void reception(int focus, int * data)
-{	
-	u8 rx_msg[8];
-	unsigned int rx_msg_complet;
-	int rx_size;
-	u16 rx_id;
-	int j;
-#if DEBUG_AFF_CAN_REC >= 1
-	printk("reception : message received...\n");
-#endif
-	if(inb(CAN_STATUS) && 0x01) //reception!
-	{
-		rx_id = (inb(CAN_RX_IDENTIFIER) << 3) + (inb(CAN_RX_RTB_BIT) >> 5);
-		
-		if((rx_id == focus) || (focus == 0))
-		{
-			rx_size = (inb(CAN_RX_RTB_BIT)) & 0x0F ;
-#if DEBUG_AFF_CAN_REC >=2
-			printk("reception :\n\tid :\t %d\n\tsize :\t%d\n",rx_id,rx_size);
-#endif
-			for(j=0; j < rx_size; j++)	// On recupere d abord les buffer ayant les data de poids fort
-			{
-				rx_msg[j] = inb(CAN_RX_BUFFER+j);
-#if DEBUG_AFF_CAN_REC >=3
-				printk("Buf %d :\t 0x%x\n",j,rx_msg[j]);
-#endif
-			}
-			
-			outb(0x04,CAN_COMMAND);	// Release du buffer de reception
-			
-			rx_msg_complet = rx_msg[0];
-			for(j=0; j < rx_size; j++)
-			{
-				if(j%2 == 0){data[j/2] = rx_msg[j]<<8; 		}
-				else 		{data[j/2] += (rx_msg[j]); 	}
-				//rx_msg_complet = (rx_msg_complet << 8) + rx_msg[j];
-			}
-		}
-	}
-}
-
-/**************************************************************************\
-|***************************** - DRIVER DAC - *****************************|
-\**************************************************************************/
-/*
- * set_DA
- * Function output: send in the channel "canal" the voltage "value" in volt (+-10V).
- * 8 LSB d'abord, 8 MSB après. Buffer garde resultat et n'envoie que quand MSB est écrit
- * Valeur à rentrer de -10 a 10
- */
-void set_DA(int canal, unsigned int value_n)
-{
-	int lsb, msb;
-#if DEBUG_AFF_DAC >= 1 
-	printk("set_DA\n");
-#endif
-	lsb = 0;
-	msb = 0;
-	lsb = value_n & 0x00FF;			//Recuperation du LSB
-	msb = value_n >> 8;				//Recuperation du MSB
-#if DEBUG_AFF_DAC >= 2
-	printk("Valeur en bits : %d\n",value_n);
-	printk("Valeur MSB : 0x%x\n",msb);
-	printk("Valeur LSB : 0x%x\n",lsb);
-#endif
-	/* WRITE OUTPUT */
-	outb(lsb,BASE_DAC_0+2*canal);
-	outb(msb,BASE_DAC_1+2*canal);
-}
-
-/**************************************************************************\
-|***************************** - DRIVER ADC - *****************************|
-\**************************************************************************/
-/*
- * Pour lire une valeur de l'ADC (une fois init):
- * trigger() -> adc_read_eoc() -> adc_read_value()
- */
-void init_3718(void)
-{    //Pour lire canal 0, mettre 0x00. Pour lire canaux 0 et 1 alternativement, mettre 0x10
-	ad_range_select(0x00,8);	// Canal 0, +/-10V
-	ad_range_select(0x11,8);	// Canal 1, +/-10V
-    outb(0x10, BASE_ADC_2);		// selectionne le canal   
-}
-
-/* 
- * Trigger the A/D conversion by writing to the A/D low byte register (BASE+0) with any value.
- */
-void trigger(void)
-{
-    outb((char)0xFF,BASE_ADC_0);
-}
-
-/*
- * ajout de cette fonction pour permettre une interruption quand fin de de conversion
- */
-int adc_read_eoc(void)
-{    
-    int eoc;
-    int temp;
-    eoc = inb(BASE_ADC_8);					// EOC: end of convertion p41/37
-    if((eoc & 0x80) == 0x80){temp = 1;}		// verif fin conversion
-    else{ temp = 0;}
-    return temp;
-}
-
-/*
- * lecture de la valeur une fois que la conversion est finie
- */
-int adc_read_value(void)
-{
-    int lsb		= 0;
-    int msb		= 0;    
-    int res		= 0;
-    int chan 	= 0;
-    
-    chan 	= inb(BASE_ADC_0);					// recuperation du LSB
-    msb 	= inb(BASE_ADC_1);					// recuparation du MSB
-    lsb 	= chan >> 4;						// recuperation LSB
-    chan 	= chan & 0x0F;						// recuperation canal de la valeur lue
-    res 	= (((msb << 4) + lsb)<< 4 )+ chan;	// Convertion de la valeur + concatenation du canal dans les 4 bits de poids faible
-
-    return res;
-}
-
-
-/*
- * ad_range_select
- * Set the input range for each A/D channel. (p26/30))
- * base+1 D3 to D0 = b1000
- */
-void ad_range_select(int canal, int range)
-{
-	outb((char)canal, BASE_ADC_2);	// selectionne le canal
-	outb((char)range, BASE_ADC_1);	// met le range
-}
 
 /**************************************************************************\
 |***************************** - LIB MATRIX - *****************************|
@@ -771,44 +531,34 @@ void init_matrix(void)
 /*
  * Fonction de calcule de la commande avec les matrice d'observation et la matrice d'état.
  */
-float calc_matrix(void)
+float calc_matrix(float *y, float *x)
 {
 	/* Declaration de variable */
 	float commande; // commande : varaible de sortie
+	float x_plus_1[4];
 #if DEBUG_AFF_MAT >= 1
 	printk("calc_matrix:\n"); // Affichage de debugage niveau 1.
 #endif
 	/* CALCULE DE LA COMMANDE */
-	/*
-	x[0]=y[0];
-	x[1]=y[1];
-	x[2]=vit_ang;   
-	x[3]=vit_pos;   	
-	*/
-	/** CALCULE DE LA MATRICE D'ETAT X = Adc * X + Bdc * Y **/
-	
-	x_save[0]= Adc[0][0]*x[0] + Adc[0][1]*x[1] + Adc[0][2]*x[2] + Adc[0][3]*x[3] + Bdc[0][0]*y[0] + Bdc[0][1]*y[1];
-	x_save[1]= Adc[1][0]*x[0] + Adc[1][1]*x[1] + Adc[1][2]*x[2] + Adc[1][3]*x[3] + Bdc[1][0]*y[0] + Bdc[1][1]*y[1];
-	x_save[2]= Adc[2][0]*x[0] + Adc[2][1]*x[1] + Adc[2][2]*x[2] + Adc[2][3]*x[3] + Bdc[2][0]*y[0] + Bdc[2][1]*y[1];
-	x_save[3]= Adc[3][0]*x[0] + Adc[3][1]*x[1] + Adc[3][2]*x[2] + Adc[3][3]*x[3] + Bdc[3][0]*y[0] + Bdc[3][1]*y[1];
+	/* x = {	y[0], 	y[1],	vit_ang,	vit_pos } */
+	/** CALCULE DE LA MATRICE D'ETAT : X = Adc * X + Bdc * Y **/
+	x_plus_1[0]= Adc[0][0]*x[0] + Adc[0][1]*x[1] + Adc[0][2]*x[2] + Adc[0][3]*x[3] + Bdc[0][0]*y[0] + Bdc[0][1]*y[1];
+	x_plus_1[1]= Adc[1][0]*x[0] + Adc[1][1]*x[1] + Adc[1][2]*x[2] + Adc[1][3]*x[3] + Bdc[1][0]*y[0] + Bdc[1][1]*y[1];
+	x_plus_1[2]= Adc[2][0]*x[0] + Adc[2][1]*x[1] + Adc[2][2]*x[2] + Adc[2][3]*x[3] + Bdc[2][0]*y[0] + Bdc[2][1]*y[1];
+	x_plus_1[3]= Adc[3][0]*x[0] + Adc[3][1]*x[1] + Adc[3][2]*x[2] + Adc[3][3]*x[3] + Bdc[3][0]*y[0] + Bdc[3][1]*y[1];
 	/** CALCULE DE LA COMMANDE commande = u = -Cdc * X **/
-	commande =  + Cdc[0]*(x_save[0])
-				+ Cdc[1]*(x_save[1])
-				+ Cdc[2]*(x_save[2])
-				+ Cdc[3]*(x_save[3]);
-#if DEBUG_AFF_MAT >= 2
-	// Affichage de debugage niveau 2
+	commande =  + Cdc[0]*(x_plus_1[0]) + Cdc[1]*(x_plus_1[1]) + Cdc[2]*(x_plus_1[2]) + Cdc[3]*(x_plus_1[3]);
+#if DEBUG_AFF_MAT >= 2 // Affichage de debugage niveau 2
 	printk("calc_matrix :\n\tx =\t\t");affichage_float(x[0]);printk(" ; ");affichage_float(x[1]);printk(" ; ");affichage_float(x[2]);printk(" ; ");affichage_float(x[3]);
-	printk("\n\tx+1 =\t\t");affichage_float(x_save[0]);printk(" ; ");affichage_float(x_save[1]);printk(" ; ");affichage_float(x_save[2]);printk(" ; ");affichage_float(x_save[3]);
+	printk("\n\tx+1 =\t\t");affichage_float(x_plus_1[0]);printk(" ; ");affichage_float(x_plus_1[1]);printk(" ; ");affichage_float(x_plus_1[2]);printk(" ; ");affichage_float(x_plus_1[3]);
 	printk("\n\ty =\t\t");affichage_float(y[0]);printk(" ; ");affichage_float(y[1]);
-	printk("\n\tcommande = \t"); affichage_float(commande);
-	printk("\n");
+	printk("\n\tcommande = \t"); affichage_float(commande);printk("\n");
 #endif
 	/** MEMORISATION DE LA MATRICE D'ETATS ACTUEL **/
-	x[0]=(x_save[0]);
-	x[1]=(x_save[1]);
-	x[2]=(x_save[2]);
-	x[3]=(x_save[3]);
+	x[0]=(x_plus_1[0]);
+	x[1]=(x_plus_1[1]);
+	x[2]=(x_plus_1[2]);
+	x[3]=(x_plus_1[3]);
 	/** GESTION EXTREMUM **/
 	return commande;
 }

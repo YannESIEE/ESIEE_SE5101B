@@ -1,5 +1,5 @@
 #generate .o
-obj-m	   := any.o
+obj-m	   := any.o ADC.o DAC.o CAN.o
 
 PATH := /opt/x86_64/gcc/gcc-3.4.4/bin:$(PATH)
 KIT = arcom1.esiee.fr
@@ -116,7 +116,7 @@ a16:
 	ssh arcom@arcom16.esiee.fr
 
 a19:
-	-rm -f *.o any*.ko .*.cmd .*.flags *.mod.c *~
+	-rm -f *.o any*.ko CAN*.ko ADC*.ko DAC*.ko .*.cmd .*.flags *.mod.c *~
 	-rm -r .tmp*
 	@echo Cleaned
 	@echo
@@ -127,7 +127,6 @@ a19:
 	i386 -B --uname-2.6 make -C $(KDIR) M=$(PWD) modules
 	@echo Built
 	@echo
-	
 	
 	scp *.ko runarcom arcom@arcom19.esiee.fr:/home/arcom
 	@echo
