@@ -12,22 +12,22 @@
 #define BASE_DAC_8 (BASE_DAC_0+8)
 
 /* DRIVER DAC */
-void 	set_DA 			(int canal, unsigned int value_n);
+void 	set_DAC 			(int canal, unsigned int value_n);
 
 /**************************************************************************\
 |***************************** - DRIVER DAC - *****************************|
 \**************************************************************************/
 /*
- * set_DA
+ * set_DAC
  * Function output: send in the channel "canal" the voltage "value" in volt (+-10V).
  * 8 LSB d'abord, 8 MSB après. Buffer garde resultat et n'envoie que quand MSB est écrit
  * Valeur à rentrer de -10 a 10
  */
-void set_DA(int canal, unsigned int value_n)
+void set_DAC(int canal, unsigned int value_n)
 {
 	int lsb, msb;
 #if DEBUG_AFF_DAC >= 1 
-	printk("set_DA\n");
+	printk("set_DAC\n");
 #endif
 	lsb = 0;
 	msb = 0;
